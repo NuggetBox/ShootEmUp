@@ -15,7 +15,6 @@ namespace ShootEmUp
         public Menu(Game1 aGame)
         {
             myGame = aGame;
-            myButtons = new List<Button>();
             myButtons.Add(new Button("Start", Color.AliceBlue, Start, new Rectangle(100, 100, 40, 10)));
             // myButtons.Add(new Button("Stats", Color.AliceBlue, Stats));
             myButtons.Add(new Button("Quit", Color.AliceBlue, Quit, new Rectangle(500, 400, 40, 5)));
