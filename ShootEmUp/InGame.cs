@@ -18,5 +18,16 @@ namespace ShootEmUp
         {
 
         }
+
+        void ExitToMain()
+        {
+            while (true)
+            {
+                if (!(Game1.GetCurrentState is Menu))
+                {
+                    Game1.AccessStateStack.Pop();
+                }
+            }
+        }
     }
 }

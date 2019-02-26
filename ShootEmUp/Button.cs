@@ -8,17 +8,16 @@ namespace ShootEmUp
     class Button
     {
         public string myLabel;
-        public SpriteFont mySpriteFont;
         public Color myColor;
         public Action myAction;
-        public Rectangle myRectangle;
+        public Vector2 myPosition;
 
-        public Button(string aLabel, Color aColor, Action anAction, Rectangle aRectangle)
+        public Button(string aLabel, Color aColor, Action anAction, Vector2 aPosition)
         {
             myLabel = aLabel;
             myColor = aColor;
             myAction = anAction;
-            myRectangle = aRectangle;
+            myPosition = aPosition;
         }
 
         public void Press()

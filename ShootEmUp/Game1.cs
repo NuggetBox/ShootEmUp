@@ -11,7 +11,7 @@ namespace ShootEmUp
     public class Game1 : Game
     {
         public static Stack<State> AccessStateStack { get; set; }
-        public State GetCurrentState => AccessStateStack.Peek();
+        public static State GetCurrentState => AccessStateStack.Peek();
 
         GraphicsDeviceManager myGraphics;
         SpriteBatch mySpriteBatch;

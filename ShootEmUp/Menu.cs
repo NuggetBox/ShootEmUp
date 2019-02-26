@@ -11,64 +11,78 @@ namespace ShootEmUp
         Game1 myGame;
 
         int mySelectedIndex = 0;
+        int myButtonScale = 4;
+
+        float myTimer;
+        float myDelay = 100;
 
         public Menu(Game1 aGame)
         {
             myGame = aGame;
-            myButtons.Add(new Button("Start", Color.AliceBlue, Start, new Rectangle(100, 100, 40, 10)));
+            myButtons = new List<Button>();
+            myButtons.Add(new Button("Start", Color.AliceBlue, Start, new Vector2(300, 300)));
             // myButtons.Add(new Button("Stats", Color.AliceBlue, Stats));
-            myButtons.Add(new Button("Quit", Color.AliceBlue, Quit, new Rectangle(500, 400, 40, 5)));
+            myButtons.Add(new Button("Quit", Color.AliceBlue, Quit, new Vector2(600, 600)));
         }
 
         public override void Update(GameTime someDeltaTime)
         {
-            //KeyboardState tempKeyboardState = Keyboard.GetState();
-            MouseState tempMouseState = Mouse.GetState();
-
-            int tempCount = 0;
+            bool tempInput = false;
 
             for (int i = 0; i < myButtons.Count; ++i)
             {
-                if (tempMouseState.Position.X >= myButtons[i].myRectangle.Left && tempMouseState.Position.X <= myButtons[i].myRectangle.Right && tempMouseState.Position.Y <= myButtons[i].myRectangle.Top && tempMouseState.Y >= myButtons[i].myRectangle.Bottom)
+                if (i != mySelectedIndex)
                 {
-                    mySelectedIndex = i;
-                    ++tempCount;
+                    myButtons[i].myColor.B = 255;
                 }
             }
 
-            if (tempCount > 0)
+            KeyboardState tempKeyboardState = Keyboard.GetState();
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                myButtons[mySelectedIndex].myColor = Color.Red;
-                
-                    myButtons[mySelectedIndex].Press();
+                myButtons[mySelectedIndex].Press();
+            }
+            else if (myTimer >= myDelay)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                {
+                    if (mySelectedIndex == 0)
+                    {
+                        mySelectedIndex = myButtons.Count - 1;
+                    }
+                    else
+                    {
+                        --mySelectedIndex;
+                    }
+
+                    tempInput = true;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                {
+                    if (mySelectedIndex == myButtons.Count - 1)
+                    {
+                        mySelectedIndex = 0;
+                    }
+                    else
+                    {
+                        ++mySelectedIndex;
+                    }
+
+                    tempInput = true;
+                }
             }
 
-            //if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-            //{
-            //    myButtons[mySelectedIndex].Press();
-            //}
-            //else if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            //{
-            //    if (mySelectedIndex == 0)
-            //    {
-            //        mySelectedIndex = myButtons.Count - 1;
-            //    }
-            //    else
-            //    {
-            //        --mySelectedIndex;
-            //    }
-            //}
-            //else if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            //{
-            //    if (mySelectedIndex == myButtons.Count - 1)
-            //    {
-            //        mySelectedIndex = 0;
-            //    }
-            //    else
-            //    {
-            //        ++mySelectedIndex;
-            //    }
-            //}
+            if (tempInput)
+            {
+                myTimer = 0;
+            }
+            else
+            {
+                myTimer += someDeltaTime.ElapsedGameTime.Milliseconds;
+            }
+
+            myButtons[mySelectedIndex].myColor.B = 123;
         }
 
         public override void Draw(GameTime someDeltaTime, SpriteBatch aSpriteBatch)
@@ -77,7 +91,8 @@ namespace ShootEmUp
 
             for (int i = 0; i < tempSize; ++i)
             {
-                aSpriteBatch.DrawString(myGame.mySpriteFont, myButtons[i].myLabel, myButtons[i].myRectangle.Location.ToVector2(), myButtons[i].myColor);
+                Button tempButton = myButtons[i];
+                aSpriteBatch.DrawString(myGame.mySpriteFont, tempButton.myLabel, tempButton.myPosition, tempButton.myColor, 0, Vector2.Zero, myButtonScale, SpriteEffects.None, 0);
             }
         }
 
