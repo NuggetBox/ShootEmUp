@@ -15,15 +15,18 @@ namespace ShootEmUp
 
         public Vector2 GetOrigin { get { return new Vector2(myTexture.Width / 2, myTexture.Height / 2); } }
 
-        public float AccessRotation { get; set; }
+        public float AccessRotation { get; protected set; }
+
+        public string AccessTag { get; protected set; }
 
         protected Texture2D myTexture;
         protected Rectangle myRectangle;
         protected Color myColor;
         protected Vector2 myScale;
         protected SpriteEffects mySpriteEffects = SpriteEffects.None;
-
         protected float myLayer;
+
+        public abstract void Update(GameTime someDeltaTime);
 
         public void Draw(SpriteBatch aSpriteBatch)
         {

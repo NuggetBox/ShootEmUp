@@ -11,7 +11,7 @@ namespace ShootEmUp
         Game1 myGame;
 
         int mySelectedIndex = 0;
-        int myButtonScale = 4;
+        float myButtonScale = 2f;
 
         float myTimer;
         float myDelay = 100;
@@ -47,11 +47,11 @@ namespace ShootEmUp
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Up))
                 {
-                    if (mySelectedIndex == 0)
-                    {
-                        mySelectedIndex = myButtons.Count - 1;
-                    }
-                    else
+                    //if (mySelectedIndex == 0)
+                    //{
+                    //    mySelectedIndex = myButtons.Count - 1;
+                    //}
+                    if (mySelectedIndex != 0)
                     {
                         --mySelectedIndex;
                     }
@@ -60,11 +60,11 @@ namespace ShootEmUp
                 }
                 else if (Keyboard.GetState().IsKeyDown(Keys.Down))
                 {
-                    if (mySelectedIndex == myButtons.Count - 1)
-                    {
-                        mySelectedIndex = 0;
-                    }
-                    else
+                    //if (mySelectedIndex == myButtons.Count - 1)
+                    //{
+                    //    mySelectedIndex = 0;
+                    //}
+                    if (mySelectedIndex != myButtons.Count - 1)
                     {
                         ++mySelectedIndex;
                     }

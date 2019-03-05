@@ -11,12 +11,18 @@ namespace ShootEmUp
 
         public override void Update(GameTime someDeltaTime)
         {
-
+            for (int i = 0; i < myGameObjects.Count; ++i)
+            {
+                myGameObjects[i].Update(someDeltaTime);
+            }
         }
 
         public override void Draw(GameTime someDeltaTime, SpriteBatch aSpriteBatch)
         {
-
+            for (int i = 0; i < myGameObjects.Count; ++i)
+            {
+                myGameObjects[i].Draw(aSpriteBatch);
+            }
         }
 
         void ExitToMain()
