@@ -12,21 +12,26 @@ namespace ShootEmUp
     {
         public static Stack<State> AccessStateStack { get; set; }
         public static State GetCurrentState => AccessStateStack.Peek();
+        public static Point AccessWindowSize { get; private set; }
 
         GraphicsDeviceManager myGraphics;
         SpriteBatch mySpriteBatch;
         public SpriteFont mySpriteFont;
 
-        int myWindowWidth = 1920,
-            myWindowHeight = 1080;
+        public static Texture2D myBulletTexture;
 
         public Game1()
         {
+            AccessWindowSize = new Point(1920, 1080);
+
             myGraphics = new GraphicsDeviceManager(this);
-            myGraphics.PreferredBackBufferWidth = myWindowWidth;
-            myGraphics.PreferredBackBufferHeight = myWindowHeight;
-            IsMouseVisible = true;
-            //myGraphics.ToggleFullScreen();
+            myGraphics.PreferredBackBufferWidth = AccessWindowSize.X;
+            myGraphics.PreferredBackBufferHeight = AccessWindowSize.Y;
+            if (!myGraphics.IsFullScreen)
+            {
+                myGraphics.ToggleFullScreen();
+            }
+            IsMouseVisible = false;
             myGraphics.ApplyChanges();
             Content.RootDirectory = "Content";
         }
@@ -59,6 +64,7 @@ namespace ShootEmUp
 
             // TODO: use this.Content to load your game content here
             mySpriteFont = Content.Load<SpriteFont>("Standard");
+            myBulletTexture = Content.Load<Texture2D>("bullet");
         }
 
         /// <summary>

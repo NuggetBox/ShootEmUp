@@ -11,18 +11,26 @@ namespace ShootEmUp
         Game1 myGame;
 
         int mySelectedIndex = 0;
-        float myButtonScale = 2f;
+        int myButtonOffset = 75;
 
+        float myButtonScale = 0.4f;
         float myTimer;
         float myDelay = 100;
 
         public Menu(Game1 aGame)
         {
             myGame = aGame;
-            myButtons = new List<Button>();
-            myButtons.Add(new Button("Start", Color.AliceBlue, Start, new Vector2(300, 300)));
-            // myButtons.Add(new Button("Stats", Color.AliceBlue, Stats));
-            myButtons.Add(new Button("Quit", Color.AliceBlue, Quit, new Vector2(600, 600)));
+            myButtons = new List<Button>
+            {
+                 new Button("Start", Start),
+                 //new Button("Settings", Stats),
+                 new Button("Quit", Quit)
+            };
+
+            for (int i = 0; i < myButtons.Count; ++i)
+            {
+                myButtons[i].myPosition = new Vector2(myButtonOffset, myButtonOffset * (i + 1));
+            }
         }
 
         public override void Update(GameTime someDeltaTime)

@@ -11,13 +11,11 @@ namespace ShootEmUp
 {
     abstract class GameObject
     {
-        public Vector2 GetPosition { get; private set; }
-
+        public Vector2 AccessPosition { get; set; }
         public Vector2 GetOrigin { get { return new Vector2(myTexture.Width / 2, myTexture.Height / 2); } }
+        public Vector2 AccessVelocity { get; set; }
 
         public float AccessRotation { get; protected set; }
-
-        public string AccessTag { get; protected set; }
 
         protected Texture2D myTexture;
         protected Rectangle myRectangle;
@@ -30,13 +28,13 @@ namespace ShootEmUp
 
         public void Draw(SpriteBatch aSpriteBatch)
         {
-            aSpriteBatch.Draw(myTexture, GetPosition, myRectangle, myColor, AccessRotation, GetOrigin, myScale, mySpriteEffects, myLayer);
+            aSpriteBatch.Draw(myTexture, AccessPosition, myRectangle, myColor, AccessRotation, GetOrigin, myScale, mySpriteEffects, myLayer);
         }
 
-        public void Move(Vector2 vector)
-        {
-            GetPosition += vector;
-        }
+        //public void Move(Vector2 vector)
+        //{
+        //    GetPosition += vector;
+        //}
 
         public void Rotate(float rotation)
         {
