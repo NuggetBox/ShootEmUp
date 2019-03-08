@@ -8,13 +8,14 @@ namespace ShootEmUp
 {
     class InGame : State
     {
-        List<GameObject> myGameObjects;
+        public static List<GameObject> myGameObjects;
 
         public override void Initialize(ContentManager someContent)
         {
             myGameObjects = new List<GameObject>()
             {
-                new Player(someContent),
+                new Player(),
+                new Enemy()
             };
         }
 
@@ -37,8 +38,7 @@ namespace ShootEmUp
 
         public override void Draw(GameTime someDeltaTime, SpriteBatch aSpriteBatch)
         {
-            for (int i = 0; 
-                i < myGameObjects.Count; ++i)
+            for (int i = 0; i < myGameObjects.Count; ++i)
             {
                 myGameObjects[i].Draw(aSpriteBatch);
             }

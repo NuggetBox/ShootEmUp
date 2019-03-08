@@ -9,7 +9,7 @@ namespace ShootEmUp
     public class Menu : State
     {
         List<Button> myButtons;
-        Game1 myGame;
+        public readonly Game1 myGame;
 
         int mySelectedIndex = 0;
         int myButtonOffset = 75;
@@ -110,6 +110,7 @@ namespace ShootEmUp
         void Start()
         {
             Game1.AccessStateStack.Push(new InGame());
+            Game1.GetCurrentState.Initialize(myGame.Content);
         }
 
         //void Stats()

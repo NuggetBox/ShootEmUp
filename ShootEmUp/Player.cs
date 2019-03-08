@@ -6,25 +6,22 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
 
 namespace ShootEmUp
 {
     class Player : GameObject
     {
-        Texture2D myBulletTexture;
-
         Vector2 myStartPos = new Vector2(300, 300);
 
-        public Player(ContentManager someContent)
+        protected float anAttackCooldown = 0.3f;
+        protected float anAttackTimer;
+
+        public Player()
         {
-            myTexture = someContent.Load<Texture2D>("player");
-            myColor = Color.White;
             AccessPosition = myStartPos;
-            myLayer = 0.5f;
-            myScale = 5;
-            myRectangle = new Rectangle((int)AccessPosition.X, (int)AccessPosition.Y, (int)(myTexture.Width * myScale), (int)(myTexture.Height * myScale));
-            myBulletTexture = Game1.myBulletTexture;
+            AccessTexture = Game1.myPlayerTexture;
+            AccessRectangle = AccessTexture.Bounds;
+            AccessSpeed = 5;
         }
 
         public override void Update(GameTime someDeltaTime)
@@ -32,12 +29,39 @@ namespace ShootEmUp
             KeyboardState tempKeyboard = Keyboard.GetState();
             MouseState tempMouse = Mouse.GetState();
 
+            AccessRectangle = new Rectangle(AccessPosition.ToPoint(), AccessRectangle.Size);
 
+            anAttackTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
+
+            if (tempKeyboard.IsKeyDown(Keys.Up))
+            {
+                AccessVelocity += new Vector2(0, -1);
+            }
+            if (tempKeyboard.IsKeyDown(Keys.Right))
+            {
+                AccessVelocity += new Vector2(1, 0);
+            }
+            if (tempKeyboard.IsKeyDown(Keys.Down))
+            {
+                AccessVelocity += new Vector2(0, 1);
+            }
+            if (tempKeyboard.IsKeyDown(Keys.Left))
+            {
+                AccessVelocity += new Vector2(-1, 0);
+            }
+            if (tempKeyboard.IsKeyDown(Keys.Z) && anAttackTimer <= 0)
+            {
+                Shoot();
+                anAttackTimer = anAttackCooldown;
+            }
+
+            Move();
+            AccessVelocity = Vector2.Zero;
         }
 
-        public void Shoot(MouseState aMouse)
+        public void Shoot()
         {
-
+            InGame.myGameObjects.Add(new Bullet("player", new Vector2(1, 0), AccessPosition, 40, Game1.myBulletTexture));
         }
     }
 }

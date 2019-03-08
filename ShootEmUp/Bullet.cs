@@ -12,19 +12,26 @@ namespace ShootEmUp
     {
         public string AccessTag { get; private set; }
 
-        public Bullet(string anOwner, Vector2 aDirection, float someSpeed, Texture2D aTexture, Color aColor)
+        public Bullet(string anOwner, Vector2 aDirection, Vector2 anOrigin, float someSpeed, Texture2D aTexture)
         {
             AccessTag = anOwner;
             aDirection.Normalize();
             AccessVelocity = aDirection * someSpeed;
-            myTexture = aTexture;
-            myColor = aColor;
+            AccessPosition = anOrigin;
+            AccessTexture = aTexture;
+            AccessRectangle = AccessTexture.Bounds;
         }
 
         public override void Update(GameTime someDeltaTime)
         {
+            AccessRectangle = new Rectangle(AccessPosition.ToPoint(), AccessRectangle.Size);
             AccessPosition += AccessVelocity;
             AccessRotation = (float)Math.Atan2(AccessVelocity.Y, AccessVelocity.X);
+
+            if (AccessPosition.X < -100 || AccessPosition.X > Game1.AccessWindowSize.X + 100 || AccessPosition.Y < -100 || AccessPosition.Y > Game1.AccessWindowSize.Y + 100)
+            {
+                Destroy();
+            }
         }
     }
 }

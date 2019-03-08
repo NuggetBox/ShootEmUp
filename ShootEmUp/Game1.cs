@@ -19,6 +19,8 @@ namespace ShootEmUp
         public SpriteFont mySpriteFont;
 
         public static Texture2D myBulletTexture;
+        public static Texture2D myPlayerTexture;
+        public static Texture2D myEnemyTexture;
 
         public Game1()
         {
@@ -31,7 +33,7 @@ namespace ShootEmUp
             //{
             //    myGraphics.ToggleFullScreen();
             //}
-            IsMouseVisible = false;
+            IsMouseVisible = true;
             myGraphics.ApplyChanges();
             Content.RootDirectory = "Content";
         }
@@ -49,7 +51,7 @@ namespace ShootEmUp
 
             Menu menu = new Menu(this);
             AccessStateStack.Push(menu);
-        
+
             base.Initialize();
         }
 
@@ -64,7 +66,10 @@ namespace ShootEmUp
 
             // TODO: use this.Content to load your game content here
             mySpriteFont = Content.Load<SpriteFont>("Standard");
+
             myBulletTexture = Content.Load<Texture2D>("bullet");
+            myPlayerTexture = Content.Load<Texture2D>("player");
+            myEnemyTexture = Content.Load<Texture2D>("enemy");
         }
 
         /// <summary>
@@ -86,14 +91,13 @@ namespace ShootEmUp
             //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             //    Exit();
 
-            if (GetCurrentState is Menu)
-            {
-                GraphicsDevice.Clear(Color.Azure);
-            }
+            //if (GetCurrentState is Menu)
+            //{
+            //    GraphicsDevice.Clear(Color.Azure);
+            //}
 
             // TODO: Add your update logic here
             GetCurrentState.Update(gameTime);
-            GetCurrentState.Initialize(Content);
 
             base.Update(gameTime);
         }
@@ -107,7 +111,7 @@ namespace ShootEmUp
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            mySpriteBatch.Begin();
+            mySpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, null);
 
             base.Draw(gameTime);
 
