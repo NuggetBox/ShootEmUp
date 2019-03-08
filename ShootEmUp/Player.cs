@@ -14,10 +14,16 @@ namespace ShootEmUp
     {
         Texture2D myBulletTexture;
 
-        public Player(ContentManager content)
+        Vector2 myStartPos = new Vector2(300, 300);
+
+        public Player(ContentManager someContent)
         {
-            myTexture = content.Load<Texture2D>("player");
-            //myRectangle = new Rectangle()
+            myTexture = someContent.Load<Texture2D>("player");
+            myColor = Color.White;
+            AccessPosition = myStartPos;
+            myLayer = 0.5f;
+            myScale = 5;
+            myRectangle = new Rectangle((int)AccessPosition.X, (int)AccessPosition.Y, (int)(myTexture.Width * myScale), (int)(myTexture.Height * myScale));
             myBulletTexture = Game1.myBulletTexture;
         }
 

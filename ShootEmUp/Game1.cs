@@ -22,15 +22,15 @@ namespace ShootEmUp
 
         public Game1()
         {
-            AccessWindowSize = new Point(1920, 1080);
+            AccessWindowSize = new Point(1280, 720);
 
             myGraphics = new GraphicsDeviceManager(this);
             myGraphics.PreferredBackBufferWidth = AccessWindowSize.X;
             myGraphics.PreferredBackBufferHeight = AccessWindowSize.Y;
-            if (!myGraphics.IsFullScreen)
-            {
-                myGraphics.ToggleFullScreen();
-            }
+            //if (!myGraphics.IsFullScreen)
+            //{
+            //    myGraphics.ToggleFullScreen();
+            //}
             IsMouseVisible = false;
             myGraphics.ApplyChanges();
             Content.RootDirectory = "Content";
@@ -93,6 +93,7 @@ namespace ShootEmUp
 
             // TODO: Add your update logic here
             GetCurrentState.Update(gameTime);
+            GetCurrentState.Initialize(Content);
 
             base.Update(gameTime);
         }

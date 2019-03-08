@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
@@ -32,6 +33,8 @@ namespace ShootEmUp
                 myButtons[i].myPosition = new Vector2(myButtonOffset, myButtonOffset * (i + 1));
             }
         }
+
+        public override void Initialize(ContentManager someContent) { }
 
         public override void Update(GameTime someDeltaTime)
         {

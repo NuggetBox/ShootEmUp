@@ -20,7 +20,7 @@ namespace ShootEmUp
         protected Texture2D myTexture;
         protected Rectangle myRectangle;
         protected Color myColor;
-        protected Vector2 myScale;
+        protected float myScale;
         protected SpriteEffects mySpriteEffects = SpriteEffects.None;
         protected float myLayer;
 
