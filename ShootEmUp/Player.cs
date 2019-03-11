@@ -79,9 +79,8 @@ namespace ShootEmUp
 
         public void Shoot()
         {
-            Vector2 tempRight = new Vector2((float)((Math.Cos(myRotation) * Math.Cos(Math.PI)) - (Math.Sin(myRotation) * Math.Sin(Math.PI))), (float)((Math.Sin(myRotation) * Math.Cos(Math.PI)) + (Math.Cos(myRotation) * Math.Sin(Math.PI))));
-            Vector2 tempLeft = new Vector2((float)Math.Cos(myRotation), (float)Math.Sin(myRotation));
-            //Vector2 tempLeft = new Vector2((float)((Math.Cos(myRotation) * Math.Cos(Math.PI)) + (Math.Sin(myRotation) * Math.Sin(Math.PI))), (float)((Math.Sin(myRotation) * Math.Cos(Math.PI)) - (Math.Cos(myRotation) * Math.Sin(Math.PI))));
+            Vector2 tempRight = new Vector2((float)Math.Cos(myRotation), (float)Math.Sin(myRotation));
+            Vector2 tempLeft = new Vector2((float)Math.Cos(myRotation - Math.PI), (float)Math.Sin(myRotation - Math.PI));
 
             InGame.myGameObjects.Add(new Bullet(this, tempRight, myPosition, myBulletSpeed, myDamage, Game1.myBulletTexture));
             InGame.myGameObjects.Add(new Bullet(this, tempLeft, myPosition, myBulletSpeed, myDamage, Game1.myBulletTexture));
