@@ -12,12 +12,10 @@ namespace ShootEmUp
         public Action myAction;
         public Vector2 myPosition;
 
-        public Button(string aLabel, /*Color aColor,*/ Action anAction/*, Vector2 aPosition*/)
+        public Button(string aLabel, Action anAction)
         {
             myLabel = aLabel;
-            //myColor = aColor;
             myAction = anAction;
-            //myPosition = aPosition;
         }
 
         public void Press()

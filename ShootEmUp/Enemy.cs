@@ -11,26 +11,23 @@ namespace ShootEmUp
     {
         Vector2 myStartPos = new Vector2(600, 300);
 
+        float anAttackCooldown = 0.3f;
+        float anAttackTimer;
+
         public Enemy()
         {
             myPosition = myStartPos;
+            myScale = 1;
             myTexture = Game1.myEnemyTexture;
             myRectangle = myTexture.Bounds;
-            myScale = 1;
+            myRectangle.Size = new Point((int)(myRectangle.Width * myScale), (int)(myRectangle.Height * myScale));
+            myRectangle.Location = myPosition.ToPoint();
             myColor = Color.Red;
         }
 
         public override void Update(GameTime someDeltaTime)
         {
             myRectangle = new Rectangle(myPosition.ToPoint(), myRectangle.Size);
-
-            for (int i = 0; i < InGame.myGameObjects.Count; ++i)
-            {
-                if (InGame.myGameObjects[i] is Bullet && InGame.myGameObjects[i].myRectangle.Intersects(myRectangle))
-                {
-                    Destroy();   
-                }
-            }
         }
     }
 }

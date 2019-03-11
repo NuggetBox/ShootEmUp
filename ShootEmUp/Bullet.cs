@@ -10,27 +10,75 @@ namespace ShootEmUp
 {
     class Bullet : GameObject
     {
-        public string AccessTag { get; private set; }
+        public bool GetIsPlayerBullet => myOwner is Player;
 
-        public Bullet(string anOwner, Vector2 aDirection, Vector2 anOrigin, float someSpeed, Texture2D aTexture)
+        public GameObject myOwner;
+
+        public Bullet(GameObject anOwner, Vector2 aDirection, Vector2 aPosition, float someSpeed, float someDamage, Texture2D aTexture)
         {
-            AccessTag = anOwner;
-            aDirection.Normalize();
-            myDirection = aDirection * someSpeed;
-            myPosition = anOrigin;
+            myScale = 1;
+
+            myOwner = anOwner;
+            myDirection = aDirection;
+            myPosition = aPosition;
+            mySpeed = someSpeed;
+            myDamage = someDamage;
             myTexture = aTexture;
             myRectangle = myTexture.Bounds;
+            myRectangle.Size = new Point((int)(myRectangle.Width * myScale), (int)(myRectangle.Height * myScale));
+            myRectangle.Location = myPosition.ToPoint();
         }
 
         public override void Update(GameTime someDeltaTime)
         {
             myRectangle = new Rectangle(myPosition.ToPoint(), myRectangle.Size);
-            myPosition += myDirection;
-            myRotation = (float)Math.Atan2(myDirection.Y, myDirection.X);
+            myPosition += myDirection * mySpeed;
+            myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
 
-            if (myPosition.X < -100 || myPosition.X > Game1.AccessWindowSize.X + 100 || myPosition.Y < -100 || myPosition.Y > Game1.AccessWindowSize.Y + 100)
+            if (myPosition.X + 2 * myRectangle.Width < 0 || myPosition.X > Game1.AccessWindowSize.X + myRectangle.Width || myPosition.Y + 2 * myRectangle.Height < 0 || myPosition.Y > Game1.AccessWindowSize.Y + myRectangle.Height)
             {
-                Destroy();
+                myRemoved = true;
+            }
+
+            CheckCollision();
+        }
+
+        void CheckCollision()
+        {
+            for (int i = 0; i < InGame.myGameObjects.Count; ++i)
+            {
+                if (myRectangle.Intersects(InGame.myGameObjects[i].myRectangle) && !(InGame.myGameObjects[i] is Bullet))
+                {
+                    if (InGame.myGameObjects[i] is Player)
+                    {
+                        if (!GetIsPlayerBullet)
+                        {
+                            InGame.myGameObjects[i].myHealth -= myDamage;
+
+                            // TODO: IF PLAYER DIE
+                            if (InGame.myGameObjects[i].myHealth <= 0)
+                            {
+                                
+                            }
+
+                            myRemoved = true;
+                            return;
+                        }
+                    }
+                    else if (InGame.myGameObjects[i] is Enemy && GetIsPlayerBullet)
+                    {
+                        InGame.myGameObjects[i].myHealth -= myDamage;
+
+                        // TODO: IF ENEMY DIE
+                        if (InGame.myGameObjects[i].myHealth <= 0)
+                        {
+                            // SOME FUCKING SCORE OR SOME SHIT
+                            InGame.myGameObjects[i].myRemoved = true;
+                        }
+
+                        myRemoved = true;
+                    }
+                }
             }
         }
     }

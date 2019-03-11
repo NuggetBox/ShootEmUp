@@ -11,17 +11,30 @@ namespace ShootEmUp
 {
     class Player : GameObject
     {
+        Keys 
+            myUp = Keys.W,
+            myDown = Keys.S,
+            myRight = Keys.D, 
+            myLeft = Keys.A,
+            myClockwiseRotation = Keys.L,
+            myCounterClockwiseRotation = Keys.J,
+            myShoot = Keys.I;
+
         Vector2 myStartPos = new Vector2(300, 300);
 
-        protected float anAttackCooldown = 0.3f;
-        protected float anAttackTimer;
+        float myAttackCooldown = 0.3f;
+        float myAttackTimer;
+        float myBulletSpeed = 10;
+        float myRotationSpeed = 1.5f;
 
         public Player()
         {
             myPosition = myStartPos;
             myTexture = Game1.myPlayerTexture;
             myRectangle = myTexture.Bounds;
-            mySpeed = 5;
+            myRectangle.Size = new Point((int)(myRectangle.Width * myScale), (int)(myRectangle.Height * myScale));
+            myRectangle.Location = myPosition.ToPoint();
+            mySpeed = 100;
         }
 
         public override void Update(GameTime someDeltaTime)
@@ -29,39 +42,49 @@ namespace ShootEmUp
             KeyboardState tempKeyboard = Keyboard.GetState();
             MouseState tempMouse = Mouse.GetState();
 
-            myRectangle = new Rectangle(myPosition.ToPoint(), myRectangle.Size);
+            myAttackTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
 
-            anAttackTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
-
-            if (tempKeyboard.IsKeyDown(Keys.Up))
+            if (tempKeyboard.IsKeyDown(myUp))
             {
                 myDirection += new Vector2(0, -1);
             }
-            if (tempKeyboard.IsKeyDown(Keys.Right))
+            if (tempKeyboard.IsKeyDown(myRight))
             {
                 myDirection += new Vector2(1, 0);
             }
-            if (tempKeyboard.IsKeyDown(Keys.Down))
+            if (tempKeyboard.IsKeyDown(myDown))
             {
                 myDirection += new Vector2(0, 1);
             }
-            if (tempKeyboard.IsKeyDown(Keys.Left))
+            if (tempKeyboard.IsKeyDown(myLeft))
             {
                 myDirection += new Vector2(-1, 0);
             }
-            if (tempKeyboard.IsKeyDown(Keys.Z) && anAttackTimer <= 0)
+            if (tempKeyboard.IsKeyDown(myShoot) && myAttackTimer <= 0)
             {
                 Shoot();
-                anAttackTimer = anAttackCooldown;
+                myAttackTimer = myAttackCooldown;
+            }
+            if (tempKeyboard.IsKeyDown(myClockwiseRotation))
+            {
+                myRotation += (float)(someDeltaTime.ElapsedGameTime.TotalSeconds) * myRotationSpeed;
+            }
+            if (tempKeyboard.IsKeyDown(myCounterClockwiseRotation))
+            {
+                myRotation -= (float)(someDeltaTime.ElapsedGameTime.TotalSeconds) * myRotationSpeed;
             }
 
-            Move();
-            myDirection = Vector2.Zero;
+            Move(someDeltaTime);
         }
 
         public void Shoot()
         {
-            InGame.myGameObjects.Add(new Bullet("player", new Vector2(1, 0), myPosition, 40, Game1.myBulletTexture));
+            Vector2 tempRight = new Vector2((float)((Math.Cos(myRotation) * Math.Cos(Math.PI)) - (Math.Sin(myRotation) * Math.Sin(Math.PI))), (float)((Math.Sin(myRotation) * Math.Cos(Math.PI)) + (Math.Cos(myRotation) * Math.Sin(Math.PI))));
+            Vector2 tempLeft = new Vector2((float)Math.Cos(myRotation), (float)Math.Sin(myRotation));
+            //Vector2 tempLeft = new Vector2((float)((Math.Cos(myRotation) * Math.Cos(Math.PI)) + (Math.Sin(myRotation) * Math.Sin(Math.PI))), (float)((Math.Sin(myRotation) * Math.Cos(Math.PI)) - (Math.Cos(myRotation) * Math.Sin(Math.PI))));
+
+            InGame.myGameObjects.Add(new Bullet(this, tempRight, myPosition, myBulletSpeed, myDamage, Game1.myBulletTexture));
+            InGame.myGameObjects.Add(new Bullet(this, tempLeft, myPosition, myBulletSpeed, myDamage, Game1.myBulletTexture));
         }
     }
 }

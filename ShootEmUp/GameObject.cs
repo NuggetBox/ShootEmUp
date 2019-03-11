@@ -11,20 +11,26 @@ namespace ShootEmUp
 {
     abstract class GameObject
     {
-        public Vector2 myPosition;
         public Vector2 GetOrigin { get { return new Vector2(myTexture.Width / 2, myTexture.Height / 2); } }
+
+        SpriteEffects mySpriteEffects = SpriteEffects.None;
+
+        public Vector2 myPosition;
         public Vector2 myDirection = Vector2.Zero;
+        public Rectangle myRectangle;
+
+        public Texture2D myTexture;
+        public Color myColor = Color.White;
 
         public float myRotation;
         public float mySpeed;
-
-        public Texture2D myTexture;
-        public Rectangle myRectangle;
-
-        public Color myColor = Color.White;
-        protected float myScale = 1;
-        SpriteEffects mySpriteEffects = SpriteEffects.None;
+        public float myHealth;
+        public float myDamage;
+        public float myScale = 1;
         float myLayer;
+
+        public bool myRemoved;
+        public bool mySolid;
 
         public abstract void Update(GameTime someDeltaTime);
 
@@ -33,15 +39,39 @@ namespace ShootEmUp
             aSpriteBatch.Draw(myTexture, myPosition, null, myColor, myRotation, GetOrigin, myScale, mySpriteEffects, myLayer);
         }
 
-        protected void Move()
+        protected void Move(GameTime someDeltaTime)
         {
-            myPosition += myDirection * mySpeed;
-            myRectangle.Location = new Point((int)myPosition.X, (int)myPosition.Y);
+            if (myDirection != Vector2.Zero)
+            {
+                myDirection.Normalize();
+            }
+
+            Vector2 tempMove = myDirection * mySpeed * (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
+
+            Rectangle tempRectangle = new Rectangle(tempMove.ToPoint(), myRectangle.Size);
+
+            if (CheckCollision(tempRectangle))
+            {
+                myDirection = Vector2.Zero;
+                return;
+            }
+
+            myPosition += tempMove;
+            myRectangle.Location = myPosition.ToPoint();
+            myDirection = Vector2.Zero;
         }
 
-        protected void Destroy()
+        bool CheckCollision(Rectangle aRectangle)
         {
-            InGame.myGameObjects.Remove(this);
+            for (int i = 0; i < InGame.myGameObjects.Count; ++i)
+            {
+                if (myRectangle.Intersects(InGame.myGameObjects[i].myRectangle) && InGame.myGameObjects[i].mySolid && InGame.myGameObjects[i] != this)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

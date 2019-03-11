@@ -21,18 +21,28 @@ namespace ShootEmUp
 
         public override void Update(GameTime someDeltaTime)
         {
-            bool tempInput = false;
+            //bool tempInput = false;
 
             KeyboardState tempKeyboardState = Keyboard.GetState();
+
+            if (tempKeyboardState.IsKeyDown(Keys.Escape))
+            {
+                ExitToMain();
+            }
 
             for (int i = 0; i < myGameObjects.Count; ++i)
             {
                 myGameObjects[i].Update(someDeltaTime);
             }
 
-            if (tempKeyboardState.IsKeyDown(Keys.Escape))
+            // Removes GameObjects that have "died" this update
+            for (int i = 0; i < myGameObjects.Count; ++i)
             {
-                ExitToMain();
+                if (myGameObjects[i].myRemoved)
+                {
+                    myGameObjects.RemoveAt(i);
+                    --i;
+                }
             }
         }
 
