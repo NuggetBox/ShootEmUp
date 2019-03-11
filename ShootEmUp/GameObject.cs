@@ -11,45 +11,37 @@ namespace ShootEmUp
 {
     abstract class GameObject
     {
-        public Vector2 AccessPosition { get; set; }
-        public Vector2 GetOrigin { get { return new Vector2(AccessTexture.Width / 2, AccessTexture.Height / 2); } }
-        public Vector2 AccessVelocity { get; set; } = Vector2.Zero;
+        public Vector2 myPosition;
+        public Vector2 GetOrigin { get { return new Vector2(myTexture.Width / 2, myTexture.Height / 2); } }
+        public Vector2 myDirection = Vector2.Zero;
 
-        public float AccessRotation { get; protected set; }
-        public float AccessSpeed { get; set; }
+        public float myRotation;
+        public float mySpeed;
 
-        public Texture2D AccessTexture { get; protected set; }
-        public Rectangle AccessRectangle { get; protected set; }
+        public Texture2D myTexture;
+        public Rectangle myRectangle;
 
-        protected Color myColor = Color.White;
-        protected float myScale = 3;
-        protected SpriteEffects mySpriteEffects = SpriteEffects.None;
-        protected float myLayer;
+        public Color myColor = Color.White;
+        protected float myScale = 1;
+        SpriteEffects mySpriteEffects = SpriteEffects.None;
+        float myLayer;
 
         public abstract void Update(GameTime someDeltaTime);
 
         public void Draw(SpriteBatch aSpriteBatch)
         {
-            aSpriteBatch.Draw(AccessTexture, AccessPosition, null, myColor, AccessRotation, GetOrigin, myScale, mySpriteEffects, myLayer);
+            aSpriteBatch.Draw(myTexture, myPosition, null, myColor, myRotation, GetOrigin, myScale, mySpriteEffects, myLayer);
         }
 
         protected void Move()
         {
-            AccessVelocity.Normalize();
-            AccessVelocity *= AccessSpeed;
-            AccessPosition += AccessVelocity;
-            //myRectangle.Location = AccessPosition.ToPoint();
-            AccessVelocity = Vector2.Zero;
+            myPosition += myDirection * mySpeed;
+            myRectangle.Location = new Point((int)myPosition.X, (int)myPosition.Y);
         }
 
         protected void Destroy()
         {
             InGame.myGameObjects.Remove(this);
         }
-
-        //public void Rotate(float rotation)
-        //{
-        //    AccessRotation += rotation;
-        //}
     }
 }

@@ -16,19 +16,19 @@ namespace ShootEmUp
         {
             AccessTag = anOwner;
             aDirection.Normalize();
-            AccessVelocity = aDirection * someSpeed;
-            AccessPosition = anOrigin;
-            AccessTexture = aTexture;
-            AccessRectangle = AccessTexture.Bounds;
+            myDirection = aDirection * someSpeed;
+            myPosition = anOrigin;
+            myTexture = aTexture;
+            myRectangle = myTexture.Bounds;
         }
 
         public override void Update(GameTime someDeltaTime)
         {
-            AccessRectangle = new Rectangle(AccessPosition.ToPoint(), AccessRectangle.Size);
-            AccessPosition += AccessVelocity;
-            AccessRotation = (float)Math.Atan2(AccessVelocity.Y, AccessVelocity.X);
+            myRectangle = new Rectangle(myPosition.ToPoint(), myRectangle.Size);
+            myPosition += myDirection;
+            myRotation = (float)Math.Atan2(myDirection.Y, myDirection.X);
 
-            if (AccessPosition.X < -100 || AccessPosition.X > Game1.AccessWindowSize.X + 100 || AccessPosition.Y < -100 || AccessPosition.Y > Game1.AccessWindowSize.Y + 100)
+            if (myPosition.X < -100 || myPosition.X > Game1.AccessWindowSize.X + 100 || myPosition.Y < -100 || myPosition.Y > Game1.AccessWindowSize.Y + 100)
             {
                 Destroy();
             }

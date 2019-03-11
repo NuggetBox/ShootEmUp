@@ -18,10 +18,10 @@ namespace ShootEmUp
 
         public Player()
         {
-            AccessPosition = myStartPos;
-            AccessTexture = Game1.myPlayerTexture;
-            AccessRectangle = AccessTexture.Bounds;
-            AccessSpeed = 5;
+            myPosition = myStartPos;
+            myTexture = Game1.myPlayerTexture;
+            myRectangle = myTexture.Bounds;
+            mySpeed = 5;
         }
 
         public override void Update(GameTime someDeltaTime)
@@ -29,25 +29,25 @@ namespace ShootEmUp
             KeyboardState tempKeyboard = Keyboard.GetState();
             MouseState tempMouse = Mouse.GetState();
 
-            AccessRectangle = new Rectangle(AccessPosition.ToPoint(), AccessRectangle.Size);
+            myRectangle = new Rectangle(myPosition.ToPoint(), myRectangle.Size);
 
             anAttackTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
 
             if (tempKeyboard.IsKeyDown(Keys.Up))
             {
-                AccessVelocity += new Vector2(0, -1);
+                myDirection += new Vector2(0, -1);
             }
             if (tempKeyboard.IsKeyDown(Keys.Right))
             {
-                AccessVelocity += new Vector2(1, 0);
+                myDirection += new Vector2(1, 0);
             }
             if (tempKeyboard.IsKeyDown(Keys.Down))
             {
-                AccessVelocity += new Vector2(0, 1);
+                myDirection += new Vector2(0, 1);
             }
             if (tempKeyboard.IsKeyDown(Keys.Left))
             {
-                AccessVelocity += new Vector2(-1, 0);
+                myDirection += new Vector2(-1, 0);
             }
             if (tempKeyboard.IsKeyDown(Keys.Z) && anAttackTimer <= 0)
             {
@@ -56,12 +56,12 @@ namespace ShootEmUp
             }
 
             Move();
-            AccessVelocity = Vector2.Zero;
+            myDirection = Vector2.Zero;
         }
 
         public void Shoot()
         {
-            InGame.myGameObjects.Add(new Bullet("player", new Vector2(1, 0), AccessPosition, 40, Game1.myBulletTexture));
+            InGame.myGameObjects.Add(new Bullet("player", new Vector2(1, 0), myPosition, 40, Game1.myBulletTexture));
         }
     }
 }

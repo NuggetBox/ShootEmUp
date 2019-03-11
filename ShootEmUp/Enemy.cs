@@ -13,20 +13,20 @@ namespace ShootEmUp
 
         public Enemy()
         {
-            AccessPosition = myStartPos;
-            AccessTexture = Game1.myEnemyTexture;
-            AccessRectangle = AccessTexture.Bounds;
+            myPosition = myStartPos;
+            myTexture = Game1.myEnemyTexture;
+            myRectangle = myTexture.Bounds;
             myScale = 1;
             myColor = Color.Red;
         }
 
         public override void Update(GameTime someDeltaTime)
         {
-            AccessRectangle = new Rectangle(AccessPosition.ToPoint(), AccessRectangle.Size);
+            myRectangle = new Rectangle(myPosition.ToPoint(), myRectangle.Size);
 
             for (int i = 0; i < InGame.myGameObjects.Count; ++i)
             {
-                if (InGame.myGameObjects[i] is Bullet && InGame.myGameObjects[i].AccessRectangle.Intersects(AccessRectangle))
+                if (InGame.myGameObjects[i] is Bullet && InGame.myGameObjects[i].myRectangle.Intersects(myRectangle))
                 {
                     Destroy();   
                 }
