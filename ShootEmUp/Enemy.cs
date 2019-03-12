@@ -7,27 +7,29 @@ using Microsoft.Xna.Framework;
 
 namespace ShootEmUp
 {
-    class Enemy : GameObject
+    abstract class Enemy : GameObject
     {
-        Vector2 myStartPos = new Vector2(600, 300);
+        public float myAttackCooldown = 0.3f;
+        public float myAttackTimer;
+        public float myBulletSpeed;
+        public float myBulletDamage;
 
-        float anAttackCooldown = 0.3f;
-        float anAttackTimer;
-
-        public Enemy()
+        public void Initialize()
         {
-            myPosition = myStartPos;
-            myScale = 1;
-            myTexture = Game1.myEnemyTexture;
+            //myPosition = aStartPos;
             myRectangle = myTexture.Bounds;
             myRectangle.Size = new Point((int)(myRectangle.Width * myScale), (int)(myRectangle.Height * myScale));
             myRectangle.Location = myPosition.ToPoint();
-            myColor = Color.Red;
         }
 
         public override void Update(GameTime someDeltaTime)
         {
             myRectangle = new Rectangle(myPosition.ToPoint(), myRectangle.Size);
+        }
+
+        public void Shoot(Vector2 aDirection)
+        {
+            InGame.myGameObjects.Add(new Bullet(this, aDirection, myPosition, myBulletSpeed, myBulletDamage, Game1.myEnemyBullet));
         }
     }
 }

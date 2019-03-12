@@ -15,7 +15,6 @@ namespace ShootEmUp
             myGameObjects = new List<GameObject>()
             {
                 new Player(),
-                new Enemy()
             };
         }
 

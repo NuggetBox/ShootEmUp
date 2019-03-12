@@ -24,7 +24,7 @@ namespace ShootEmUp
 
         float myAttackCooldown = 0.3f;
         float myAttackTimer;
-        float myBulletSpeed = 10;
+        float myBulletSpeed = 300;
         float myRotationSpeed = 1.5f;
 
         public Player()
@@ -34,6 +34,7 @@ namespace ShootEmUp
             myRectangle = myTexture.Bounds;
             myRectangle.Size = new Point((int)(myRectangle.Width * myScale), (int)(myRectangle.Height * myScale));
             myRectangle.Location = myPosition.ToPoint();
+
             mySpeed = 100;
         }
 
@@ -67,11 +68,11 @@ namespace ShootEmUp
             }
             if (tempKeyboard.IsKeyDown(myClockwiseRotation))
             {
-                myRotation += (float)(someDeltaTime.ElapsedGameTime.TotalSeconds) * myRotationSpeed;
+                myRotation += (float)someDeltaTime.ElapsedGameTime.TotalSeconds * myRotationSpeed;
             }
             if (tempKeyboard.IsKeyDown(myCounterClockwiseRotation))
             {
-                myRotation -= (float)(someDeltaTime.ElapsedGameTime.TotalSeconds) * myRotationSpeed;
+                myRotation -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds * myRotationSpeed;
             }
 
             Move(someDeltaTime);
@@ -80,7 +81,7 @@ namespace ShootEmUp
         public void Shoot()
         {
             Vector2 tempRight = new Vector2((float)Math.Cos(myRotation), (float)Math.Sin(myRotation));
-            Vector2 tempLeft = new Vector2((float)Math.Cos(myRotation - Math.PI), (float)Math.Sin(myRotation - Math.PI));
+            Vector2 tempLeft = new Vector2((float)Math.Cos(myRotation + Math.PI), (float)Math.Sin(myRotation + Math.PI));
 
             InGame.myGameObjects.Add(new Bullet(this, tempRight, myPosition, myBulletSpeed, myDamage, Game1.myBulletTexture));
             InGame.myGameObjects.Add(new Bullet(this, tempLeft, myPosition, myBulletSpeed, myDamage, Game1.myBulletTexture));

@@ -32,7 +32,7 @@ namespace ShootEmUp
         public override void Update(GameTime someDeltaTime)
         {
             myRectangle = new Rectangle(myPosition.ToPoint(), myRectangle.Size);
-            myPosition += myDirection * mySpeed;
+            myPosition += myDirection * mySpeed * (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
             myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
 
             if (myPosition.X + 2 * myRectangle.Width < 0 || myPosition.X > Game1.AccessWindowSize.X + myRectangle.Width || myPosition.Y + 2 * myRectangle.Height < 0 || myPosition.Y > Game1.AccessWindowSize.Y + myRectangle.Height)

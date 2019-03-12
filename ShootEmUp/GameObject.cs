@@ -11,7 +11,7 @@ namespace ShootEmUp
 {
     abstract class GameObject
     {
-        public Vector2 GetOrigin { get { return new Vector2(myTexture.Width / 2, myTexture.Height / 2); } }
+        public Vector2 GetOrigin { get { return new Vector2(myRectangle.Width * 0.5f, myRectangle.Height * 0.5f); } }
 
         SpriteEffects mySpriteEffects = SpriteEffects.None;
 
