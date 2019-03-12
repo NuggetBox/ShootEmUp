@@ -20,8 +20,6 @@ namespace ShootEmUp
 
         public override void Update(GameTime someDeltaTime)
         {
-            //bool tempInput = false;
-
             KeyboardState tempKeyboardState = Keyboard.GetState();
 
             if (tempKeyboardState.IsKeyDown(Keys.Escape))

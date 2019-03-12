@@ -22,10 +22,10 @@ namespace ShootEmUp
             myRectangle.Location = myPosition.ToPoint();
         }
 
-        public override void Update(GameTime someDeltaTime)
-        {
-            myRectangle = new Rectangle(myPosition.ToPoint(), myRectangle.Size);
-        }
+        //public override void Update(GameTime someDeltaTime)
+        //{
+        //    myRectangle = new Rectangle(myPosition.ToPoint(), myRectangle.Size);
+        //}
 
         public void Shoot(Vector2 aDirection)
         {
