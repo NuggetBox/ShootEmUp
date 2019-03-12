@@ -8,7 +8,7 @@ namespace ShootEmUp
 {
     public abstract class State
     {
-        public abstract void Initialize(ContentManager someContent);
+        public virtual void Initialize() { }
         public abstract void Update(GameTime someDeltaTime);
         public abstract void Draw(GameTime someDeltaTime, SpriteBatch aSpriteBatch);
     }

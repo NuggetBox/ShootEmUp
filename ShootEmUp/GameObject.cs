@@ -24,8 +24,7 @@ namespace ShootEmUp
 
         public float myRotation;
         public float mySpeed;
-        public float myHealth;
-        public float myDamage;
+        public float myHealth = 1;
         public float myScale = 1;
         float myLayer;
 

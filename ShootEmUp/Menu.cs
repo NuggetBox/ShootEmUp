@@ -34,8 +34,6 @@ namespace ShootEmUp
             }
         }
 
-        public override void Initialize(ContentManager someContent) { }
-
         public override void Update(GameTime someDeltaTime)
         {
             bool tempInput = false;
@@ -110,7 +108,7 @@ namespace ShootEmUp
         void Start()
         {
             Game1.AccessStateStack.Push(new InGame());
-            Game1.GetCurrentState.Initialize(myGame.Content);
+            Game1.GetCurrentState.Initialize();
         }
 
         //void Stats()

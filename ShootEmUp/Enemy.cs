@@ -9,23 +9,11 @@ namespace ShootEmUp
 {
     abstract class Enemy : GameObject
     {
-        public float myAttackCooldown = 0.3f;
+        public int myBulletDamage = 1;
+
+        public float myAttackSpeed = 0.3f;
         public float myAttackTimer;
-        public float myBulletSpeed;
-        public float myBulletDamage;
-
-        public void Initialize()
-        {
-            //myPosition = aStartPos;
-            myRectangle = myTexture.Bounds;
-            myRectangle.Size = new Point((int)(myRectangle.Width * myScale), (int)(myRectangle.Height * myScale));
-            myRectangle.Location = myPosition.ToPoint();
-        }
-
-        //public override void Update(GameTime someDeltaTime)
-        //{
-        //    myRectangle = new Rectangle(myPosition.ToPoint(), myRectangle.Size);
-        //}
+        public float myBulletSpeed = 200;
 
         public void Shoot(Vector2 aDirection)
         {

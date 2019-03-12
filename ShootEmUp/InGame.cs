@@ -10,11 +10,12 @@ namespace ShootEmUp
     {
         public static List<GameObject> myGameObjects;
 
-        public override void Initialize(ContentManager someContent)
+        public override void Initialize()
         {
             myGameObjects = new List<GameObject>()
             {
                 new Player(),
+                new Pirate(new Vector2(300, 600)),
             };
         }
 

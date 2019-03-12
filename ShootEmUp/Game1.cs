@@ -28,9 +28,12 @@ namespace ShootEmUp
         {
             AccessWindowSize = new Point(1280, 720);
 
-            myGraphics = new GraphicsDeviceManager(this);
-            myGraphics.PreferredBackBufferWidth = AccessWindowSize.X;
-            myGraphics.PreferredBackBufferHeight = AccessWindowSize.Y;
+            myGraphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = AccessWindowSize.X,
+                PreferredBackBufferHeight = AccessWindowSize.Y
+            };
+
             IsMouseVisible = true;
             myGraphics.ApplyChanges();
             Content.RootDirectory = "Content";

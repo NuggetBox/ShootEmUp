@@ -14,6 +14,8 @@ namespace ShootEmUp
 
         public GameObject myOwner;
 
+        public float myDamage;
+
         public Bullet(GameObject anOwner, Vector2 aDirection, Vector2 aPosition, float someSpeed, float someDamage, Texture2D aTexture)
         {
             myScale = 1;
