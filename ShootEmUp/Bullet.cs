@@ -18,21 +18,20 @@ namespace ShootEmUp
 
         public Bullet(GameObject anOwner, Vector2 aDirection, Vector2 aPosition, float someSpeed, float someDamage, Texture2D aTexture)
         {
-            myScale = 1;
-
             myOwner = anOwner;
             myDirection = aDirection;
-            myPosition = aPosition;
+            aDirection.Normalize();
             mySpeed = someSpeed;
             myDamage = someDamage;
             myTexture = aTexture;
-            myRectangle = new Rectangle((int)(myPosition.X - myTexture.Width * myScale * 0.5f), (int)(myPosition.Y - myTexture.Height * myScale * 0.5f), myTexture.Width * myScale, myTexture.Height * myScale);
+            myPosition = aPosition/* - new Vector2(myTexture.Width * myScale * 0.5f, myTexture.Height * myScale * 0.5f)*/;
+            myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width * myScale, myTexture.Height * myScale);
         }
 
         public override void Update(GameTime someDeltaTime)
         {
             myPosition += myDirection * mySpeed * (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
-            myRectangle.Location = new Point((int)(myPosition.X - myRectangle.Width * 0.5f), (int)(myPosition.Y - myRectangle.Height * 0.5f));
+            myRectangle.Location = (myPosition - GetOrigin * myScale).ToPoint();
             myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
 
             if (myPosition.X + 2 * myRectangle.Width < 0 || myPosition.X > Game1.AccessWindowSize.X + myRectangle.Width || myPosition.Y + 2 * myRectangle.Height < 0 || myPosition.Y > Game1.AccessWindowSize.Y + myRectangle.Height)

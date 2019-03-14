@@ -11,13 +11,14 @@ namespace ShootEmUp
     {
         public int myBulletDamage = 1;
 
-        public float myAttackSpeed = 0.3f;
+        public float myAttackSpeed = 1f;
         public float myAttackTimer;
         public float myBulletSpeed = 200;
 
         public void Shoot(Vector2 aDirection)
         {
-            InGame.myGameObjects.Add(new Bullet(this, aDirection, myPosition, myBulletSpeed, myBulletDamage, Game1.myEnemyBullet));
+            aDirection.Normalize();
+            InGame.myGameObjects.Add(new Bullet(this, aDirection, myPosition + GetOrigin, myBulletSpeed, myBulletDamage, Game1.myEnemyBullet));
         }
     }
 }
