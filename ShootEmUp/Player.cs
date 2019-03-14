@@ -33,9 +33,7 @@ namespace ShootEmUp
         {
             myPosition = myStartPos;
             myTexture = Game1.myPlayerTexture;
-            myRectangle = myTexture.Bounds;
-            myRectangle.Size = new Point((int)(myRectangle.Width * myScale), (int)(myRectangle.Height * myScale));
-            myRectangle.Location = myPosition.ToPoint();
+            myRectangle = new Rectangle((int)(myPosition.X - myTexture.Width * myScale * 0.5f), (int)(myPosition.Y - myTexture.Height * myScale * 0.5f), myTexture.Width * myScale, myTexture.Height * myScale);
 
             mySpeed = 100;
         }

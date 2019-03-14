@@ -13,11 +13,9 @@ namespace ShootEmUp
         {
             myTexture = Game1.myEnemyTexture;
             myPosition = aPosition;
-            mySpeed = 75;
+            mySpeed = 50;
             myHealth = 2;
-            myRectangle = myTexture.Bounds;
-            myRectangle.Size = new Point((int)(myRectangle.Width * myScale), (int)(myRectangle.Height * myScale));
-            myRectangle.Location = myPosition.ToPoint();
+            myRectangle = new Rectangle((int)(myPosition.X - myTexture.Width * myScale * 0.5f), (int)(myPosition.Y - myTexture.Height * myScale * 0.5f), myTexture.Width * myScale, myTexture.Height * myScale);
         }
 
         public override void Update(GameTime someDeltaTime)
@@ -29,6 +27,9 @@ namespace ShootEmUp
                 Shoot(new Vector2(1, 1));
                 myAttackTimer = myAttackSpeed;
             }
+
+            myDirection = InGame.myGameObjects[0].myPosition - myPosition;
+            Move(someDeltaTime);
         }
     }
 }

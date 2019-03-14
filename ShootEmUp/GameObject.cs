@@ -22,10 +22,11 @@ namespace ShootEmUp
         public Texture2D myTexture;
         public Color myColor = Color.White;
 
+        public int myScale = 1;
+
         public float myRotation;
         public float mySpeed;
         public float myHealth = 1;
-        public float myScale = 1;
         float myLayer;
 
         public bool myRemoved;
@@ -49,18 +50,18 @@ namespace ShootEmUp
 
             Rectangle tempRectangle = new Rectangle(tempMove.ToPoint(), myRectangle.Size);
 
-            if (CheckCollision(tempRectangle))
+            if (CheckCollision())
             {
                 myDirection = Vector2.Zero;
                 return;
             }
 
             myPosition += tempMove;
-            myRectangle.Location = myPosition.ToPoint();
+            myRectangle.Location = new Point((int)(myPosition.X - myRectangle.Width * 0.5f), (int)(myPosition.Y - myRectangle.Height * 0.5f));
             myDirection = Vector2.Zero;
         }
 
-        bool CheckCollision(Rectangle aRectangle)
+        bool CheckCollision()
         {
             for (int i = 0; i < InGame.myGameObjects.Count; ++i)
             {

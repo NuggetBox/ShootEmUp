@@ -26,15 +26,13 @@ namespace ShootEmUp
             mySpeed = someSpeed;
             myDamage = someDamage;
             myTexture = aTexture;
-            myRectangle = myTexture.Bounds;
-            myRectangle.Size = new Point((int)(myRectangle.Width * myScale), (int)(myRectangle.Height * myScale));
-            myRectangle.Location = myPosition.ToPoint();
+            myRectangle = new Rectangle((int)(myPosition.X - myTexture.Width * myScale * 0.5f), (int)(myPosition.Y - myTexture.Height * myScale * 0.5f), myTexture.Width * myScale, myTexture.Height * myScale);
         }
 
         public override void Update(GameTime someDeltaTime)
         {
-            myRectangle = new Rectangle(myPosition.ToPoint(), myRectangle.Size);
             myPosition += myDirection * mySpeed * (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
+            myRectangle.Location = new Point((int)(myPosition.X - myRectangle.Width * 0.5f), (int)(myPosition.Y - myRectangle.Height * 0.5f));
             myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
 
             if (myPosition.X + 2 * myRectangle.Width < 0 || myPosition.X > Game1.AccessWindowSize.X + myRectangle.Width || myPosition.Y + 2 * myRectangle.Height < 0 || myPosition.Y > Game1.AccessWindowSize.Y + myRectangle.Height)
