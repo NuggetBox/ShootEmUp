@@ -1,14 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ShootEmUp
 {
-    class Menu : State
+    class Pause : State
     {
         List<Button> myButtons;
+        public readonly Game1 myGame;
 
         int mySelectedIndex = 0;
         int myButtonOffset = 75;
@@ -17,15 +21,14 @@ namespace ShootEmUp
         float myTimer;
         float myDelay = 100;
 
-        public Menu(List<Button> someButtons)
+        public Pause()
         {
-            myButtons = someButtons;
-            //myButtons = new List<Button>
-            //{
-            //     new Button("Start", Start),
-            //     //new Button("Settings", Stats),
-            //     new Button("Quit", Quit)
-            //};
+            myButtons = new List<Button>
+            {
+                 new Button("Resume", Resume),
+                 //new Button("Settings", Stats),
+                 new Button("Exit to main menu", ExitToMain)
+            };
 
             for (int i = 0; i < myButtons.Count; ++i)
             {
@@ -104,28 +107,18 @@ namespace ShootEmUp
             }
         }
 
-        public static void Start()
-        {
-            Game1.AccessStateStack.Push(new InGame());
-            Game1.GetCurrentState.Initialize();
-        }
-
-        public static void Resume()
+        void Resume()
         {
             Game1.AccessStateStack.Pop();
         }
 
-        public static void ExitToMain()
+        // TODO: MAKE EXIT TO MAIN WORK
+        void ExitToMain()
         {
             while (!(Game1.GetCurrentState is Menu))
             {
                 Game1.AccessStateStack.Pop();
             }
-        }
-
-        public static void Quit()
-        {
-            Game1.myQuit = true;
         }
     }
 }

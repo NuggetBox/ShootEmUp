@@ -15,22 +15,29 @@ namespace ShootEmUp
 
         SpriteEffects mySpriteEffects = SpriteEffects.None;
 
-        public Vector2 myPosition;
-        public Vector2 myDirection = Vector2.Zero;
+        public Vector2 
+            myPosition,
+            myDirection = Vector2.Zero;
+
         public Rectangle myRectangle;
 
         public Texture2D myTexture;
+
         public Color myColor = Color.White;
 
-        public int myScale = 4;
+        public int 
+            myScale = 4,
+            mySpeed;
 
-        public float myRotation;
-        public float mySpeed;
-        public float myHealth = 1;
+        public float 
+            myRotation,
+            myHealth = 1;
+
         float myLayer;
 
-        public bool myRemoved;
-        public bool mySolid;
+        public bool 
+            myRemoved,
+            mySolid;
 
         public abstract void Update(GameTime someDeltaTime);
 
@@ -61,7 +68,9 @@ namespace ShootEmUp
 
             myPosition += tempMove;
             myRectangle.Location = ((myPosition - GetOrigin * myScale)).ToPoint();
-            myDirection = Vector2.Zero;
+
+            if (this is Player)
+                myDirection = Vector2.Zero;
         }
 
         bool CheckCollision(Rectangle aRectangle)
@@ -80,6 +89,17 @@ namespace ShootEmUp
         protected Rectangle CreateRectangle()
         {
             return new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width * myScale, myTexture.Height * myScale);
+        }
+
+        protected void CheckPlayerDeath()
+        {
+            if (InGame.GetPlayer.myHealth <= 0)
+            {
+                InGame.myScore = 0;
+                Game1.AccessStateStack.Pop();
+                Game1.AccessStateStack.Push(new InGame());
+                Game1.GetCurrentState.Initialize();
+            }
         }
     }
 }

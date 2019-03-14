@@ -16,7 +16,7 @@ namespace ShootEmUp
 
         public float myDamage;
 
-        public Bullet(GameObject anOwner, Vector2 aDirection, Vector2 aPosition, float someSpeed, float someDamage, Texture2D aTexture)
+        public Bullet(GameObject anOwner, Vector2 aDirection, Vector2 aPosition, int someSpeed, float someDamage, Texture2D aTexture)
         {
             myOwner = anOwner;
             myDirection = aDirection;
@@ -24,8 +24,8 @@ namespace ShootEmUp
             mySpeed = someSpeed;
             myDamage = someDamage;
             myTexture = aTexture;
-            myPosition = aPosition/* - new Vector2(myTexture.Width * myScale * 0.5f, myTexture.Height * myScale * 0.5f)*/;
-            myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width * myScale, myTexture.Height * myScale);
+            myPosition = aPosition;
+            myRectangle = CreateRectangle();
         }
 
         public override void Update(GameTime someDeltaTime)
@@ -55,10 +55,7 @@ namespace ShootEmUp
                             InGame.myGameObjects[i].myHealth -= myDamage;
 
                             // TODO: IF PLAYER DIE
-                            if (InGame.myGameObjects[i].myHealth <= 0)
-                            {
-                                
-                            }
+                            CheckPlayerDeath();
 
                             myRemoved = true;
                             return;
@@ -71,7 +68,7 @@ namespace ShootEmUp
                         // TODO: IF ENEMY DIE
                         if (InGame.myGameObjects[i].myHealth <= 0)
                         {
-                            // SOME FUCKING SCORE OR SOME SHIT
+                            ++InGame.myScore;
                             InGame.myGameObjects[i].myRemoved = true;
                         }
 

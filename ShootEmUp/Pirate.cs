@@ -9,28 +9,42 @@ namespace ShootEmUp
 {
     class Pirate : Enemy
     {
-        public Pirate(Vector2 aPosition)
+        public int myFireRange = 200;
+
+        bool myFire;
+
+        public Pirate(int x, int y)
         {
             myTexture = Game1.myPirate;
-            myPosition = aPosition;
+            myPosition = new Vector2(x, y);
             mySpeed = 30;
             myHealth = 3;
+            myDamage = 3;
             myRectangle = CreateRectangle();
         }
 
         public override void Update(GameTime someDeltaTime)
         {
+            myDirection = InGame.GetPlayer.myPosition - myPosition;
+            myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
             myAttackTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
 
-            if (myAttackTimer <= 0)
+            if ((InGame.GetPlayer.myPosition - myPosition).Length() <= myFireRange)
             {
-                Shoot(InGame.myGameObjects[0].myPosition - myPosition);
-                myAttackTimer = myAttackSpeed;
+                myFire = true;
+            }
+            else
+            {
+                myDirection = InGame.GetPlayer.myPosition - myPosition;
+                Move(someDeltaTime);
             }
 
-            myDirection = InGame.myGameObjects[0].myPosition - myPosition;
-            myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
-            Move(someDeltaTime);
+            if (myAttackTimer <= 0 && myFire)
+            {
+                Shoot(InGame.GetPlayer.myPosition - myPosition);
+                myAttackTimer = myAttackSpeed;
+                myFire = false;
+            }
         }
     }
 }

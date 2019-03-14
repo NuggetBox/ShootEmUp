@@ -9,18 +9,26 @@ namespace ShootEmUp
 {
     class Crab : Enemy
     {
-        public int myDashDistance = 40;
+        Vector2 myDashPos;
 
-        int mySpeedMult = 5;
+        public int myDashDistance = 150;
 
-        bool myCharging;
+        int
+            myChargeSpeed = 520,
+            myRegularSpeed;
 
-        public Crab(Vector2 aPosition)
+        bool
+            myCharging,
+            myDashing,
+            myReturning;
+
+        public Crab(int x, int y)
         {
-            myPosition = aPosition;
+            myPosition = new Vector2(x, y);
             myTexture = Game1.myCrab;
             myHealth = 3;
             mySpeed = 130;
+            myRegularSpeed = mySpeed;
             myAttackSpeed = 1.5f;
             myAttackTimer = myAttackSpeed;
             myRectangle = CreateRectangle();
@@ -30,30 +38,57 @@ namespace ShootEmUp
         {
             myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
 
-            if ((InGame.myGameObjects[0].myPosition - myPosition).Length() <= myDashDistance || myCharging)
+            if ((InGame.GetPlayer.myPosition - myPosition).Length() <= myDashDistance || myCharging)
             {
-                CrabAttack(someDeltaTime);
+                myColor = Color.DarkRed;
+
+                if (myDashing)
+                {
+                    myColor = Color.White;
+                    myDirection = InGame.GetPlayer.myPosition - myPosition;
+
+                    if ((InGame.GetPlayer.myPosition - myPosition).Length() <= 5)
+                    {
+                        myReturning = true;
+                        InGame.myGameObjects[0].myHealth -= myDamage;
+                    }
+
+                    if (myReturning)
+                    {
+                        if ((myPosition - myDashPos).Length() <= 5)
+                        {
+                            myDashing = false;
+                            myCharging = false;
+                            myReturning = false;
+                            myAttackTimer = myAttackSpeed;
+                        }
+
+                        mySpeed = myRegularSpeed;
+                        myDirection = myDashPos - myPosition;
+                    }
+
+                    Move(someDeltaTime);
+                }
+                else
+                {
+                    myCharging = true;
+
+                    if (myAttackTimer <= 0)
+                    {
+                        myDashPos = myPosition;
+                        myDirection = InGame.GetPlayer.myPosition - myPosition;
+                        mySpeed = myChargeSpeed;
+                        myDashing = true;
+                    }
+
+                    myAttackTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
+                }
             }
             else
             {
-                myDirection = InGame.myGameObjects[0].myPosition - myPosition;
+                myDirection = InGame.GetPlayer.myPosition - myPosition;
                 Move(someDeltaTime);
             }
-        }
-
-        void CrabAttack(GameTime someDeltaTime)
-        {
-            myCharging = true;
-
-            if (myAttackTimer <= 0)
-            {
-                Vector2 tempDashPos = myPosition;
-                myDirection = InGame.myGameObjects[0].myPosition - myPosition;
-                mySpeed *= mySpeedMult;
-
-            }
-
-            myAttackTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
         }
     }
 }

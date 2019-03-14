@@ -16,16 +16,17 @@ namespace ShootEmUp
 
         GraphicsDeviceManager myGraphics;
         SpriteBatch mySpriteBatch;
-        public SpriteFont mySpriteFont;
+        public static SpriteFont mySpriteFont;
 
         public static Texture2D myPlayer;
         public static Texture2D myPlayerBullet;
-
 
         public static Texture2D hej;
         public static Texture2D myCrab;
         public static Texture2D myPirate;
         public static Texture2D myEnemyBullet;
+
+        public static bool myQuit;
 
         public Game1()
         {
@@ -53,7 +54,14 @@ namespace ShootEmUp
             // TODO: Add your initialization logic here
             AccessStateStack = new Stack<State>();
 
-            Menu menu = new Menu(this);
+            List<Button> tempButtons = new List<Button>
+            {
+                new Button("Start", Menu.Start),
+                new Button("Quit", Menu.Quit),
+            };
+
+            Menu menu = new Menu(tempButtons);
+
             AccessStateStack.Push(menu);
 
             base.Initialize();
@@ -74,7 +82,7 @@ namespace ShootEmUp
             myPlayer = Content.Load<Texture2D>("ship");
             myPlayerBullet = Content.Load<Texture2D>("ball");
 
-            hej = Content.Load<Texture2D>("svart");
+            //hej = Content.Load<Texture2D>("svart");
             myCrab = Content.Load<Texture2D>("crab");
             myPirate = Content.Load<Texture2D>("pirate");
             myEnemyBullet = Content.Load<Texture2D>("ball");
@@ -105,6 +113,9 @@ namespace ShootEmUp
             //}
 
             // TODO: Add your update logic here
+            if (myQuit)
+                Exit();
+
             GetCurrentState.Update(gameTime);
 
             base.Update(gameTime);
@@ -116,7 +127,7 @@ namespace ShootEmUp
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DodgerBlue);
 
             // TODO: Add your drawing code here
             mySpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, null);
