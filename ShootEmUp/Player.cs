@@ -32,10 +32,8 @@ namespace ShootEmUp
         public Player()
         {
             myPosition = myStartPos;
-            myTexture = Game1.myPlayerTexture;
-            myRectangle = myTexture.Bounds;
-            myRectangle.Size = new Point((int)(myRectangle.Width * myScale), (int)(myRectangle.Height * myScale));
-            myRectangle.Location = myPosition.ToPoint();
+            myTexture = Game1.myPlayer;
+            myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width * myScale, myTexture.Height * myScale);
 
             mySpeed = 100;
         }
@@ -85,8 +83,8 @@ namespace ShootEmUp
             Vector2 tempRight = new Vector2((float)Math.Cos(myRotation), (float)Math.Sin(myRotation));
             Vector2 tempLeft = new Vector2((float)Math.Cos(myRotation + Math.PI), (float)Math.Sin(myRotation + Math.PI));
 
-            InGame.myGameObjects.Add(new Bullet(this, tempRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
-            InGame.myGameObjects.Add(new Bullet(this, tempLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+            InGame.myGameObjects.Add(new Bullet(this, tempRight, myPosition + GetOrigin, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+            InGame.myGameObjects.Add(new Bullet(this, tempLeft, myPosition + GetOrigin, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
         }
     }
 }

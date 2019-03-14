@@ -11,7 +11,7 @@ namespace ShootEmUp
 {
     abstract class GameObject
     {
-        public Vector2 GetOrigin { get { return new Vector2(myRectangle.Width * 0.5f, myRectangle.Height * 0.5f); } }
+        public Vector2 GetOrigin => new Vector2(myTexture.Bounds.Width * 0.5f, myTexture.Bounds.Height * 0.5f); 
 
         SpriteEffects mySpriteEffects = SpriteEffects.None;
 
@@ -22,10 +22,11 @@ namespace ShootEmUp
         public Texture2D myTexture;
         public Color myColor = Color.White;
 
+        public int myScale = 4;
+
         public float myRotation;
         public float mySpeed;
         public float myHealth = 1;
-        public float myScale = 1;
         float myLayer;
 
         public bool myRemoved;
@@ -36,6 +37,9 @@ namespace ShootEmUp
         public void Draw(SpriteBatch aSpriteBatch)
         {
             aSpriteBatch.Draw(myTexture, myPosition, null, myColor, myRotation, GetOrigin, myScale, mySpriteEffects, myLayer);
+
+            //Rectangle temp = new Rectangle(myPosition.ToPoint(), myTexture.Bounds.Size);
+            //aSpriteBatch.Draw(Game1.hej, temp, Color.White);
         }
 
         protected void Move(GameTime someDeltaTime)
@@ -47,16 +51,16 @@ namespace ShootEmUp
 
             Vector2 tempMove = myDirection * mySpeed * (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
 
-            Rectangle tempRectangle = new Rectangle(tempMove.ToPoint(), myRectangle.Size);
+            //Rectangle tempRectangle = new Rectangle(tempMove.ToPoint(), myRectangle.Size);
 
-            if (CheckCollision(tempRectangle))
-            {
-                myDirection = Vector2.Zero;
-                return;
-            }
+            //if (CheckCollision(tempRectangle))
+            //{
+            //    myDirection = Vector2.Zero;
+            //    return;
+            //}
 
             myPosition += tempMove;
-            myRectangle.Location = myPosition.ToPoint();
+            myRectangle.Location = ((myPosition - GetOrigin * myScale)).ToPoint();
             myDirection = Vector2.Zero;
         }
 

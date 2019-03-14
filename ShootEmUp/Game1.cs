@@ -18,10 +18,13 @@ namespace ShootEmUp
         SpriteBatch mySpriteBatch;
         public SpriteFont mySpriteFont;
 
-        public static Texture2D myPlayerTexture;
+        public static Texture2D myPlayer;
         public static Texture2D myPlayerBullet;
 
-        public static Texture2D myEnemyTexture;
+
+        public static Texture2D hej;
+        public static Texture2D myCrab;
+        public static Texture2D myPirate;
         public static Texture2D myEnemyBullet;
 
         public Game1()
@@ -68,11 +71,13 @@ namespace ShootEmUp
             // TODO: use this.Content to load your game content here
             mySpriteFont = Content.Load<SpriteFont>("Standard");
 
-            myPlayerTexture = Content.Load<Texture2D>("player");
-            myPlayerBullet = Content.Load<Texture2D>("bullet");
+            myPlayer = Content.Load<Texture2D>("ship");
+            myPlayerBullet = Content.Load<Texture2D>("ball");
 
-            myEnemyTexture = Content.Load<Texture2D>("enemy");
-            myEnemyBullet = Content.Load<Texture2D>("bullet");
+            hej = Content.Load<Texture2D>("svart");
+            myCrab = Content.Load<Texture2D>("crab");
+            myPirate = Content.Load<Texture2D>("pirate");
+            myEnemyBullet = Content.Load<Texture2D>("ball");
         }
 
         /// <summary>
@@ -111,7 +116,7 @@ namespace ShootEmUp
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
             mySpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, null);

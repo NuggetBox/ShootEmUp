@@ -15,7 +15,7 @@ namespace ShootEmUp
             myGameObjects = new List<GameObject>()
             {
                 new Player(),
-                new Pirate(new Vector2(300, 600)),
+                new Pirate(new Vector2(300, 400)),
             };
         }
 
@@ -54,12 +54,9 @@ namespace ShootEmUp
 
         void ExitToMain()
         {
-            while (true)
+            while (!(Game1.GetCurrentState is Menu))
             {
-                if (!(Game1.GetCurrentState is Menu))
-                {
-                    Game1.AccessStateStack.Pop();
-                }
+                Game1.AccessStateStack.Pop();
             }
         }
     }
