@@ -15,7 +15,7 @@ namespace ShootEmUp
             myPosition = aPosition;
             mySpeed = 30;
             myHealth = 3;
-            myRectangle = new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width * myScale, myTexture.Height * myScale);
+            myRectangle = CreateRectangle();
         }
 
         public override void Update(GameTime someDeltaTime)

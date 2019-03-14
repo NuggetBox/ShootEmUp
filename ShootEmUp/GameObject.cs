@@ -76,5 +76,10 @@ namespace ShootEmUp
 
             return false;
         }
+
+        protected Rectangle CreateRectangle()
+        {
+            return new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width * myScale, myTexture.Height * myScale);
+        }
     }
 }
