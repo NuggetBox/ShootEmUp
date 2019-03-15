@@ -57,6 +57,11 @@ namespace ShootEmUp
             {
                 if (myGameObjects[i].myRemoved)
                 {
+                    if (myGameObjects[i] is Enemy)
+                    {
+                        ++myScore;
+                    }
+
                     myGameObjects.RemoveAt(i);
                     --i;
                 }

@@ -68,7 +68,6 @@ namespace ShootEmUp
                         // TODO: IF ENEMY DIE
                         if (InGame.myGameObjects[i].myHealth <= 0)
                         {
-                            ++InGame.myScore;
                             InGame.myGameObjects[i].myRemoved = true;
                         }
 
