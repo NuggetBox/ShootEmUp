@@ -14,7 +14,7 @@ namespace ShootEmUp
         public int myDashDistance = 150;
 
         int
-            myChargeSpeed = 520,
+            myChargeSpeed = 500,
             myRegularSpeed;
 
         bool
