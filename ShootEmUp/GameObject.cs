@@ -33,7 +33,7 @@ namespace ShootEmUp
             myRotation,
             myHealth = 1;
 
-        float myLayer;
+        public float myLayer;
 
         public bool 
             myRemoved,
@@ -88,7 +88,7 @@ namespace ShootEmUp
 
         protected Rectangle CreateRectangle()
         {
-            return new Rectangle((int)myPosition.X, (int)myPosition.Y, myTexture.Width * myScale, myTexture.Height * myScale);
+            return new Rectangle((int)(myPosition.X - GetOrigin.X * myScale), (int)(myPosition.Y - GetOrigin.Y * myScale), myTexture.Width * myScale, myTexture.Height * myScale);
         }
 
         protected void CheckPlayerDeath()

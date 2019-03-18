@@ -16,15 +16,20 @@ namespace ShootEmUp
 
         GraphicsDeviceManager myGraphics;
         SpriteBatch mySpriteBatch;
+
         public static SpriteFont mySpriteFont;
 
-        public static Texture2D myPlayer;
-        public static Texture2D myPlayerBullet;
+        public static Texture2D 
+            myPlayer,
+            myPlayerBullet;
 
-        public static Texture2D hej;
-        public static Texture2D myCrab;
-        public static Texture2D myPirate;
-        public static Texture2D myEnemyBullet;
+        //public static Texture2D hej;
+        public static Texture2D
+            myCrab,
+            myOctopus,
+            myInk,
+            myPirate,
+            myEnemyBullet;
 
         public static bool myQuit;
 
@@ -84,6 +89,8 @@ namespace ShootEmUp
 
             //hej = Content.Load<Texture2D>("svart");
             myCrab = Content.Load<Texture2D>("crab");
+            myOctopus = Content.Load<Texture2D>("octopus");
+            myInk = Content.Load<Texture2D>("ink");
             myPirate = Content.Load<Texture2D>("pirate");
             myEnemyBullet = Content.Load<Texture2D>("ball");
         }
@@ -130,7 +137,7 @@ namespace ShootEmUp
             GraphicsDevice.Clear(Color.DodgerBlue);
 
             // TODO: Add your drawing code here
-            mySpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, null);
+            mySpriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, null, null, null, null);
 
             base.Draw(gameTime);
 

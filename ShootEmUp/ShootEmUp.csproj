@@ -45,6 +45,8 @@
     <Compile Include="Bullet.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Crab.cs" />
+    <Compile Include="Ink.cs" />
+    <Compile Include="Octopus.cs" />
     <Compile Include="Pause.cs" />
     <Compile Include="Pirate.cs" />
     <Compile Include="Enemy.cs" />

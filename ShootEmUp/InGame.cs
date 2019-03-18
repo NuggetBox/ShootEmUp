@@ -22,6 +22,8 @@ namespace ShootEmUp
 
                 new Pirate(20, 510),
 
+                new Octopus(50, 50),
+
                 new Crab(0, 0), new Crab(100, 50), new Crab(200, 0), new Crab(300, 0), new Crab(400, 0), new Crab(500, 0), new Crab(600, 0), new Crab(600, 0),
                 new Crab(25, 25), new Crab(100, 150), new Crab(200, 100), new Crab(300, 100), new Crab(400, 100), new Crab(500, 100), new Crab(500, 100), new Crab(500, 100),
                 new Crab(50, 50), new Crab(100, 250), new Crab(200, 200), new Crab(300, 200), new Crab(400, 200), new Crab(500, 200), new Crab(500, 200), new Crab(500, 200),
@@ -76,6 +78,7 @@ namespace ShootEmUp
             }
 
             aSpriteBatch.DrawString(Game1.mySpriteFont, "Score: " + myScore, new Vector2(400, 50), Color.White, 1, Vector2.Zero, 1, SpriteEffects.None, 1);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Health: " + InGame.GetPlayer.myHealth, new Vector2(450, 50), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
         }
 
         public void ExitToMain()
