@@ -10,7 +10,7 @@ namespace ShootEmUp
 {
     class Octopus : Enemy
     {
-        Random myRng = new Random();
+        static Random myRng = new Random();
 
         bool
             myCharging;
@@ -21,7 +21,7 @@ namespace ShootEmUp
             myInkScale = 6;
 
         float
-            myInkCooldown = 5,
+            myInkCooldown = 3,
             myInkTimer;
 
         public Octopus(int x, int y)
@@ -40,6 +40,7 @@ namespace ShootEmUp
 
             if (tempPlayerDir.Length() <= myAttackRange || myCharging)
             {
+                myColor = Color.DarkRed;
                 myCharging = true;
 
                 if (myInkTimer <= 0)
@@ -53,9 +54,12 @@ namespace ShootEmUp
             }
             else
             {
+                myColor = Color.White;
                 myDirection = tempPlayerDir;
                 Move(someDeltaTime);
             }
+
+            myRotation = (float)Math.Atan2(tempPlayerDir.X, -tempPlayerDir.Y) + (float)Math.PI;
         }
 
         void Ink()

@@ -47,48 +47,42 @@ namespace ShootEmUp
 
             KeyboardState tempKeyboardState = Keyboard.GetState();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            if (myTimer >= myDelay)
             {
-                myButtons[mySelectedIndex].Press();
-            }
-            else if (myTimer >= myDelay)
-            {
-                if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
-                    //if (mySelectedIndex == 0)
-                    //{
-                    //    mySelectedIndex = myButtons.Count - 1;
-                    //}
-                    if (mySelectedIndex != 0)
-                    {
-                        --mySelectedIndex;
-                    }
-
-                    tempInput = true;
+                    myButtons[mySelectedIndex].Press();
                 }
-                else if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                else
                 {
-                    //if (mySelectedIndex == myButtons.Count - 1)
-                    //{
-                    //    mySelectedIndex = 0;
-                    //}
-                    if (mySelectedIndex != myButtons.Count - 1)
+                    if (Keyboard.GetState().IsKeyDown(Keys.Up))
                     {
-                        ++mySelectedIndex;
+                        //if (mySelectedIndex == 0)
+                        //{
+                        //    mySelectedIndex = myButtons.Count - 1;
+                        //}
+                        if (mySelectedIndex != 0)
+                        {
+                            --mySelectedIndex;
+                        }
                     }
-
-                    tempInput = true;
+                    else if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                    {
+                        //if (mySelectedIndex == myButtons.Count - 1)
+                        //{
+                        //    mySelectedIndex = 0;
+                        //}
+                        if (mySelectedIndex != myButtons.Count - 1)
+                        {
+                            ++mySelectedIndex;
+                        }
+                    }
                 }
-            }
 
-            if (tempInput)
-            {
                 myTimer = 0;
             }
-            else
-            {
-                myTimer += someDeltaTime.ElapsedGameTime.Milliseconds;
-            }
+
+            myTimer += someDeltaTime.ElapsedGameTime.Milliseconds;
 
             myButtons[mySelectedIndex].myColor.B = 123;
         }
@@ -117,7 +111,7 @@ namespace ShootEmUp
 
         public static void ExitToMain()
         {
-            while (!(Game1.GetCurrentState is Menu))
+            while (Game1.AccessStateStack.Count > 1)
             {
                 Game1.AccessStateStack.Pop();
             }

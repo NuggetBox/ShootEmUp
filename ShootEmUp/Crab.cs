@@ -26,7 +26,7 @@ namespace ShootEmUp
         {
             myPosition = new Vector2(x, y);
             myTexture = Game1.myCrab;
-            myHealth = 3;
+            myHealth = 1;
             mySpeed = 130;
             myRegularSpeed = mySpeed;
             myAttackSpeed = 1.5f;

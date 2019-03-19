@@ -22,7 +22,7 @@ namespace ShootEmUp
 
                 new Pirate(20, 510),
 
-                new Octopus(50, 50),
+                new Octopus(50, 50), 
 
                 new Crab(0, 0), new Crab(100, 50), new Crab(200, 0), new Crab(300, 0), new Crab(400, 0), new Crab(500, 0), new Crab(600, 0), new Crab(600, 0),
                 new Crab(25, 25), new Crab(100, 150), new Crab(200, 100), new Crab(300, 100), new Crab(400, 100), new Crab(500, 100), new Crab(500, 100), new Crab(500, 100),
@@ -77,16 +77,8 @@ namespace ShootEmUp
                 myGameObjects[i].Draw(aSpriteBatch);
             }
 
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Score: " + myScore, new Vector2(400, 50), Color.White, 1, Vector2.Zero, 1, SpriteEffects.None, 1);
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Health: " + InGame.GetPlayer.myHealth, new Vector2(450, 50), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
-        }
-
-        public void ExitToMain()
-        {
-            while (!(Game1.GetCurrentState is Menu))
-            {
-                Game1.AccessStateStack.Pop();
-            }
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Score: " + myScore, new Vector2(10, 40), Color.White, 0, Vector2.Zero, 0.2f, SpriteEffects.None, 1);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Health: " + InGame.GetPlayer.myHealth, new Vector2(10, 10), Color.White, 0, Vector2.Zero, 0.2f, SpriteEffects.None, 1);
         }
     }
 }
