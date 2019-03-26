@@ -23,6 +23,7 @@ namespace ShootEmUp
             aDirection.Normalize();
             mySpeed = someSpeed;
             myDamage = someDamage;
+            myLayer = 0.75f;
             myTexture = aTexture;
             myPosition = aPosition;
             myRectangle = CreateRectangle();

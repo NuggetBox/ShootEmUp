@@ -72,6 +72,8 @@ namespace ShootEmUp
 
         public override void Draw(GameTime someDeltaTime, SpriteBatch aSpriteBatch)
         {
+            aSpriteBatch.Draw(Game1.myBeach, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 20, SpriteEffects.None, 0);
+
             for (int i = 0; i < myGameObjects.Count; ++i)
             {
                 myGameObjects[i].Draw(aSpriteBatch);

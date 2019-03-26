@@ -33,7 +33,7 @@ namespace ShootEmUp
             myRotation,
             myHealth = 1;
 
-        public float myLayer;
+        public float myLayer = 0.5f;
 
         public bool 
             myRemoved,

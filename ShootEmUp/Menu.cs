@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,12 +11,14 @@ namespace ShootEmUp
     {
         List<Button> myButtons;
 
+        KeyboardState myPreviousKeyboardState;
+
         int mySelectedIndex = 0;
         int myButtonOffset = 75;
 
         float myButtonScale = 0.4f;
-        float myTimer;
-        float myDelay = 100;
+        //float myTimer;
+        //float myDelay = 100;
 
         public Menu(List<Button> someButtons)
         {
@@ -35,8 +38,6 @@ namespace ShootEmUp
 
         public override void Update(GameTime someDeltaTime)
         {
-            bool tempInput = false;
-
             for (int i = 0; i < myButtons.Count; ++i)
             {
                 if (i != mySelectedIndex)
@@ -47,44 +48,34 @@ namespace ShootEmUp
 
             KeyboardState tempKeyboardState = Keyboard.GetState();
 
-            if (myTimer >= myDelay)
+            if (tempKeyboardState.IsKeyDown(Keys.Enter) && myPreviousKeyboardState.IsKeyUp(Keys.Enter))
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                myButtons[mySelectedIndex].Press();
+                //Console.Beep();
+            }
+            else
+            {
+                if (tempKeyboardState.IsKeyDown(Keys.Up) && myPreviousKeyboardState.IsKeyUp(Keys.Up))
                 {
-                    myButtons[mySelectedIndex].Press();
+                    if (mySelectedIndex != 0)
+                    {
+                        --mySelectedIndex;
+                    }
+                    //Console.Beep();
                 }
-                else
+                else if (tempKeyboardState.IsKeyDown(Keys.Down) && myPreviousKeyboardState.IsKeyUp(Keys.Down))
                 {
-                    if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                    if (mySelectedIndex != myButtons.Count - 1)
                     {
-                        //if (mySelectedIndex == 0)
-                        //{
-                        //    mySelectedIndex = myButtons.Count - 1;
-                        //}
-                        if (mySelectedIndex != 0)
-                        {
-                            --mySelectedIndex;
-                        }
+                        ++mySelectedIndex;
                     }
-                    else if (Keyboard.GetState().IsKeyDown(Keys.Down))
-                    {
-                        //if (mySelectedIndex == myButtons.Count - 1)
-                        //{
-                        //    mySelectedIndex = 0;
-                        //}
-                        if (mySelectedIndex != myButtons.Count - 1)
-                        {
-                            ++mySelectedIndex;
-                        }
-                    }
+                    //Console.Beep();
                 }
-
-                myTimer = 0;
             }
 
-            myTimer += someDeltaTime.ElapsedGameTime.Milliseconds;
-
             myButtons[mySelectedIndex].myColor.B = 123;
+
+            myPreviousKeyboardState = tempKeyboardState;
         }
 
         public override void Draw(GameTime someDeltaTime, SpriteBatch aSpriteBatch)

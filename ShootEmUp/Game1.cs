@@ -29,7 +29,8 @@ namespace ShootEmUp
             myOctopus,
             myInk,
             myPirate,
-            myEnemyBullet;
+            myEnemyBullet,
+            myBeach;
 
         public static bool myQuit;
 
@@ -93,6 +94,7 @@ namespace ShootEmUp
             myInk = Content.Load<Texture2D>("ink");
             myPirate = Content.Load<Texture2D>("pirate");
             myEnemyBullet = Content.Load<Texture2D>("ball");
+            myBeach = Content.Load<Texture2D>("beach");
         }
 
         /// <summary>
