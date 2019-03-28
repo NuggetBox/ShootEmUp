@@ -11,8 +11,6 @@ namespace ShootEmUp
     {
         Vector2 myDashPos;
 
-        public int myDashDistance = 150;
-
         int
             myChargeSpeed = 500,
             myRegularSpeed;
@@ -38,7 +36,7 @@ namespace ShootEmUp
         {
             myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
 
-            if ((InGame.GetPlayer.myPosition - myPosition).Length() <= myDashDistance || myCharging)
+            if ((InGame.GetPlayer.myPosition - myPosition).Length() <= myAttackRange || myCharging)
             {
                 myColor = Color.DarkRed;
 

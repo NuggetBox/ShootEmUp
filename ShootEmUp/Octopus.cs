@@ -16,7 +16,6 @@ namespace ShootEmUp
             myCharging;
 
         int
-            myAttackRange = 150,
             myInkCount = 5,
             myInkScale = 6;
 

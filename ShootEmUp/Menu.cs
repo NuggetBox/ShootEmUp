@@ -17,8 +17,6 @@ namespace ShootEmUp
         int myButtonOffset = 75;
 
         float myButtonScale = 0.4f;
-        //float myTimer;
-        //float myDelay = 100;
 
         public Menu(List<Button> someButtons)
         {

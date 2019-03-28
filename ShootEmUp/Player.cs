@@ -26,7 +26,7 @@ namespace ShootEmUp
             myBulletDamage = 1,
             myBulletSpeed = 300;
 
-        float 
+        float
             myAttackCooldown = 0.3f,
             myAttackTimer,
             myRotationSpeed = 1.5f;
@@ -37,7 +37,6 @@ namespace ShootEmUp
             myTexture = Game1.myPlayer;
             myRectangle = CreateRectangle();
             myHealth = 300;
-
             mySpeed = 100;
         }
 
@@ -80,8 +79,7 @@ namespace ShootEmUp
                 myRotation -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds * myRotationSpeed;
             }
 
-            Console.WriteLine(myPosition);
-
+            // Console.WriteLine(myPosition);
             // 420, 850
 
             if (myPosition.X + myDirection.X * mySpeed * someDeltaTime.ElapsedGameTime.TotalSeconds > 420 && myPosition.X + myDirection.X * mySpeed * someDeltaTime.ElapsedGameTime.TotalSeconds < 850)
