@@ -20,11 +20,13 @@ namespace ShootEmUp
             {
                 new Player(),
 
-                new Pirate(20, 510),
+                //new Pirate(20, 510),
 
-                new Octopus(50, 50), 
+                new Octopus(500, 50), 
 
-                new Clam(90, 90),
+                new Clam(250, 250),
+
+                new Crab(20, 20),
 
                 //new Crab(0, 0), new Crab(100, 50), new Crab(200, 0), new Crab(300, 0), new Crab(400, 0), new Crab(500, 0), new Crab(600, 0), new Crab(600, 0),
                 //new Crab(25, 25), new Crab(100, 150), new Crab(200, 100), new Crab(300, 100), new Crab(400, 100), new Crab(500, 100), new Crab(500, 100), new Crab(500, 100),

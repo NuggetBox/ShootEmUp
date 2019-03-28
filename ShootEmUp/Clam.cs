@@ -15,8 +15,6 @@ namespace ShootEmUp
             myOpening,
             myOpen;
 
-        //float myAnimationTimer = 0.1f;
-
         public Clam(int x, int y)
         {
             myClosed = Game1.myClamClosed;
@@ -29,6 +27,7 @@ namespace ShootEmUp
             mySpeed = 50;
             myAttackSpeed = 0.8f;
             myAttackTimer = myAttackSpeed;
+            myAttackRange = 250;
             myDamage = 3;
             myRectangle = CreateRectangle();
         }
@@ -39,21 +38,20 @@ namespace ShootEmUp
 
             myDirection = InGame.GetPlayer.myPosition - myPosition;
 
-            if (myAttackTimer > 0.66 * myAttackSpeed)
-            {
-                myTexture = myClosed;
-            }
-            if (myAttackTimer < 0.66 * myAttackSpeed)
-            {
-                myTexture = myOpening;
-            }
-            if (myAttackTimer < 0.33 * myAttackSpeed)
-            {
-                myTexture = myOpen;
-            }
-
             if (myDirection.Length() <= myAttackRange)
             {
+                if (myAttackTimer > 0.66 * myAttackSpeed)
+                {
+                    myTexture = myClosed;
+                }
+                if (myAttackTimer < 0.66 * myAttackSpeed)
+                {
+                    myTexture = myOpening;
+                }
+                if (myAttackTimer < 0.33 * myAttackSpeed)
+                {
+                    myTexture = myOpen;
+                }
                 if (myAttackTimer <= 0)
                 {
                     Shoot(myDirection, Game1.myPearl);
@@ -63,10 +61,7 @@ namespace ShootEmUp
             {
                 Move(someDeltaTime);
 
-                if (myDirection.Length() < myAttackRange + 10)
-                {
-                    myTexture = myClosed;
-                }
+                myTexture = myClosed;
             }
 
             myAttackTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
