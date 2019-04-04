@@ -47,6 +47,7 @@
     <Compile Include="Clam.cs" />
     <Compile Include="Crab.cs" />
     <Compile Include="Ink.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="Octopus.cs" />
     <Compile Include="Pause.cs" />
     <Compile Include="Pirate.cs" />

@@ -8,25 +8,44 @@ namespace ShootEmUp
 {
     class InGame : State
     {
+        public static GameObject GetPlayer => myGameObjects[0];
+
+        public Level myCurrentLevel { get { return myLevels[myLevelIndex]; } set { myCurrentLevel = value; } }
+
         public static List<GameObject> myGameObjects;
 
-        public static GameObject GetPlayer => myGameObjects[0];
+        public static List<Level> myLevels = new List<Level>
+        {
+            new Level(0, 10, 1, 3, 1, 2, 2, 5, 0, 1, false),
+            
+        };
+    
+        public int myLevelIndex; 
+
+        public int x = 500, y = 100;
+
+        public float
+            myEnemyTimer,
+            myWaveTimer,
+            myLevelTimer;
 
         public static int myScore;
 
         public override void Initialize()
         {
+            myEnemyTimer = myCurrentLevel.myEnemyDelay;
+
             myGameObjects = new List<GameObject>()
             {
                 new Player(),
 
                 //new Pirate(20, 510),
 
-                new Octopus(500, 50), 
+                //new Octopus(500, 50), 
 
-                new Clam(250, 250),
+                //new Clam(250, 250),
 
-                new Crab(20, 20),
+                //new Crab(20, 20),
 
                 //new Crab(0, 0), new Crab(100, 50), new Crab(200, 0), new Crab(300, 0), new Crab(400, 0), new Crab(500, 0), new Crab(600, 0), new Crab(600, 0),
                 //new Crab(25, 25), new Crab(100, 150), new Crab(200, 100), new Crab(300, 100), new Crab(400, 100), new Crab(500, 100), new Crab(500, 100), new Crab(500, 100),
@@ -39,7 +58,10 @@ namespace ShootEmUp
 
         public override void Update(GameTime someDeltaTime)
         {
+            float tempDelta = (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
             KeyboardState tempKeyboardState = Keyboard.GetState();
+
+            UpdateLevel(tempDelta);
 
             if (tempKeyboardState.IsKeyDown(Keys.Escape))
             {
@@ -72,6 +94,40 @@ namespace ShootEmUp
                     --i;
                 }
             }
+        }
+
+        public void UpdateLevel(float someDeltaTime)
+        {
+            if (myCurrentLevel.myComplete)
+            {
+                BetweenLevels(someDeltaTime);
+            }
+
+            if (myCurrentLevel.mySpawnedEnemies == myCurrentLevel.myNumEnemies)
+            {
+                myCurrentLevel.myComplete = true;
+                myEnemyTimer = myCurrentLevel.myEnemyDelay;
+            }
+            else if (myEnemyTimer <= 0)
+            {
+                myCurrentLevel.mySpawnedEnemies++;
+                myGameObjects.Add(new Crab(x, y));
+                myEnemyTimer = myCurrentLevel.myEnemyDelay;
+            }
+
+            myEnemyTimer -= someDeltaTime;
+        }
+
+        bool BetweenLevels(float someDeltaTime)
+        {
+            if (myCurrentLevel.myLevelDelay <= 0)
+            {
+                myCurrentLevel = myLevels[myCurrentLevel.GetLevelNumber];
+                return true;
+            }
+
+            myCurrentLevel.myLevelDelay -= someDeltaTime;
+            return false;
         }
 
         public override void Draw(GameTime someDeltaTime, SpriteBatch aSpriteBatch)

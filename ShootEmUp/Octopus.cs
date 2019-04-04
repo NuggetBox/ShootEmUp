@@ -30,11 +30,23 @@ namespace ShootEmUp
             myHealth = 3;
             mySpeed = 70;
             myInkTimer = myInkCooldown;
+            myAnimSpeed = 0.15f;
+            myAnimTimer = myAnimSpeed;
             myRectangle = CreateRectangle();
         }
 
         public override void Update(GameTime someDeltaTime)
         {
+            float tempDelta = (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
+
+            myAnimTimer -= tempDelta;
+            
+            if (myAnimTimer <= 0)
+            {
+                myTexture = myTexture == Game1.myOctopus ? Game1.myOctopusSlither : Game1.myOctopus;
+                myAnimTimer = myAnimSpeed;
+            }
+
             Vector2 tempPlayerDir = InGame.GetPlayer.myPosition - myPosition;
 
             if (tempPlayerDir.Length() <= myAttackRange || myCharging)
@@ -49,7 +61,7 @@ namespace ShootEmUp
                     myInkTimer = myInkCooldown;
                 }
 
-                myInkTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
+                myInkTimer -= tempDelta;
             }
             else
             {

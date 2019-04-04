@@ -21,12 +21,6 @@ namespace ShootEmUp
         public Menu(List<Button> someButtons)
         {
             myButtons = someButtons;
-            //myButtons = new List<Button>
-            //{
-            //     new Button("Start", Start),
-            //     //new Button("Settings", Stats),
-            //     new Button("Quit", Quit)
-            //};
 
             for (int i = 0; i < myButtons.Count; ++i)
             {

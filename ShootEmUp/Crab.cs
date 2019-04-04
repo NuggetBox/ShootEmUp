@@ -29,11 +29,23 @@ namespace ShootEmUp
             myRegularSpeed = mySpeed;
             myAttackSpeed = 1.5f;
             myAttackTimer = myAttackSpeed;
+            myAnimSpeed = 0.2f;
+            myAnimTimer = myAnimSpeed;
             myRectangle = CreateRectangle();
         }
 
         public override void Update(GameTime someDeltaTime)
         {
+            float tempDelta = (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
+
+            myAnimTimer -= tempDelta;
+
+            if (myAnimTimer <= 0)
+            {
+                myTexture = myTexture == Game1.myCrab ? Game1.myCrabPinch : Game1.myCrab;
+                myAnimTimer = myAnimSpeed;
+            }
+
             myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
 
             if ((InGame.GetPlayer.myPosition - myPosition).Length() <= myAttackRange || myCharging)
@@ -79,7 +91,7 @@ namespace ShootEmUp
                         myDashing = true;
                     }
 
-                    myAttackTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
+                    myAttackTimer -= tempDelta;
                 }
             }
             else

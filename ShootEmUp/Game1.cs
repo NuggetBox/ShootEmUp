@@ -26,7 +26,9 @@ namespace ShootEmUp
         //public static Texture2D hej;
         public static Texture2D
             myCrab,
+            myCrabPinch,
             myOctopus,
+            myOctopusSlither,
             myInk,
             myPirate,
             myEnemyBullet,
@@ -86,18 +88,21 @@ namespace ShootEmUp
             // Create a new SpriteBatch, which can be used to draw textures.
             mySpriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
             mySpriteFont = Content.Load<SpriteFont>("Standard");
 
             myPlayer = Content.Load<Texture2D>("ship");
             myPlayerBullet = Content.Load<Texture2D>("ball");
 
-            //hej = Content.Load<Texture2D>("svart");
             myCrab = Content.Load<Texture2D>("crab");
+            myCrabPinch = Content.Load<Texture2D>("crabpinch");
+
             myOctopus = Content.Load<Texture2D>("octopus");
+            myOctopusSlither = Content.Load<Texture2D>("octopusslither");
             myInk = Content.Load<Texture2D>("ink");
+
             myPirate = Content.Load<Texture2D>("pirate");
             myEnemyBullet = Content.Load<Texture2D>("ball");
+
             myBeach = Content.Load<Texture2D>("beach");
 
             myClamClosed = Content.Load<Texture2D>("clamclosed");
@@ -122,14 +127,6 @@ namespace ShootEmUp
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            //    Exit();
-
-            //if (GetCurrentState is Menu)
-            //{
-            //    GraphicsDevice.Clear(Color.Azure);
-            //}
-
             // TODO: Add your update logic here
             if (myQuit)
                 Exit();
