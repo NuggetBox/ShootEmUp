@@ -11,8 +11,6 @@ namespace ShootEmUp
     {
         Vector2 myDashPos;
 
-        public int myDashDistance = 150;
-
         int
             myChargeSpeed = 500,
             myRegularSpeed;
@@ -26,19 +24,31 @@ namespace ShootEmUp
         {
             myPosition = new Vector2(x, y);
             myTexture = Game1.myCrab;
-            myHealth = 3;
+            myHealth = 1;
             mySpeed = 130;
             myRegularSpeed = mySpeed;
             myAttackSpeed = 1.5f;
             myAttackTimer = myAttackSpeed;
+            myAnimSpeed = 0.2f;
+            myAnimTimer = myAnimSpeed;
             myRectangle = CreateRectangle();
         }
 
         public override void Update(GameTime someDeltaTime)
         {
+            float tempDelta = (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
+
+            myAnimTimer -= tempDelta;
+
+            if (myAnimTimer <= 0)
+            {
+                myTexture = myTexture == Game1.myCrab ? Game1.myCrabPinch : Game1.myCrab;
+                myAnimTimer = myAnimSpeed;
+            }
+
             myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
 
-            if ((InGame.GetPlayer.myPosition - myPosition).Length() <= myDashDistance || myCharging)
+            if ((InGame.GetPlayer.myPosition - myPosition).Length() <= myAttackRange || myCharging)
             {
                 myColor = Color.DarkRed;
 
@@ -81,7 +91,7 @@ namespace ShootEmUp
                         myDashing = true;
                     }
 
-                    myAttackTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
+                    myAttackTimer -= tempDelta;
                 }
             }
             else

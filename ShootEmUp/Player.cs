@@ -20,13 +20,13 @@ namespace ShootEmUp
             myCounterClockwiseRotation = Keys.J,
             myShoot = Keys.I;
 
-        Vector2 myStartPos = new Vector2(300, 300);
+        Vector2 myStartPos = new Vector2(500, 300);
 
         int 
             myBulletDamage = 1,
             myBulletSpeed = 300;
 
-        float 
+        float
             myAttackCooldown = 0.3f,
             myAttackTimer,
             myRotationSpeed = 1.5f;
@@ -36,8 +36,7 @@ namespace ShootEmUp
             myPosition = myStartPos;
             myTexture = Game1.myPlayer;
             myRectangle = CreateRectangle();
-            myHealth = 30;
-
+            myHealth = 50;
             mySpeed = 100;
         }
 
@@ -80,7 +79,13 @@ namespace ShootEmUp
                 myRotation -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds * myRotationSpeed;
             }
 
-            Move(someDeltaTime);
+            // Console.WriteLine(myPosition);
+            // 420, 850
+
+            if (myPosition.X + myDirection.X * mySpeed * someDeltaTime.ElapsedGameTime.TotalSeconds > 420 && myPosition.X + myDirection.X * mySpeed * someDeltaTime.ElapsedGameTime.TotalSeconds < 850)
+            {
+                Move(someDeltaTime);
+            }
         }
 
         public void Shoot()

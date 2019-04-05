@@ -9,8 +9,6 @@ namespace ShootEmUp
 {
     class Pirate : Enemy
     {
-        public int myFireRange = 200;
-
         bool myFire;
 
         public Pirate(int x, int y)
@@ -20,6 +18,7 @@ namespace ShootEmUp
             mySpeed = 30;
             myHealth = 3;
             myDamage = 3;
+            myAttackRange = 200;
             myRectangle = CreateRectangle();
         }
 
@@ -29,7 +28,7 @@ namespace ShootEmUp
             myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
             myAttackTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
 
-            if ((InGame.GetPlayer.myPosition - myPosition).Length() <= myFireRange)
+            if ((InGame.GetPlayer.myPosition - myPosition).Length() <= myAttackRange)
             {
                 myFire = true;
             }
@@ -41,8 +40,7 @@ namespace ShootEmUp
 
             if (myAttackTimer <= 0 && myFire)
             {
-                Shoot(InGame.GetPlayer.myPosition - myPosition);
-                myAttackTimer = myAttackSpeed;
+                Shoot(InGame.GetPlayer.myPosition - myPosition, Game1.myEnemyBullet);
                 myFire = false;
             }
         }

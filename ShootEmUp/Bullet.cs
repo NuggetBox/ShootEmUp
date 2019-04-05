@@ -23,6 +23,7 @@ namespace ShootEmUp
             aDirection.Normalize();
             mySpeed = someSpeed;
             myDamage = someDamage;
+            myLayer = 0.75f;
             myTexture = aTexture;
             myPosition = aPosition;
             myRectangle = CreateRectangle();
@@ -46,7 +47,7 @@ namespace ShootEmUp
         {
             for (int i = 0; i < InGame.myGameObjects.Count; ++i)
             {
-                if (myRectangle.Intersects(InGame.myGameObjects[i].myRectangle) && !(InGame.myGameObjects[i] is Bullet))
+                if (myRectangle.Intersects(InGame.myGameObjects[i].myRectangle) && !(InGame.myGameObjects[i] is Bullet) && !myRemoved)
                 {
                     if (InGame.myGameObjects[i] is Player)
                     {

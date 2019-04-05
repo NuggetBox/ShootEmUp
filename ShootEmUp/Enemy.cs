@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ShootEmUp
 {
@@ -15,12 +16,14 @@ namespace ShootEmUp
 
         public float 
             myAttackSpeed = 1f,
-            myAttackTimer;
+            myAttackTimer,
+            myAttackRange = 150;
 
-        public void Shoot(Vector2 aDirection)
+        public void Shoot(Vector2 aDirection, Texture2D aTexture)
         {
             aDirection.Normalize();
-            InGame.myGameObjects.Add(new Bullet(this, aDirection, myPosition, myBulletSpeed, myDamage, Game1.myEnemyBullet));
+            InGame.myGameObjects.Add(new Bullet(this, aDirection, myPosition, myBulletSpeed, myDamage, aTexture));
+            myAttackTimer = myAttackSpeed;
         }
     }
 }
