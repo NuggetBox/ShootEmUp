@@ -10,15 +10,11 @@ namespace ShootEmUp
     {
         public static GameObject GetPlayer => myGameObjects[0];
 
-        public Level myCurrentLevel { get { return myLevels[myLevelIndex]; } set { myCurrentLevel = value; } }
+        public Level AccessCurrentLevel { get { return myLevels[myLevelIndex]; } set { AccessCurrentLevel = value; } }
 
         public static List<GameObject> myGameObjects;
 
-        public static List<Level> myLevels = new List<Level>
-        {
-            new Level(0, 10, 1, 3, 1, 2, 2, 5, 0, 1, false),
-            
-        };
+        public static List<Level> myLevels = new List<Level>();
     
         public int myLevelIndex; 
 
@@ -33,7 +29,15 @@ namespace ShootEmUp
 
         public override void Initialize()
         {
-            myEnemyTimer = myCurrentLevel.myEnemyDelay;
+            myScore = 0;
+
+            myLevels = new List<Level>
+            {   
+                new Level(0, 10, 1, 3, 1, 2, 2, 5, 0, 1, false),
+
+            };
+
+            myEnemyTimer = AccessCurrentLevel.myEnemyDelay;
 
             myGameObjects = new List<GameObject>()
             {
@@ -98,21 +102,21 @@ namespace ShootEmUp
 
         public void UpdateLevel(float someDeltaTime)
         {
-            if (myCurrentLevel.myComplete)
+            if (AccessCurrentLevel.myComplete)
             {
                 BetweenLevels(someDeltaTime);
             }
 
-            if (myCurrentLevel.mySpawnedEnemies == myCurrentLevel.myNumEnemies)
+            if (AccessCurrentLevel.mySpawnedEnemies == AccessCurrentLevel.myNumEnemies)
             {
-                myCurrentLevel.myComplete = true;
-                myEnemyTimer = myCurrentLevel.myEnemyDelay;
+                AccessCurrentLevel.myComplete = true;
+                myEnemyTimer = AccessCurrentLevel.myEnemyDelay;
             }
             else if (myEnemyTimer <= 0)
             {
-                myCurrentLevel.mySpawnedEnemies++;
+                AccessCurrentLevel.mySpawnedEnemies++;
                 myGameObjects.Add(new Crab(x, y));
-                myEnemyTimer = myCurrentLevel.myEnemyDelay;
+                myEnemyTimer = AccessCurrentLevel.myEnemyDelay;
             }
 
             myEnemyTimer -= someDeltaTime;
@@ -120,13 +124,20 @@ namespace ShootEmUp
 
         bool BetweenLevels(float someDeltaTime)
         {
-            if (myCurrentLevel.myLevelDelay <= 0)
+            if (AccessCurrentLevel.myLevelDelay <= 0)
             {
-                myCurrentLevel = myLevels[myCurrentLevel.GetLevelNumber];
-                return true;
+                if (myLevels.Count == AccessCurrentLevel.GetLevelNumber)
+                {
+                    Menu.ExitToMain();
+                }
+                else
+                {
+                    AccessCurrentLevel = myLevels[AccessCurrentLevel.GetLevelNumber];
+                    return true;
+                }
             }
 
-            myCurrentLevel.myLevelDelay -= someDeltaTime;
+            AccessCurrentLevel.myLevelDelay -= someDeltaTime;
             return false;
         }
 
