@@ -105,8 +105,15 @@ namespace ShootEmUp
 
             if (myCurrentLevel.mySpawnedEnemies == myCurrentLevel.myNumEnemies)
             {
-                myCurrentLevel.myComplete = true;
-                myEnemyTimer = myCurrentLevel.myEnemyDelay;
+                if (myCurrentLevel.myIsBoss)
+                {
+                    // TODO: SPAWN SOME BOSS
+                }
+                else
+                {
+                    myCurrentLevel.myComplete = true;
+                    myEnemyTimer = myCurrentLevel.myEnemyDelay;
+                }
             }
             else if (myEnemyTimer <= 0)
             {
