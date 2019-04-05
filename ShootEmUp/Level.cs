@@ -57,10 +57,22 @@ namespace ShootEmUp
             myIsBoss = anIsBossBool;
         }
 
-        //public Enemy GetNextEnemy()
-        //{
-        //    int tempNumber = myRandom.Next(1, GetTotalFactor + 1);
+        public Type GetNextEnemy()
+        {
+            int tempNumber = myRandom.Next(1, GetTotalFactor + 1);
 
-        //}
+            if (tempNumber <= myCrabFactor)
+            {
+                return typeof(Crab);
+            }
+            else if (tempNumber <= myCrabFactor + myOctopusFactor)
+            {
+                return typeof(Octopus);
+            }
+            else
+            {
+                return typeof(Clam);
+            }
+        }
     }
 }
