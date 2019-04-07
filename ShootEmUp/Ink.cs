@@ -17,7 +17,7 @@ namespace ShootEmUp
         {
             myPosition = new Vector2(x, y);
             myTexture = Game1.myInk;
-            myLayer = 1;
+            myLayer = 0.99f;
             myScale = aScale;
             myInkTimer = myInkDuration;
         }
