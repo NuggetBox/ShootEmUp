@@ -26,7 +26,7 @@ namespace ShootEmUp
 
         bool mySpawnSwap = true;
     
-        public int myLevelIndex; 
+        public int myLevelIndex;
 
         public float
             myEnemyTimer,
@@ -44,7 +44,7 @@ namespace ShootEmUp
                 //new Level(0, 10, 1, 3, 1, 2, 2, 5, 0, 1.2f, 1, false),
                 //new Level(0, 2, 3, 1, 0, 0, 1, 0, 3, 1.5f, 1, false),
                 //new Level(0, 2, 3, 0, 1, 0, 1, 0, 3, 1.5f, 1, false),
-                new Level(6, 1, 1, 20, 1.5f, 0.5f, 2, 1.2f),
+                new Level(6, 0, 0, 20, 1.5f, 0.8f, 0, 2, 1.2f),
             };
 
             myEnemyTimer = AccessLevel.myEnemyDelay;
@@ -90,6 +90,13 @@ namespace ShootEmUp
                         myGameObjects.Add(AccessLevel.GetNextEnemy(myRightSpawn.X, myRightSpawn.Y));
                         AccessLevel.mySpawnedEnemies += 2;
                         AccessLevel.myEnemyDelay *= AccessLevel.myEnemyDelayFactor;
+                        
+                        // ENEMY DELAY
+                        //if (AccessLevel.myEnemyDelay <= AccessLevel.myMinEnemyDelay)
+                        //{
+                        //    AccessLevel.myEnemyDelay = AccessLevel.myMinEnemyDelay;
+                        //}
+
                         myEnemyTimer = AccessLevel.myEnemyDelay;
 
                         if (mySpawnSwap)

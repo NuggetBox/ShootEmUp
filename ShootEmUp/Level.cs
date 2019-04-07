@@ -39,6 +39,7 @@ namespace ShootEmUp
             myClamFactor;
 
         public float
+            myMinEnemyDelay,
             myEnemyDelay,
             myLevelDelay,
             myWaveDelay,
@@ -70,7 +71,7 @@ namespace ShootEmUp
         }
 
         // For creating an endless level
-        public Level(int aCrabFactor, int anOctopusFactor, int aClamFactor, int someSpawnChange, float anEnemyDelay, float anEnemyDelayFactor, int aWaveDelay, float anIncreaseEnemyFactor)
+        public Level(int aCrabFactor, int anOctopusFactor, int aClamFactor, int someSpawnChange, float anEnemyDelay, float anEnemyDelayFactor, float aMinEnemyDelay, int aWaveDelay, float anIncreaseEnemyFactor)
         {
             myIsEndless = true;
 
@@ -80,6 +81,7 @@ namespace ShootEmUp
             mySpawnChange = someSpawnChange;
             myEnemyDelay = anEnemyDelay;
             myEnemyDelayFactor = anEnemyDelayFactor;
+            myMinEnemyDelay = aMinEnemyDelay;
             myWaveDelay = aWaveDelay;
             myIncreaseEnemyFactor = anIncreaseEnemyFactor;
         }
