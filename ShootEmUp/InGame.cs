@@ -9,6 +9,9 @@ namespace ShootEmUp
 {
     class InGame : State
     {
+        
+
+
         public static GameObject GetPlayer => myGameObjects[0];
 
         public Level AccessLevel { get { return myLevels[myLevelIndex]; } set { AccessLevel = value; } }
@@ -22,7 +25,9 @@ namespace ShootEmUp
 
         Point
             myLeftSpawn = new Point(0, 0),
-            myRightSpawn = new Point(1280, 720);
+            myRightSpawn = new Point(1280, 720),
+            myLeftSpawn2 = new Point(0, 720),
+            myRightSpawn2 = new Point(1280, 720);
 
         bool mySpawnSwap = true;
     
@@ -44,7 +49,8 @@ namespace ShootEmUp
                 //new Level(0, 10, 1, 3, 1, 2, 2, 5, 0, 1.2f, 1, false),
                 //new Level(0, 2, 3, 1, 0, 0, 1, 0, 3, 1.5f, 1, false),
                 //new Level(0, 2, 3, 0, 1, 0, 1, 0, 3, 1.5f, 1, false),
-                new Level(6, 0, 0, 20, 1.5f, 0.8f, 0, 2, 1.2f),
+
+                new Level(1, 1, 1, 20, 1.5f, 1f, 0.5f, 2, 1.2f),
             };
 
             myEnemyTimer = AccessLevel.myEnemyDelay;
@@ -88,14 +94,16 @@ namespace ShootEmUp
 
                         myGameObjects.Add(AccessLevel.GetNextEnemy(myLeftSpawn.X, myLeftSpawn.Y));
                         myGameObjects.Add(AccessLevel.GetNextEnemy(myRightSpawn.X, myRightSpawn.Y));
+                        myGameObjects.Add(AccessLevel.GetNextEnemy(myLeftSpawn.X, myLeftSpawn2.Y - myLeftSpawn.Y));
+                        myGameObjects.Add(AccessLevel.GetNextEnemy(myRightSpawn.X, myRightSpawn2.Y - myRightSpawn.Y));
                         AccessLevel.mySpawnedEnemies += 2;
                         AccessLevel.myEnemyDelay *= AccessLevel.myEnemyDelayFactor;
-                        
+
                         // ENEMY DELAY
-                        //if (AccessLevel.myEnemyDelay <= AccessLevel.myMinEnemyDelay)
-                        //{
-                        //    AccessLevel.myEnemyDelay = AccessLevel.myMinEnemyDelay;
-                        //}
+                        if (AccessLevel.myEnemyDelay <= AccessLevel.myMinEnemyDelay)
+                        {
+                            AccessLevel.myEnemyDelay = AccessLevel.myMinEnemyDelay;
+                        }
 
                         myEnemyTimer = AccessLevel.myEnemyDelay;
 
@@ -173,38 +181,6 @@ namespace ShootEmUp
 
                     break;
             }
-
-            //if (AccessLevel.myComplete)
-            //{
-            //    BetweenLevels(someDeltaTime);
-            //}
-
-            //if (AccessLevel.mySpawnedEnemies == AccessLevel.myNumEnemies)
-            //{
-            //    AccessLevel.myCompletedWaves++;
-            //    AccessLevel.mySpawnedEnemies = 0;
-
-            //    if (AccessLevel.myCompletedWaves == AccessLevel.myNumWaves)
-            //    {
-            //        if (AccessLevel.myIsBoss)
-            //        {
-            //            //TODO: SOME BOSS
-            //            UpdateBoss(someDeltaTime);
-            //        }
-
-            //        AccessLevel.myComplete = true;
-            //    }
-
-            //    myEnemyTimer = AccessLevel.myEnemyDelay;
-            //}
-            //else if (myEnemyTimer <= 0)
-            //{
-            //    AccessLevel.mySpawnedEnemies++;
-            //    myGameObjects.Add(AccessLevel.GetNextEnemy(x, y));
-            //    myEnemyTimer = AccessLevel.myEnemyDelay;
-            //}
-
-            //myEnemyTimer -= someDeltaTime;
         }
 
         bool IsEveryoneDead()

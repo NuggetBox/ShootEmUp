@@ -14,9 +14,9 @@ namespace ShootEmUp
 
         public GameObject myOwner;
 
-        public float myDamage;
+        public int myDamage;
 
-        public Bullet(GameObject anOwner, Vector2 aDirection, Vector2 aPosition, int someSpeed, float someDamage, Texture2D aTexture)
+        public Bullet(GameObject anOwner, Vector2 aDirection, Vector2 aPosition, int someSpeed, int someDamage, Texture2D aTexture)
         {
             myOwner = anOwner;
             myDirection = aDirection;
