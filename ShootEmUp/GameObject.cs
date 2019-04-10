@@ -27,13 +27,13 @@ namespace ShootEmUp
 
         public int 
             myScale = 4,
+            myHealth = 1,
             mySpeed;
 
-        public float 
+        public float
             myAnimSpeed,
             myAnimTimer,
-            myRotation,
-            myHealth = 1;
+            myRotation;
 
         public float myLayer = 0.5f;
 

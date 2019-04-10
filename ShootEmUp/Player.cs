@@ -36,7 +36,7 @@ namespace ShootEmUp
             myPosition = myStartPos;
             myTexture = Game1.myPlayer;
             myRectangle = CreateRectangle();
-            myHealth = 230402340;
+            myHealth = 230402323;
             mySpeed = 100;
         }
 

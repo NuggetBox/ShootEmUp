@@ -41,10 +41,12 @@ namespace ShootEmUp
 
             myLevels = new List<Level>
             {   
-                //new Level(0, 10, 1, 3, 1, 2, 2, 5, 0, 1.2f, 1, false),
-                //new Level(0, 2, 3, 1, 0, 0, 1, 0, 3, 1.5f, 1, false),
-                //new Level(0, 2, 3, 0, 1, 0, 1, 0, 3, 1.5f, 1, false),
-                new Level(6, 0, 0, 20, 1.5f, 0.8f, 0, 2, 1.2f),
+                //new Level(0, 10, 3, 2, 1, 1, 0.98f, 4, 2, 1.2f, 1, false),
+                //new Level(0, 10, 3, 1, 1, 4, 0.98f, 4, 2, 1.2f, 1, false),
+                //new Level(0, 10, 3, 2, 3, 1, 0.98f, 4, 2, 1.2f, 1, false),
+
+                // ENDLESS
+                new Level(0, 0, 1, 20, 1.5f, 0.8f, 0.2f, 2, 1.2f),
             };
 
             myEnemyTimer = AccessLevel.myEnemyDelay;
@@ -150,7 +152,6 @@ namespace ShootEmUp
 
                     break;
                 case LevelState.BetweenLevel:
-
                     if (myLevelTimer <= 0)
                     {
                         if (myLevels.Count == myLevelIndex + 1)
@@ -173,38 +174,6 @@ namespace ShootEmUp
 
                     break;
             }
-
-            //if (AccessLevel.myComplete)
-            //{
-            //    BetweenLevels(someDeltaTime);
-            //}
-
-            //if (AccessLevel.mySpawnedEnemies == AccessLevel.myNumEnemies)
-            //{
-            //    AccessLevel.myCompletedWaves++;
-            //    AccessLevel.mySpawnedEnemies = 0;
-
-            //    if (AccessLevel.myCompletedWaves == AccessLevel.myNumWaves)
-            //    {
-            //        if (AccessLevel.myIsBoss)
-            //        {
-            //            //TODO: SOME BOSS
-            //            UpdateBoss(someDeltaTime);
-            //        }
-
-            //        AccessLevel.myComplete = true;
-            //    }
-
-            //    myEnemyTimer = AccessLevel.myEnemyDelay;
-            //}
-            //else if (myEnemyTimer <= 0)
-            //{
-            //    AccessLevel.mySpawnedEnemies++;
-            //    myGameObjects.Add(AccessLevel.GetNextEnemy(x, y));
-            //    myEnemyTimer = AccessLevel.myEnemyDelay;
-            //}
-
-            //myEnemyTimer -= someDeltaTime;
         }
 
         bool IsEveryoneDead()
