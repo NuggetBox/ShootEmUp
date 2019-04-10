@@ -9,6 +9,9 @@ namespace ShootEmUp
 {
     class InGame : State
     {
+        
+
+
         public static GameObject GetPlayer => myGameObjects[0];
 
         public Level AccessLevel { get { return myLevels[myLevelIndex]; } set { AccessLevel = value; } }
@@ -22,7 +25,9 @@ namespace ShootEmUp
 
         Point
             myLeftSpawn = new Point(0, 0),
-            myRightSpawn = new Point(1280, 720);
+            myRightSpawn = new Point(1280, 720),
+            myLeftSpawn2 = new Point(0, 720),
+            myRightSpawn2 = new Point(1280, 720);
 
         bool mySpawnSwap = true;
     
@@ -41,12 +46,11 @@ namespace ShootEmUp
 
             myLevels = new List<Level>
             {   
-                //new Level(0, 10, 3, 2, 1, 1, 0.98f, 4, 2, 1.2f, 1, false),
-                //new Level(0, 10, 3, 1, 1, 4, 0.98f, 4, 2, 1.2f, 1, false),
-                //new Level(0, 10, 3, 2, 3, 1, 0.98f, 4, 2, 1.2f, 1, false),
+                //new Level(0, 10, 1, 3, 1, 2, 2, 5, 0, 1.2f, 1, false),
+                //new Level(0, 2, 3, 1, 0, 0, 1, 0, 3, 1.5f, 1, false),
+                //new Level(0, 2, 3, 0, 1, 0, 1, 0, 3, 1.5f, 1, false),
 
-                // ENDLESS
-                new Level(0, 0, 1, 20, 1.5f, 0.8f, 0.2f, 2, 1.2f),
+                new Level(1, 1, 1, 20, 1.5f, 1f, 0.5f, 2, 1.2f),
             };
 
             myEnemyTimer = AccessLevel.myEnemyDelay;
@@ -90,14 +94,16 @@ namespace ShootEmUp
 
                         myGameObjects.Add(AccessLevel.GetNextEnemy(myLeftSpawn.X, myLeftSpawn.Y));
                         myGameObjects.Add(AccessLevel.GetNextEnemy(myRightSpawn.X, myRightSpawn.Y));
+                        myGameObjects.Add(AccessLevel.GetNextEnemy(myLeftSpawn.X, myLeftSpawn2.Y - myLeftSpawn.Y));
+                        myGameObjects.Add(AccessLevel.GetNextEnemy(myRightSpawn.X, myRightSpawn2.Y - myRightSpawn.Y));
                         AccessLevel.mySpawnedEnemies += 2;
                         AccessLevel.myEnemyDelay *= AccessLevel.myEnemyDelayFactor;
-                        
+
                         // ENEMY DELAY
-                        //if (AccessLevel.myEnemyDelay <= AccessLevel.myMinEnemyDelay)
-                        //{
-                        //    AccessLevel.myEnemyDelay = AccessLevel.myMinEnemyDelay;
-                        //}
+                        if (AccessLevel.myEnemyDelay <= AccessLevel.myMinEnemyDelay)
+                        {
+                            AccessLevel.myEnemyDelay = AccessLevel.myMinEnemyDelay;
+                        }
 
                         myEnemyTimer = AccessLevel.myEnemyDelay;
 
@@ -152,6 +158,7 @@ namespace ShootEmUp
 
                     break;
                 case LevelState.BetweenLevel:
+
                     if (myLevelTimer <= 0)
                     {
                         if (myLevels.Count == myLevelIndex + 1)

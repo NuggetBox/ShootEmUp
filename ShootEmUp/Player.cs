@@ -27,7 +27,7 @@ namespace ShootEmUp
             myBulletSpeed = 300;
 
         float
-            myAttackCooldown = 0.3f,
+            myAttackCooldown = 0.05f,
             myAttackTimer,
             myRotationSpeed = 1.5f;
 
@@ -36,7 +36,7 @@ namespace ShootEmUp
             myPosition = myStartPos;
             myTexture = Game1.myPlayer;
             myRectangle = CreateRectangle();
-            myHealth = 230402323;
+            myHealth = 10000;
             mySpeed = 100;
         }
 
