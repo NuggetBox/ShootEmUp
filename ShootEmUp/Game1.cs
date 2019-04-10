@@ -92,15 +92,7 @@ namespace ShootEmUp
             // CRAB RAVE
             mySong = Content.Load<SoundEffect>("crabrave").CreateInstance();
             mySong.IsLooped = true;
-            //mySong.Pitch = 0.00001f;
             mySong.Play();
-
-            //mySong2 = Content.Load<SoundEffect>("crabrave").CreateInstance();
-            //mySong2.IsLooped = true;
-            //mySong2.Play();
-
-            //MediaPlayer.IsRepeating = true;
-            //MediaPlayer.Play(song);
 
             // Create a new SpriteBatch, which can be used to draw textures.
             mySpriteBatch = new SpriteBatch(GraphicsDevice);
@@ -144,8 +136,7 @@ namespace ShootEmUp
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            mySong.Pitch += 0.01f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //mySong2.Pitch = mySong.Pitch * 0.5f;
+            //mySong.Pitch += 0.01f * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             // TODO: Add your update logic here
             if (myQuit)

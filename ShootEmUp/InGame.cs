@@ -50,7 +50,7 @@ namespace ShootEmUp
                 //new Level(0, 2, 3, 1, 0, 0, 1, 0, 3, 1.5f, 1, false),
                 //new Level(0, 2, 3, 0, 1, 0, 1, 0, 3, 1.5f, 1, false),
 
-                new Level(1, 1, 1, 20, 1.5f, 1f, 0.5f, 2, 1.2f),
+                new Level(1, 1, 1, 20, 1.5f, 0.8f, 0.2f, 0, 1.2f),
             };
 
             myEnemyTimer = AccessLevel.myEnemyDelay;
@@ -96,7 +96,7 @@ namespace ShootEmUp
                         myGameObjects.Add(AccessLevel.GetNextEnemy(myRightSpawn.X, myRightSpawn.Y));
                         myGameObjects.Add(AccessLevel.GetNextEnemy(myLeftSpawn.X, myLeftSpawn2.Y - myLeftSpawn.Y));
                         myGameObjects.Add(AccessLevel.GetNextEnemy(myRightSpawn.X, myRightSpawn2.Y - myRightSpawn.Y));
-                        AccessLevel.mySpawnedEnemies += 2;
+                        AccessLevel.mySpawnedEnemies += 4;
                         AccessLevel.myEnemyDelay *= AccessLevel.myEnemyDelayFactor;
 
                         // ENEMY DELAY
