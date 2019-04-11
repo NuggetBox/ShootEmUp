@@ -23,12 +23,12 @@ namespace ShootEmUp
             myTexture = myClosed;
 
             myPosition = new Vector2(x, y);
-            myHealth = 3;
+            myHealth = 2;
             mySpeed = 50;
             myAttackSpeed = 0.8f;
             myAttackTimer = myAttackSpeed;
             myAttackRange = 250;
-            myDamage = 3;
+            myDamage = 2;
             myRectangle = CreateRectangle();
         }
 
@@ -36,7 +36,7 @@ namespace ShootEmUp
         {
             myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
 
-            myDirection = InGame.GetPlayer.myPosition - myPosition;
+            myDirection = InGame.AccessPlayer.myPosition - myPosition;
 
             if (myDirection.Length() <= myAttackRange)
             {

@@ -9,12 +9,11 @@ namespace ShootEmUp
 {
     class InGame : State
     {
-        
-
-
-        public static GameObject GetPlayer => myGameObjects[0];
+        public static Player AccessPlayer { get { return myGameObjects[0] as Player; } set { myGameObjects[0] = value; } }
 
         public Level AccessLevel { get { return myLevels[myLevelIndex]; } set { AccessLevel = value; } }
+
+        public static Random myRandom = new Random();
 
         enum LevelState { Spawning, BetweenWave, BetweenLevel, Boss }
         LevelState myState = new LevelState();
@@ -34,6 +33,7 @@ namespace ShootEmUp
         public int myLevelIndex;
 
         public float
+            myPowerUpTimer,
             myEnemyTimer,
             myWaveTimer,
             myLevelTimer;
@@ -50,9 +50,10 @@ namespace ShootEmUp
                 //new Level(0, 2, 3, 1, 0, 0, 1, 0, 3, 1.5f, 1, false),
                 //new Level(0, 2, 3, 0, 1, 0, 1, 0, 3, 1.5f, 1, false),
 
-                new Level(1, 1, 1, 20, 1.5f, 1f, 0.5f, 2, 1.2f),
+                new Level(1, 1, 1, 20, 5, 1.5f, 0.5f, 0, 2, 1.2f),
             };
 
+            myPowerUpTimer = AccessLevel.myPowerUpDelay;
             myEnemyTimer = AccessLevel.myEnemyDelay;
             myWaveTimer = AccessLevel.myWaveDelay;
             myLevelTimer = AccessLevel.myLevelDelay;
@@ -60,6 +61,8 @@ namespace ShootEmUp
             myGameObjects = new List<GameObject>()
             {
                 new Player(),
+
+                //new FireRate(0.5f),
 
                 //new Pirate(20, 510),
 
@@ -76,6 +79,8 @@ namespace ShootEmUp
                 //new Crab(100, 600), new Crab(100, 450), new Crab(200, 400), new Crab(300, 400), new Crab(400, 400), new Crab(500, 400), new Crab(500, 400), new Crab(500, 400),
                 //new Crab(100, 100), new Crab(100, 550), new Crab(200, 500), new Crab(300, 500), new Crab(400, 500), new Crab(500, 500), new Crab(500, 500), new Crab(500, 500),
             };
+
+            myGameObjects.Add(new FireRate(3));
         }
 
         public void UpdateLevel(float someDeltaTime)
@@ -84,6 +89,13 @@ namespace ShootEmUp
             {
                 case LevelState.Spawning:
                     myEnemyTimer -= someDeltaTime;
+                    myPowerUpTimer -= someDeltaTime;
+
+                    if (myPowerUpTimer <= 0)
+                    {
+                        myGameObjects.Add(AccessLevel.GetNextPowerUp(3));
+                        myPowerUpTimer = AccessLevel.myPowerUpDelay;
+                    }
 
                     if (myEnemyTimer <= 0)
                     {
@@ -96,7 +108,7 @@ namespace ShootEmUp
                         myGameObjects.Add(AccessLevel.GetNextEnemy(myRightSpawn.X, myRightSpawn.Y));
                         myGameObjects.Add(AccessLevel.GetNextEnemy(myLeftSpawn.X, myLeftSpawn2.Y - myLeftSpawn.Y));
                         myGameObjects.Add(AccessLevel.GetNextEnemy(myRightSpawn.X, myRightSpawn2.Y - myRightSpawn.Y));
-                        AccessLevel.mySpawnedEnemies += 2;
+                        AccessLevel.mySpawnedEnemies += 4;
                         AccessLevel.myEnemyDelay *= AccessLevel.myEnemyDelayFactor;
 
                         // ENEMY DELAY
@@ -270,7 +282,7 @@ namespace ShootEmUp
             }
 
             aSpriteBatch.DrawString(Game1.mySpriteFont, "Score: " + myScore, new Vector2(10, 40), Color.White, 0, Vector2.Zero, 0.2f, SpriteEffects.None, 1);
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Health: " + InGame.GetPlayer.myHealth, new Vector2(10, 10), Color.White, 0, Vector2.Zero, 0.2f, SpriteEffects.None, 1);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Health: " + InGame.AccessPlayer.myHealth, new Vector2(10, 10), Color.White, 0, Vector2.Zero, 0.2f, SpriteEffects.None, 1);
         }
     }
 }

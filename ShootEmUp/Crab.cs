@@ -28,6 +28,7 @@ namespace ShootEmUp
             mySpeed = 130;
             myRegularSpeed = mySpeed;
             myAttackSpeed = 1.5f;
+            myDamage = 3;
             myAttackTimer = myAttackSpeed;
             myAnimSpeed = 0.2f;
             myAnimTimer = myAnimSpeed;
@@ -48,19 +49,19 @@ namespace ShootEmUp
 
             myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
 
-            if ((InGame.GetPlayer.myPosition - myPosition).Length() <= myAttackRange || myCharging)
+            if ((InGame.AccessPlayer.myPosition - myPosition).Length() <= myAttackRange || myCharging)
             {
                 myColor = Color.DarkRed;
 
                 if (myDashing)
                 {
                     myColor = Color.White;
-                    myDirection = InGame.GetPlayer.myPosition - myPosition;
+                    myDirection = InGame.AccessPlayer.myPosition - myPosition;
 
-                    if ((InGame.GetPlayer.myPosition - myPosition).Length() <= 5)
+                    if ((InGame.AccessPlayer.myPosition - myPosition).Length() <= 5)
                     {
                         myReturning = true;
-                        InGame.myGameObjects[0].myHealth -= myDamage;
+                        InGame.AccessPlayer.myHealth -= myDamage;
                     }
 
                     if (myReturning)
@@ -86,7 +87,7 @@ namespace ShootEmUp
                     if (myAttackTimer <= 0)
                     {
                         myDashPos = myPosition;
-                        myDirection = InGame.GetPlayer.myPosition - myPosition;
+                        myDirection = InGame.AccessPlayer.myPosition - myPosition;
                         mySpeed = myChargeSpeed;
                         myDashing = true;
                     }
@@ -96,7 +97,7 @@ namespace ShootEmUp
             }
             else
             {
-                myDirection = InGame.GetPlayer.myPosition - myPosition;
+                myDirection = InGame.AccessPlayer.myPosition - myPosition;
                 Move(someDeltaTime);
             }
         }

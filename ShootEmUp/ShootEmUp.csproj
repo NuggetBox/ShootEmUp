@@ -46,6 +46,7 @@
     <Compile Include="Button.cs" />
     <Compile Include="Clam.cs" />
     <Compile Include="Crab.cs" />
+    <Compile Include="FireRate.cs" />
     <Compile Include="Ink.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Octopus.cs" />

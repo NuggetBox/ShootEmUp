@@ -47,7 +47,7 @@ namespace ShootEmUp
                 myAnimTimer = myAnimSpeed;
             }
 
-            Vector2 tempPlayerDir = InGame.GetPlayer.myPosition - myPosition;
+            Vector2 tempPlayerDir = InGame.AccessPlayer.myPosition - myPosition;
 
             if (tempPlayerDir.Length() <= myAttackRange || myCharging)
             {

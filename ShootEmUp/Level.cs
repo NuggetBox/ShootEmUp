@@ -40,6 +40,7 @@ namespace ShootEmUp
 
         public float
             myMinEnemyDelay,
+            myPowerUpDelay,
             myEnemyDelay,
             myLevelDelay,
             myWaveDelay,
@@ -52,7 +53,7 @@ namespace ShootEmUp
             myIsEndless,
             myComplete;
 
-        public Level(int anIndex, int aNumEnemies, int aNumWaves, int aCrabFactor, int anOctopusFactor, int aClamFactor, float anEnemyDelay, float aLevelDelay, int aWaveDelay, float anIncreaseEnemyFactor, float aDamageMod, bool anIsBossBool)
+        public Level(int anIndex, int aNumEnemies, int aNumWaves, int aCrabFactor, int anOctopusFactor, int aClamFactor, float aPowerUpDelay, float anEnemyDelay, float aLevelDelay, int aWaveDelay, float anIncreaseEnemyFactor, float aDamageMod, bool anIsBossBool)
         {
             myIndex = anIndex;
             myNumEnemies = aNumEnemies;
@@ -62,6 +63,7 @@ namespace ShootEmUp
             myOctopusFactor = anOctopusFactor;
             myClamFactor = aClamFactor;
 
+            myPowerUpDelay = aPowerUpDelay;
             myEnemyDelay = anEnemyDelay;
             myLevelDelay = aLevelDelay;
             myWaveDelay = aWaveDelay;
@@ -71,7 +73,7 @@ namespace ShootEmUp
         }
 
         // For creating an endless level
-        public Level(int aCrabFactor, int anOctopusFactor, int aClamFactor, int someSpawnChange, float anEnemyDelay, float anEnemyDelayFactor, float aMinEnemyDelay, int aWaveDelay, float anIncreaseEnemyFactor)
+        public Level(int aCrabFactor, int anOctopusFactor, int aClamFactor, int someSpawnChange, float aPowerUpDelay, float anEnemyDelay, float anEnemyDelayFactor, float aMinEnemyDelay, int aWaveDelay, float anIncreaseEnemyFactor)
         {
             myIsEndless = true;
 
@@ -79,6 +81,7 @@ namespace ShootEmUp
             myOctopusFactor = anOctopusFactor;
             myClamFactor = aClamFactor;
             mySpawnChange = someSpawnChange;
+            myPowerUpDelay = aPowerUpDelay;
             myEnemyDelay = anEnemyDelay;
             myEnemyDelayFactor = anEnemyDelayFactor;
             myMinEnemyDelay = aMinEnemyDelay;
@@ -101,6 +104,25 @@ namespace ShootEmUp
             else
             {
                 return new Clam(x, y);
+            }
+        }
+
+        public PowerUp GetNextPowerUp(float someActiveTime)
+        {
+            // TODO:
+            int tempNumber = myRandom.Next(0, 1);
+
+            if (tempNumber == 0)
+            {
+                return new FireRate(someActiveTime);
+            }
+            else if (tempNumber == 1)
+            {
+                return null;
+            }
+            else
+            {
+                return null;
             }
         }
     }

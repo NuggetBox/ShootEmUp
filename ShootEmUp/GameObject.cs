@@ -95,7 +95,7 @@ namespace ShootEmUp
 
         protected void CheckPlayerDeath()
         {
-            if (InGame.GetPlayer.myHealth <= 0)
+            if (InGame.AccessPlayer.myHealth <= 0)
             {
                 InGame.myScore = 0;
                 Game1.AccessStateStack.Pop();

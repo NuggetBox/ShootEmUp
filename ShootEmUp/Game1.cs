@@ -29,6 +29,7 @@ namespace ShootEmUp
 
         //public static Texture2D hej;
         public static Texture2D
+            myBarrel,
             myCrab,
             myCrabPinch,
             myOctopus,
@@ -41,6 +42,10 @@ namespace ShootEmUp
             myClamOpening,
             myClamOpen,
             myPearl;
+
+        public static int
+            myLeftBeach = 420,
+            myRightBeach = 850;
 
         public static bool myQuit;
 
@@ -107,6 +112,7 @@ namespace ShootEmUp
 
             mySpriteFont = Content.Load<SpriteFont>("Standard");
 
+            myBarrel = Content.Load<Texture2D>("barrel");
             myPlayer = Content.Load<Texture2D>("ship");
             myPlayerBullet = Content.Load<Texture2D>("ball");
 
@@ -144,8 +150,7 @@ namespace ShootEmUp
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            mySong.Pitch += 0.01f * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //mySong2.Pitch = mySong.Pitch * 0.5f;
+            //mySong.Pitch += 0.01f * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             // TODO: Add your update logic here
             if (myQuit)

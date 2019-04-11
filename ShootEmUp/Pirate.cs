@@ -24,23 +24,23 @@ namespace ShootEmUp
 
         public override void Update(GameTime someDeltaTime)
         {
-            myDirection = InGame.GetPlayer.myPosition - myPosition;
+            myDirection = InGame.AccessPlayer.myPosition - myPosition;
             myRotation = (float)Math.Atan2(myDirection.X, -myDirection.Y);
             myAttackTimer -= (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
 
-            if ((InGame.GetPlayer.myPosition - myPosition).Length() <= myAttackRange)
+            if ((InGame.AccessPlayer.myPosition - myPosition).Length() <= myAttackRange)
             {
                 myFire = true;
             }
             else
             {
-                myDirection = InGame.GetPlayer.myPosition - myPosition;
+                myDirection = InGame.AccessPlayer.myPosition - myPosition;
                 Move(someDeltaTime);
             }
 
             if (myAttackTimer <= 0 && myFire)
             {
-                Shoot(InGame.GetPlayer.myPosition - myPosition, Game1.myEnemyBullet);
+                Shoot(InGame.AccessPlayer.myPosition - myPosition, Game1.myEnemyBullet);
                 myFire = false;
             }
         }
