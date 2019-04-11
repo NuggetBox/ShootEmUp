@@ -30,7 +30,7 @@ namespace ShootEmUp
             myHealth = 1,
             mySpeed;
 
-        public float 
+        public float
             myAnimSpeed,
             myAnimTimer,
             myRotation;

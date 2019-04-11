@@ -97,15 +97,7 @@ namespace ShootEmUp
             // CRAB RAVE
             mySong = Content.Load<SoundEffect>("crabrave").CreateInstance();
             mySong.IsLooped = true;
-            //mySong.Pitch = 0.00001f;
             mySong.Play();
-
-            //mySong2 = Content.Load<SoundEffect>("crabrave").CreateInstance();
-            //mySong2.IsLooped = true;
-            //mySong2.Play();
-
-            //MediaPlayer.IsRepeating = true;
-            //MediaPlayer.Play(song);
 
             // Create a new SpriteBatch, which can be used to draw textures.
             mySpriteBatch = new SpriteBatch(GraphicsDevice);
