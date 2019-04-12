@@ -17,7 +17,7 @@ namespace ShootEmUp
 
         int
             myInkCount = 5,
-            myInkScale = 6;
+            myInkScale = 3;
 
         float
             myInkCooldown = 3,

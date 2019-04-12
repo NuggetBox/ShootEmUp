@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 
 namespace ShootEmUp
 {
-    class FireRate : PowerUp
+    class TriShoot : PowerUp
     {
         public float myNewAttackCooldown = 0.15f;
 
-        public FireRate(float someActiveTime)
+        public TriShoot(float someActiveTime)
         {
             myPosition = new Vector2(myRandom.Next(Game1.myLeftBeach, Game1.myRightBeach), 0);
             mySpeed = 100;
+            myColor = Color.Tomato;
             myTexture = Game1.myBarrel;
             myRectangle = CreateRectangle();
             myActiveTime = someActiveTime;
@@ -23,13 +24,13 @@ namespace ShootEmUp
 
         public override void Apply(float someDelta)
         {
-            InGame.AccessPlayer.myAttackCooldown = myNewAttackCooldown;
+            InGame.AccessPlayer.myTriShooting = true;
             myActiveTime -= someDelta;
         }
 
         public override void Reset()
         {
-            InGame.AccessPlayer.ResetAttackCooldown();
+            InGame.AccessPlayer.myTriShooting = false;
         }
 
         public override void Update(GameTime someDeltaTime)

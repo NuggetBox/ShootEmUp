@@ -110,7 +110,7 @@ namespace ShootEmUp
         public PowerUp GetNextPowerUp(float someActiveTime)
         {
             // TODO:
-            int tempNumber = myRandom.Next(0, 1);
+            int tempNumber = myRandom.Next(0, 2);
 
             if (tempNumber == 0)
             {
@@ -118,7 +118,7 @@ namespace ShootEmUp
             }
             else if (tempNumber == 1)
             {
-                return null;
+                return new TriShoot(someActiveTime);
             }
             else
             {

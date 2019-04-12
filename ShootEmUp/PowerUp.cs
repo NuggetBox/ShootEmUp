@@ -9,8 +9,10 @@ namespace ShootEmUp
 {
     abstract class PowerUp : GameObject
     {
-        public enum PowerUpType { FireRate }
-        public static PowerUpType myPowerUpType = new PowerUpType();
+        //public enum PowerUpType { FireRate }
+        //public static PowerUpType myPowerUpType = new PowerUpType();
+
+        public static Random myRandom = new Random();
 
         public int
             myLeftBounds = 420,

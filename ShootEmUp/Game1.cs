@@ -25,7 +25,7 @@ namespace ShootEmUp
             myPlayer,
             myPlayerBullet;
 
-        SoundEffectInstance mySong, mySong2;
+        public static SoundEffectInstance mySong;
 
         //public static Texture2D hej;
         public static Texture2D
