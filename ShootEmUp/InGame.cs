@@ -62,6 +62,9 @@ namespace ShootEmUp
             {
                 new Player(),
 
+                new Water(Game1.AccessWindowSize.X * 0.5f, Game1.AccessWindowSize.Y * 0.5f),
+                new Water(Game1.AccessWindowSize.X * 0.5f, - Game1.AccessWindowSize.Y * 0.5f),
+
                 //new FireRate(0.5f),
 
                 //new Pirate(20, 510),
@@ -274,7 +277,7 @@ namespace ShootEmUp
 
         public override void Draw(GameTime someDeltaTime, SpriteBatch aSpriteBatch)
         {
-            aSpriteBatch.Draw(Game1.myBeach, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 20, SpriteEffects.None, 0);
+            aSpriteBatch.Draw(Game1.myBeach, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 5 + 1f/3, SpriteEffects.None, 0.11f);
 
             for (int i = 0; i < myGameObjects.Count; ++i)
             {

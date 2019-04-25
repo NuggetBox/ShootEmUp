@@ -64,6 +64,7 @@
     <Compile Include="State.cs" />
     <Compile Include="TriShoot.cs" />
     <Compile Include="Wall.cs" />
+    <Compile Include="Water.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

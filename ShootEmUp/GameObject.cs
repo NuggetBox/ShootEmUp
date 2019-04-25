@@ -26,11 +26,11 @@ namespace ShootEmUp
         public Color myColor = Color.White;
 
         public int 
-            myScale = 4,
             myHealth = 1,
             mySpeed;
 
         public float
+            myScale = 4,
             myAnimSpeed,
             myAnimTimer,
             myRotation;
@@ -90,7 +90,7 @@ namespace ShootEmUp
 
         protected Rectangle CreateRectangle()
         {
-            return new Rectangle((int)(myPosition.X - GetOrigin.X * myScale), (int)(myPosition.Y - GetOrigin.Y * myScale), myTexture.Width * myScale, myTexture.Height * myScale);
+            return new Rectangle((int)(myPosition.X - GetOrigin.X * myScale), (int)(myPosition.Y - GetOrigin.Y * myScale), (int)(myTexture.Width * myScale),(int)(myTexture.Height * myScale));
         }
 
         protected void CheckPlayerDeath()

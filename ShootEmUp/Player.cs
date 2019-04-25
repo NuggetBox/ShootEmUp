@@ -34,7 +34,7 @@ namespace ShootEmUp
 
         int 
             myBulletDamage = 1,
-            myBulletSpeed = 300;
+            myBulletSpeed = 200;
 
         public float
             myOriginalAttackCooldown = 0.3f,

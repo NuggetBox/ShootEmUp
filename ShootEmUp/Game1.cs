@@ -38,6 +38,7 @@ namespace ShootEmUp
             myPirate,
             myEnemyBullet,
             myBeach,
+            myWater,
             myClamClosed,
             myClamOpening,
             myClamOpen,
@@ -119,6 +120,7 @@ namespace ShootEmUp
             myEnemyBullet = Content.Load<Texture2D>("ball");
 
             myBeach = Content.Load<Texture2D>("beach");
+            myWater = Content.Load<Texture2D>("water");
 
             myClamClosed = Content.Load<Texture2D>("clamclosed");
             myClamOpening = Content.Load<Texture2D>("clamopening");
