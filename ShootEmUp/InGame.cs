@@ -50,7 +50,7 @@ namespace ShootEmUp
                 //new Level(0, 2, 3, 1, 0, 0, 1, 0, 3, 1.5f, 1, false),
                 //new Level(0, 2, 3, 0, 1, 0, 1, 0, 3, 1.5f, 1, false),
 
-                new Level(1, 1, 1, 20, 5, 1f, 0.98f, 1f, 0, 0.2f),
+                new Level(1, 1, 1, 20, 5, 3, 0.97f, 0.8f, 2, 0.2f),
             };
 
             myPowerUpTimer = AccessLevel.myPowerUpDelay;

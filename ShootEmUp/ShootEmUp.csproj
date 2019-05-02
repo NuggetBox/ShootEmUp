@@ -50,7 +50,6 @@
     <Compile Include="Ink.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Octopus.cs" />
-    <Compile Include="Pause.cs" />
     <Compile Include="Pirate.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Game1.cs" />

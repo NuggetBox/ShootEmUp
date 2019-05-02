@@ -9,7 +9,7 @@ namespace ShootEmUp
 {
     class FireRate : PowerUp
     {
-        public float myNewAttackCooldown = 0.15f;
+        public float myNewAttackCooldown = 0.25f;
 
         public FireRate(float someActiveTime)
         {

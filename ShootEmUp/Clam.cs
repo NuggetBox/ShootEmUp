@@ -23,7 +23,7 @@ namespace ShootEmUp
             myTexture = myClosed;
 
             myPosition = new Vector2(x, y);
-            myHealth = 2;
+            myHealth = 1;
             mySpeed = 50;
             myAttackSpeed = 0.8f;
             myAttackTimer = myAttackSpeed;

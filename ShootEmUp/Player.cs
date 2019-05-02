@@ -37,7 +37,7 @@ namespace ShootEmUp
             myBulletSpeed = 200;
 
         public float
-            myOriginalAttackCooldown = 0.3f,
+            myOriginalAttackCooldown = 0.5f,
             myAttackCooldown,
             myAttackTimer,
             myRotationSpeed = 1.5f;
@@ -149,19 +149,19 @@ namespace ShootEmUp
         public void TriShoot()
         {
             Vector2 tempRight = new Vector2((float)Math.Cos(myRotation), (float)Math.Sin(myRotation));
-            Vector2 tempRightUp = new Vector2((float)Math.Cos(myRotation - myTriAngle), (float)Math.Sin(myRotation - myTriAngle));
-            Vector2 tempRightDown = new Vector2((float)Math.Cos(myRotation + myTriAngle), (float)Math.Sin(myRotation + myTriAngle));
+            Vector2 tempTopRight = new Vector2((float)Math.Cos(myRotation - myTriAngle), (float)Math.Sin(myRotation - myTriAngle));
+            Vector2 tempBottomRight = new Vector2((float)Math.Cos(myRotation + myTriAngle), (float)Math.Sin(myRotation + myTriAngle));
 
             Vector2 tempLeft = new Vector2((float)Math.Cos(myRotation + Math.PI), (float)Math.Sin(myRotation + Math.PI));
-            Vector2 tempLeftUp = new Vector2((float)Math.Cos(myRotation + Math.PI + myTriAngle), (float)Math.Sin(myRotation + Math.PI + myTriAngle));
-            Vector2 tempLeftDown = new Vector2((float)Math.Cos(myRotation + Math.PI - myTriAngle), (float)Math.Sin(myRotation + Math.PI - myTriAngle));
+            Vector2 tempTopLeft = new Vector2((float)Math.Cos(myRotation + Math.PI + myTriAngle), (float)Math.Sin(myRotation + Math.PI + myTriAngle));
+            Vector2 tempBottomLeft = new Vector2((float)Math.Cos(myRotation + Math.PI - myTriAngle), (float)Math.Sin(myRotation + Math.PI - myTriAngle));
 
             InGame.myGameObjects.Add(new Bullet(this, tempRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
-            InGame.myGameObjects.Add(new Bullet(this, tempRightUp, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
-            InGame.myGameObjects.Add(new Bullet(this, tempRightDown, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+            InGame.myGameObjects.Add(new Bullet(this, tempTopRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+            InGame.myGameObjects.Add(new Bullet(this, tempBottomRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
             InGame.myGameObjects.Add(new Bullet(this, tempLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
-            InGame.myGameObjects.Add(new Bullet(this, tempLeftUp, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
-            InGame.myGameObjects.Add(new Bullet(this, tempLeftDown, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+            InGame.myGameObjects.Add(new Bullet(this, tempTopLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+            InGame.myGameObjects.Add(new Bullet(this, tempBottomLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
         }
 
         public void ResetAttackCooldown()

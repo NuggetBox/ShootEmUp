@@ -45,8 +45,8 @@ namespace ShootEmUp
             myPearl;
 
         public static int
-            myLeftBeach = 420,
-            myRightBeach = 850;
+            myLeftBeach = 300,
+            myRightBeach = 980;
 
         public static bool myQuit;
 

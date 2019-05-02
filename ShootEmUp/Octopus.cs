@@ -27,7 +27,7 @@ namespace ShootEmUp
         {
             myPosition = new Vector2(x, y);
             myTexture = Game1.myOctopus;
-            myHealth = 3;
+            myHealth = 2;
             mySpeed = 70;
             myInkTimer = myInkCooldown;
             myAnimSpeed = 0.15f;
