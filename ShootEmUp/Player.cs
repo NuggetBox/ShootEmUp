@@ -50,6 +50,7 @@ namespace ShootEmUp
             myTexture = Game1.myPlayer;
             myRectangle = CreateRectangle();
             myAttackCooldown = myOriginalAttackCooldown;
+            myLayer = 0.8f;
             myHealth = 100;
             mySpeed = 100;
         }
