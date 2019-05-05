@@ -286,8 +286,8 @@ namespace ShootEmUp
                 myGameObjects[i].Draw(aSpriteBatch);
             }
 
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Score: " + myScore, new Vector2(10, 40), Color.White, 0, Vector2.Zero, 0.2f, SpriteEffects.None, 1);
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Health: " + InGame.AccessPlayer.myHealth, new Vector2(10, 10), Color.White, 0, Vector2.Zero, 0.2f, SpriteEffects.None, 1);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Score: " + myScore, new Vector2(10, 40), Color.Blue, 0, Vector2.Zero, 0.2f, SpriteEffects.None, 1);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Health: " + InGame.AccessPlayer.myHealth, new Vector2(10, 10), Color.Blue, 0, Vector2.Zero, 0.2f, SpriteEffects.None, 1);
         }
     }
 }

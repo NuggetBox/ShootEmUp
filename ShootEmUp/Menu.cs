@@ -81,6 +81,11 @@ namespace ShootEmUp
                 Button tempButton = myButtons[i];
                 aSpriteBatch.DrawString(Game1.mySpriteFont, tempButton.myLabel, tempButton.myPosition, tempButton.myColor, 0, Vector2.Zero, myButtonScale, SpriteEffects.None, 0);
             }
+
+            if (Game1.myFinalScore > -1)
+            {
+                aSpriteBatch.DrawString(Game1.mySpriteFont, "Final score: " + Game1.myFinalScore, new Vector2(75, 13), Color.IndianRed, 0, Vector2.Zero, 0.4f, SpriteEffects.None, 0);
+            }
         }
 
         public static void Start()
@@ -102,6 +107,8 @@ namespace ShootEmUp
 
         public static void ExitToMain()
         {
+            Game1.myFinalScore = -1;
+
             while (Game1.AccessStateStack.Count > 1)
             {
                 Game1.AccessStateStack.Pop();

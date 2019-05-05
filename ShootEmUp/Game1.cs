@@ -22,6 +22,8 @@ namespace ShootEmUp
         public static string GetDirectory => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BoatGame\boatgamedata\";
         static string myFileName = "data.bog";
 
+        public static int myFinalScore = -1;
+
         GraphicsDeviceManager myGraphics;
         SpriteBatch mySpriteBatch;
 

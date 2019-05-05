@@ -47,8 +47,8 @@ namespace ShootEmUp
             myRectangle = CreateRectangle();
             myAttackCooldown = myOriginalAttackCooldown;
             myLayer = 0.8f;
-            myHealth = 100;
-            mySpeed = 100;
+            myHealth = 1;
+            mySpeed = 120;
         }
 
         public override void Update(GameTime someDeltaTime)
