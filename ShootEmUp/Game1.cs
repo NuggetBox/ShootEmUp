@@ -27,6 +27,12 @@ namespace ShootEmUp
 
         public static SpriteFont mySpriteFont;
 
+        Keys
+            myPitchUp = Keys.PageUp,
+            myPitchDown = Keys.PageDown,
+            myPitchReset = Keys.Q,
+            myPitchRandom = Keys.E;
+
         public static Texture2D myPlayerTexture;
 
         public static Texture2D
@@ -165,7 +171,44 @@ namespace ShootEmUp
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            //mySong.Pitch += 0.01f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            KeyboardState tempKeyboard = Keyboard.GetState();
+            float tempDelta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (tempKeyboard.IsKeyDown(myPitchUp))
+            {
+                float tempPitch = mySong.Pitch + 0.1f * tempDelta;
+
+                if (tempPitch > 1)
+                {
+                    mySong.Pitch = 1;
+                }
+                else
+                {
+                    mySong.Pitch = tempPitch;
+                }
+            }
+            if (tempKeyboard.IsKeyDown(myPitchDown))
+            {
+                float tempPitch = mySong.Pitch - 0.1f * tempDelta;
+
+                if (tempPitch < -1)
+                {
+                    mySong.Pitch = -1;
+                }
+                else
+                {
+                    mySong.Pitch = tempPitch;
+                }
+            }
+            if (tempKeyboard.IsKeyDown(myPitchRandom))
+            {
+                int tempPitch = Player.myRandom.Next(-100, 101);
+                mySong.Pitch = tempPitch * 0.01f;
+            }
+            if (tempKeyboard.IsKeyDown(myPitchReset))
+            {
+                mySong.Pitch = 0;
+            }
 
             // TODO: Add your update logic here
             if (myQuit)

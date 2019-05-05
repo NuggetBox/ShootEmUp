@@ -13,18 +13,14 @@ namespace ShootEmUp
     {
         public static Random myRandom = new Random();
 
-        readonly Keys 
+        readonly Keys
             myUp = Keys.W,
             myDown = Keys.S,
-            myRight = Keys.D, 
+            myRight = Keys.D,
             myLeft = Keys.A,
             myClockwiseRotation = Keys.L,
             myCounterClockwiseRotation = Keys.J,
-            myShoot = Keys.I,
-            myPitchUp = Keys.Up,
-            myPitchDown = Keys.Down,
-            myPitchReset = Keys.Q,
-            myPitchRandom = Keys.E;
+            myShoot = Keys.I;
 
         public List<PowerUp> myPowerUps = new List<PowerUp>();
 
@@ -96,23 +92,6 @@ namespace ShootEmUp
             if (tempKeyboard.IsKeyDown(myCounterClockwiseRotation))
             {
                 myRotation -= tempDelta * myRotationSpeed;
-            }
-            if (tempKeyboard.IsKeyDown(myPitchUp))
-            {
-                Game1.mySong.Pitch += 0.05f * tempDelta;
-            }
-            if (tempKeyboard.IsKeyDown(myPitchDown))
-            {
-                Game1.mySong.Pitch -= 0.05f * tempDelta;
-            }
-            if (tempKeyboard.IsKeyDown(myPitchRandom))
-            {
-                float tempPitch = myRandom.Next(-100, 101);
-                Game1.mySong.Pitch = tempPitch *= 0.01f;
-            }
-            if (tempKeyboard.IsKeyDown(myPitchReset))
-            {
-                Game1.mySong.Pitch = 0;
             }
 
             if (myPosition.X + myDirection.X * mySpeed * tempDelta > Game1.myLeftBeach && myPosition.X + myDirection.X * mySpeed * tempDelta < Game1.myRightBeach)
