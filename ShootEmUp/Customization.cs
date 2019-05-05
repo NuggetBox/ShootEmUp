@@ -82,11 +82,11 @@ namespace ShootEmUp
 
         public override void Draw(GameTime someDeltaTime, SpriteBatch aSpriteBatch)
         {
-            aSpriteBatch.Draw(myLeftArrowKey, new Vector2(100, 150), null, Color.White, 0, myLeftArrowKey.Bounds.Size.ToVector2() * 0.5f, 4, SpriteEffects.None, 0);
-            aSpriteBatch.Draw(myLeftArrowKey, new Vector2(400, 150), null, Color.White, 0, myLeftArrowKey.Bounds.Size.ToVector2() * 0.5f, 4, SpriteEffects.FlipHorizontally, 0);
-            aSpriteBatch.Draw(myConfirmKey, new Vector2(130, 375), null, Color.White, 0, myConfirmKey.Bounds.Size.ToVector2() * 0.5f, 4, SpriteEffects.None, 0);
+            aSpriteBatch.Draw(myLeftArrowKey, new Vector2(100, 150), null, Color.White, 0, myLeftArrowKey.Bounds.Size.ToVector2() * 0.5f, 2, SpriteEffects.None, 0);
+            aSpriteBatch.Draw(myLeftArrowKey, new Vector2(400, 150), null, Color.White, 0, myLeftArrowKey.Bounds.Size.ToVector2() * 0.5f, 2, SpriteEffects.FlipHorizontally, 0);
+            aSpriteBatch.Draw(myConfirmKey, new Vector2(160, 375), null, Color.White, 0, myConfirmKey.Bounds.Size.ToVector2() * 0.5f, 1.5f, SpriteEffects.None, 0);
             aSpriteBatch.Draw(mySkins[index], new Vector2(250, 150), null, Color.White, 0, mySkins[index].Bounds.Size.ToVector2() * 0.5f, 7, SpriteEffects.None, 0);
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Confirm", new Vector2(220, 340), Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Confirm", new Vector2(250, 340), Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
         }
 
         void Next()

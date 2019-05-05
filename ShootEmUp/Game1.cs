@@ -29,11 +29,13 @@ namespace ShootEmUp
 
         public static SpriteFont mySpriteFont;
 
+        public static SoundEffectInstance mySong;
+
         Keys
-            myPitchUp = Keys.PageUp,
-            myPitchDown = Keys.PageDown,
-            myPitchReset = Keys.Q,
-            myPitchRandom = Keys.E;
+            myPitchUp = Keys.E,
+            myPitchDown = Keys.Q,
+            myPitchReset = Keys.R,
+            myPitchRandom = Keys.F;
 
         public static Texture2D myPlayerTexture;
 
@@ -44,13 +46,28 @@ namespace ShootEmUp
             myShipSteam,
             myShipThicc;
 
-        public static SoundEffectInstance mySong;
+        public static Texture2D
+            myEnter,
+            myEsc,
+            myRight,
+            myLeft,
+            myUp,
+            myDown,
+            myW,
+            myA,
+            myS,
+            myD,
+            myQ,
+            myE,
+            myR,
+            myF,
+            myI,
+            myJ,
+            myL,
+            myM;
 
         public static Texture2D
             myPlayerBullet,
-            myLeft, 
-            myRight,
-            myEnter,
             myBarrel,
             myCrab,
             myCrabPinch,
@@ -100,6 +117,7 @@ namespace ShootEmUp
             {
                 new Button("Start", Menu.Start),
                 new Button("Skins", Menu.SkinCustomization),
+                new Button("Tutorial", Menu.Tutorial),
                 new Button("Quit", Menu.Quit),
             };
 
@@ -124,37 +142,52 @@ namespace ShootEmUp
             // Create a new SpriteBatch, which can be used to draw textures.
             mySpriteBatch = new SpriteBatch(GraphicsDevice);
 
-            myShip = Content.Load<Texture2D>("ship");
-            myShipGreen = Content.Load<Texture2D>("shipGreen");
-            myShipRed = Content.Load<Texture2D>("shipRed");
-            myShipSteam = Content.Load<Texture2D>("shipSteam");
-            myShipThicc = Content.Load<Texture2D>("shipThicc");
-
-            myPlayerTexture = myShip;
-
             mySpriteFont = Content.Load<SpriteFont>("Standard");
 
-            myBarrel = Content.Load<Texture2D>("barrel");
-            myPlayerBullet = Content.Load<Texture2D>("ball");
+            myShip = GetContent("ship");
+            myShipGreen = GetContent("shipGreen");
+            myShipRed = GetContent("shipRed");
+            myShipSteam = GetContent("shipSteam");
+            myShipThicc = GetContent("shipThicc");
 
-            myLeft = Content.Load<Texture2D>("left");
-            myRight = Content.Load<Texture2D>("right");
-            myEnter = Content.Load<Texture2D>("enter");
+            myW = GetContent("w");
+            myA = GetContent("a");
+            myS = GetContent("s");
+            myD = GetContent("d");
+            myQ = GetContent("q");
+            myE = GetContent("e");
+            myR = GetContent("r");
+            myF = GetContent("f");
+            myJ = GetContent("j");
+            myI = GetContent("i");
+            myL = GetContent("l");
+            myM = GetContent("m");
+            myEnter = GetContent("enter");
+            myRight = GetContent("right");
+            myLeft = GetContent("left");
+            myUp = GetContent("up");
+            myDown = GetContent("down");
+            myEsc = GetContent("esc");
 
-            myCrab = Content.Load<Texture2D>("crab");
-            myCrabPinch = Content.Load<Texture2D>("crabpinch");
+            myBarrel = GetContent("barrel");
+            myPlayerBullet = GetContent("ball");
 
-            myOctopus = Content.Load<Texture2D>("octopus");
-            myOctopusSlither = Content.Load<Texture2D>("octopusslither");
-            myInk = Content.Load<Texture2D>("ink");
+            myCrab = GetContent("crab");
+            myCrabPinch = GetContent("crabpinch");
 
-            myBeach = Content.Load<Texture2D>("beach");
-            myWater = Content.Load<Texture2D>("water");
+            myOctopus = GetContent("octopus");
+            myOctopusSlither = GetContent("octopusslither");
+            myInk = GetContent("ink");
 
-            myClamClosed = Content.Load<Texture2D>("clamclosed");
-            myClamOpening = Content.Load<Texture2D>("clamopening");
-            myClamOpen = Content.Load<Texture2D>("clamopen");
-            myPearl = Content.Load<Texture2D>("pearl");
+            myBeach = GetContent("beach");
+            myWater = GetContent("water");
+
+            myClamClosed = GetContent("clamclosed");
+            myClamOpening = GetContent("clamopening");
+            myClamOpen = GetContent("clamopen");
+            myPearl = GetContent("pearl");
+
+            myPlayerTexture = myShip;
         }
 
         /// <summary>
@@ -243,6 +276,11 @@ namespace ShootEmUp
         {
             Save();
             Exit();
+        }
+
+        Texture2D GetContent(string aName)
+        {
+            return Content.Load<Texture2D>(aName);
         }
 
         public static void Save()

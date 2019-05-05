@@ -105,6 +105,12 @@ namespace ShootEmUp
             Game1.GetCurrentState.Initialize();
         }
 
+        public static void Tutorial()
+        {
+            Game1.AccessStateStack.Push(new Tutorial());
+            Game1.GetCurrentState.Initialize();
+        }
+
         public static void ExitToMain()
         {
             Game1.myFinalScore = -1;

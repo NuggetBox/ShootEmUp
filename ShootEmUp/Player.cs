@@ -47,7 +47,7 @@ namespace ShootEmUp
             myRectangle = CreateRectangle();
             myAttackCooldown = myOriginalAttackCooldown;
             myLayer = 0.8f;
-            myHealth = 1;
+            myHealth = 100;
             mySpeed = 120;
         }
 
