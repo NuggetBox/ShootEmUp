@@ -47,7 +47,7 @@ namespace ShootEmUp
         public Player()
         {
             myPosition = myStartPos;
-            myTexture = Game1.myPlayer;
+            myTexture = Game1.myPlayerTexture;
             myRectangle = CreateRectangle();
             myAttackCooldown = myOriginalAttackCooldown;
             myLayer = 0.8f;
@@ -57,6 +57,8 @@ namespace ShootEmUp
 
         public override void Update(GameTime someDeltaTime)
         {
+            myTexture = Game1.myPlayerTexture;
+
             float tempDelta = (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
 
             CheckPlayerDeath();

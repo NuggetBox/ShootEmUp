@@ -98,9 +98,15 @@ namespace ShootEmUp
             if (InGame.AccessPlayer.myHealth <= 0)
             {
                 InGame.myScore = 0;
-                Game1.AccessStateStack.Pop();
-                Game1.AccessStateStack.Push(new InGame());
-                Game1.GetCurrentState.Initialize();
+
+                List<Button> tempButtons = new List<Button>()
+                {
+                    new Button("Restart", Menu.Start),
+                    new Button("Main Menu", Menu.ExitToMain),
+                    new Button("Quit", Menu.Quit),
+                };
+
+                Game1.AccessStateStack.Push(new Menu(tempButtons));
             }
         }
     }

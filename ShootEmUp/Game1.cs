@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
+using System.IO;
+using System;
 
 namespace ShootEmUp
 {
@@ -16,27 +18,37 @@ namespace ShootEmUp
         public static State GetCurrentState => AccessStateStack.Peek();
         public static Point AccessWindowSize { get; private set; }
 
+        public static string GetFullDirectory => GetDirectory + myFileName;
+        public static string GetDirectory => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BoatGame\boatgamedata\";
+        static string myFileName = "data.bog";
+
         GraphicsDeviceManager myGraphics;
         SpriteBatch mySpriteBatch;
 
         public static SpriteFont mySpriteFont;
 
-        public static Texture2D 
-            myPlayer,
-            myPlayerBullet;
+        public static Texture2D myPlayerTexture;
+
+        public static Texture2D
+            myShip,
+            myShipGreen,
+            myShipRed,
+            myShipSteam,
+            myShipThicc;
 
         public static SoundEffectInstance mySong;
 
-        //public static Texture2D hej;
         public static Texture2D
+            myPlayerBullet,
+            myLeft, 
+            myRight,
+            myEnter,
             myBarrel,
             myCrab,
             myCrabPinch,
             myOctopus,
             myOctopusSlither,
             myInk,
-            myPirate,
-            myEnemyBullet,
             myBeach,
             myWater,
             myClamClosed,
@@ -79,12 +91,13 @@ namespace ShootEmUp
             List<Button> tempButtons = new List<Button>
             {
                 new Button("Start", Menu.Start),
+                new Button("Skins", Menu.SkinCustomization),
                 new Button("Quit", Menu.Quit),
             };
 
             Menu menu = new Menu(tempButtons);
 
-            AccessStateStack.Push(menu);
+            AccessStateStack.Push(menu); 
 
             base.Initialize();
         }
@@ -103,11 +116,22 @@ namespace ShootEmUp
             // Create a new SpriteBatch, which can be used to draw textures.
             mySpriteBatch = new SpriteBatch(GraphicsDevice);
 
+            myShip = Content.Load<Texture2D>("ship");
+            myShipGreen = Content.Load<Texture2D>("shipGreen");
+            myShipRed = Content.Load<Texture2D>("shipRed");
+            myShipSteam = Content.Load<Texture2D>("shipSteam");
+            myShipThicc = Content.Load<Texture2D>("shipThicc");
+
+            myPlayerTexture = myShip;
+
             mySpriteFont = Content.Load<SpriteFont>("Standard");
 
             myBarrel = Content.Load<Texture2D>("barrel");
-            myPlayer = Content.Load<Texture2D>("ship");
             myPlayerBullet = Content.Load<Texture2D>("ball");
+
+            myLeft = Content.Load<Texture2D>("left");
+            myRight = Content.Load<Texture2D>("right");
+            myEnter = Content.Load<Texture2D>("enter");
 
             myCrab = Content.Load<Texture2D>("crab");
             myCrabPinch = Content.Load<Texture2D>("crabpinch");
@@ -115,9 +139,6 @@ namespace ShootEmUp
             myOctopus = Content.Load<Texture2D>("octopus");
             myOctopusSlither = Content.Load<Texture2D>("octopusslither");
             myInk = Content.Load<Texture2D>("ink");
-
-            myPirate = Content.Load<Texture2D>("pirate");
-            myEnemyBullet = Content.Load<Texture2D>("ball");
 
             myBeach = Content.Load<Texture2D>("beach");
             myWater = Content.Load<Texture2D>("water");
@@ -148,7 +169,7 @@ namespace ShootEmUp
 
             // TODO: Add your update logic here
             if (myQuit)
-                Exit();
+                QuitGame();
 
             GetCurrentState.Update(gameTime);
 
@@ -171,6 +192,25 @@ namespace ShootEmUp
             GetCurrentState.Draw(gameTime, mySpriteBatch);
 
             mySpriteBatch.End();
+        }
+
+        void QuitGame()
+        {
+            Save();
+            Exit();
+        }
+
+        public static void Save()
+        {
+            if (Directory.Exists(GetDirectory))
+            {
+                File.WriteAllText(GetFullDirectory, Customization.index.ToString());
+            }
+            else
+            {
+                Directory.CreateDirectory(GetDirectory);
+                File.WriteAllText(GetFullDirectory, Customization.index.ToString());
+            }
         }
     }
 }

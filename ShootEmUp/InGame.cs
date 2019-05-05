@@ -242,13 +242,15 @@ namespace ShootEmUp
 
             UpdateLevel(tempDelta);
 
+            // TODO: Pause
             if (tempKeyboardState.IsKeyDown(Keys.Escape))
             {
                 List<Button> tempButtons = new List<Button>
                 {
                     new Button("Resume", Menu.Resume),
-                    new Button("Exit To Main", Menu.ExitToMain),
-                    new Button("Quit Game", Menu.Quit),
+                    new Button("Skins", Menu.SkinCustomization),
+                    new Button("Main Menu", Menu.ExitToMain),
+                    new Button("Quit", Menu.Quit),
                 };
 
                 Game1.AccessStateStack.Push(new Menu(tempButtons));

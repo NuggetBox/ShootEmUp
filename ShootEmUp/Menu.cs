@@ -11,7 +11,9 @@ namespace ShootEmUp
     {
         List<Button> myButtons;
 
-        KeyboardState myPreviousKeyboardState;
+        static KeyboardState 
+            myPreviousKeyboardState,
+            myKeyboardState;
 
         int mySelectedIndex = 0;
         int myButtonOffset = 75;
@@ -38,16 +40,16 @@ namespace ShootEmUp
                 }
             }
 
-            KeyboardState tempKeyboardState = Keyboard.GetState();
+            myKeyboardState = Keyboard.GetState();
 
-            if (tempKeyboardState.IsKeyDown(Keys.Enter) && myPreviousKeyboardState.IsKeyUp(Keys.Enter))
+            if (myKeyboardState.IsKeyDown(Keys.Enter) && myPreviousKeyboardState.IsKeyUp(Keys.Enter))
             {
                 myButtons[mySelectedIndex].Press();
                 //Console.Beep();
             }
             else
             {
-                if (tempKeyboardState.IsKeyDown(Keys.Up) && myPreviousKeyboardState.IsKeyUp(Keys.Up))
+                if (myKeyboardState.IsKeyDown(Keys.Up) && myPreviousKeyboardState.IsKeyUp(Keys.Up))
                 {
                     if (mySelectedIndex != 0)
                     {
@@ -55,7 +57,7 @@ namespace ShootEmUp
                     }
                     //Console.Beep();
                 }
-                else if (tempKeyboardState.IsKeyDown(Keys.Down) && myPreviousKeyboardState.IsKeyUp(Keys.Down))
+                else if (myKeyboardState.IsKeyDown(Keys.Down) && myPreviousKeyboardState.IsKeyUp(Keys.Down))
                 {
                     if (mySelectedIndex != myButtons.Count - 1)
                     {
@@ -67,7 +69,7 @@ namespace ShootEmUp
 
             myButtons[mySelectedIndex].myColor.B = 123;
 
-            myPreviousKeyboardState = tempKeyboardState;
+            myPreviousKeyboardState = myKeyboardState;
         }
 
         public override void Draw(GameTime someDeltaTime, SpriteBatch aSpriteBatch)
@@ -90,6 +92,12 @@ namespace ShootEmUp
         public static void Resume()
         {
             Game1.AccessStateStack.Pop();
+        }
+
+        public static void SkinCustomization()
+        {
+            Game1.AccessStateStack.Push(new Customization(myKeyboardState));
+            Game1.GetCurrentState.Initialize();
         }
 
         public static void ExitToMain()

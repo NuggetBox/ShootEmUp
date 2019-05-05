@@ -46,11 +46,11 @@
     <Compile Include="Button.cs" />
     <Compile Include="Clam.cs" />
     <Compile Include="Crab.cs" />
+    <Compile Include="Customization.cs" />
     <Compile Include="FireRate.cs" />
     <Compile Include="Ink.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Octopus.cs" />
-    <Compile Include="Pirate.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameObject.cs" />
