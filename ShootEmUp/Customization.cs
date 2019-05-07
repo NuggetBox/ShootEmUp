@@ -38,8 +38,11 @@ namespace ShootEmUp
             mySkins = new List<Texture2D>()
             {
                 Game1.myShip,
-                Game1.myShipGreen,
+                Game1.myShipPurple,
+                Game1.myShipBee,
                 Game1.myShipRed,
+                Game1.myShipColor,
+                Game1.myShipTriple,
                 Game1.myShipSteam,
                 Game1.myShipThicc,
             };

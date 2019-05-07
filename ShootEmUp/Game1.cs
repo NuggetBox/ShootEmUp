@@ -20,12 +20,15 @@ namespace ShootEmUp
 
         public static string GetFullDirectory => GetDirectory + myFileName;
         public static string GetDirectory => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BoatGame\boatgamedata\";
+
         static string myFileName = "data.bog";
 
         public static int myFinalScore = -1;
 
         GraphicsDeviceManager myGraphics;
         SpriteBatch mySpriteBatch;
+
+        KeyboardState myPreviousKeyboard;
 
         public static SpriteFont mySpriteFont;
 
@@ -35,14 +38,18 @@ namespace ShootEmUp
             myPitchUp = Keys.E,
             myPitchDown = Keys.Q,
             myPitchReset = Keys.R,
-            myPitchRandom = Keys.F;
+            myPitchRandom = Keys.F,
+            myMute = Keys.M;
 
         public static Texture2D myPlayerTexture;
 
         public static Texture2D
             myShip,
-            myShipGreen,
+            myShipPurple,
+            myShipBee,
             myShipRed,
+            myShipColor,
+            myShipTriple,
             myShipSteam,
             myShipThicc;
 
@@ -145,8 +152,11 @@ namespace ShootEmUp
             mySpriteFont = Content.Load<SpriteFont>("Standard");
 
             myShip = GetContent("ship");
-            myShipGreen = GetContent("shipGreen");
+            myShipPurple = GetContent("shipPurple");
+            myShipBee = GetContent("shipBee");
             myShipRed = GetContent("shipRed");
+            myShipColor = GetContent("shipColor");
+            myShipTriple = GetContent("shipTriple");
             myShipSteam = GetContent("shipSteam");
             myShipThicc = GetContent("shipThicc");
 
@@ -244,12 +254,18 @@ namespace ShootEmUp
             {
                 mySong.Pitch = 0;
             }
+            if (tempKeyboard.IsKeyDown(myMute) && myPreviousKeyboard.IsKeyUp(myMute))
+            {
+                mySong.Volume = mySong.Volume == 1 ? 0 : 1;
+            }
 
             // TODO: Add your update logic here
             if (myQuit)
                 QuitGame();
 
             GetCurrentState.Update(gameTime);
+
+            myPreviousKeyboard = tempKeyboard;
 
             base.Update(gameTime);
         }

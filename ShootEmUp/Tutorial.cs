@@ -28,10 +28,11 @@ namespace ShootEmUp
 
                 new Key(Game1.myEsc, new Vector2(104, 315)),
 
-                new Key(Game1.myE, new Vector2(100, 430)),
-                new Key(Game1.myQ, new Vector2(100, 500)),
-                new Key(Game1.myR, new Vector2(100, 570)),
-                new Key(Game1.myF, new Vector2(100, 640)),
+                new Key(Game1.myE, new Vector2(100, 414)),
+                new Key(Game1.myQ, new Vector2(100, 474)),
+                new Key(Game1.myR, new Vector2(100, 534)),
+                new Key(Game1.myF, new Vector2(100, 594)),
+                new Key(Game1.myM, new Vector2(100, 654)),
 
                 new Key(Game1.myUp, new Vector2(650, 71)),
                 new Key(Game1.myLeft, new Vector2(596, 125)),
@@ -66,14 +67,15 @@ namespace ShootEmUp
             aSpriteBatch.DrawString(Game1.mySpriteFont, "Shoot", new Vector2(225, 185), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
             aSpriteBatch.DrawString(Game1.mySpriteFont, "Rotate", new Vector2(225, 245), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
             aSpriteBatch.DrawString(Game1.mySpriteFont, "Pause", new Vector2(225, 305), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Sound", new Vector2(115, 360), Color.LightGoldenrodYellow, 0, Vector2.Zero, 0.4f, SpriteEffects.None, 0);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Sound", new Vector2(115, 350), Color.LightGoldenrodYellow, 0, Vector2.Zero, 0.4f, SpriteEffects.None, 0);
 
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Pitch Up", new Vector2(175, 430), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Pitch Down", new Vector2(175, 500), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Reset Pitch", new Vector2(175, 570), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Random Pitch", new Vector2(175, 640), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Pitch Up", new Vector2(175, 414), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Pitch Down", new Vector2(175, 474), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Reset Pitch", new Vector2(175, 534), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Random Pitch", new Vector2(175, 594), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Mute Sound", new Vector2(175, 654), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
 
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Menu Navigation", new Vector2(585, 0), Color.LightGoldenrodYellow, 0, Vector2.Zero, 0.4f, SpriteEffects.None, 0);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Menu Navigation", new Vector2(620, 0), Color.LightGoldenrodYellow, 0, Vector2.Zero, 0.4f, SpriteEffects.None, 0);
             aSpriteBatch.DrawString(Game1.mySpriteFont, "Change Selection", new Vector2(775, 100), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
             aSpriteBatch.DrawString(Game1.mySpriteFont, "Confirm Selection", new Vector2(775, 220), Color.White, 0, Vector2.Zero, 0.28f, SpriteEffects.None, 0);
 
