@@ -47,7 +47,7 @@ namespace ShootEmUp
                 Game1.myShipThicc,
             };
 
-            if (Directory.Exists(Game1.GetDirectory))
+            if (File.Exists(Game1.GetFullDirectory))
             {
                 index = int.Parse(File.ReadAllText(Game1.GetFullDirectory));
             }

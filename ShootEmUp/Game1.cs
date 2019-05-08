@@ -18,7 +18,7 @@ namespace ShootEmUp
         public static State GetCurrentState => AccessStateStack.Peek();
         public static Point AccessWindowSize { get; private set; }
 
-        public static string GetFullDirectory => GetDirectory + myFileName;
+        public static string GetFullDirectory => GetDirectory + @myFileName;
         public static string GetDirectory => Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\BoatGame\boatgamedata\";
 
         static string myFileName = "data.bog";
@@ -133,6 +133,12 @@ namespace ShootEmUp
             AccessStateStack.Push(menu); 
 
             base.Initialize();
+
+            if (!File.Exists(GetFullDirectory))
+            {
+                AccessStateStack.Push(new Tutorial());
+                GetCurrentState.Initialize();
+            }
         }
 
         /// <summary>
