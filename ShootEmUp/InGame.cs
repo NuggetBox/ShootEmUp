@@ -83,6 +83,7 @@ namespace ShootEmUp
                 //new Crab(100, 100), new Crab(100, 550), new Crab(200, 500), new Crab(300, 500), new Crab(400, 500), new Crab(500, 500), new Crab(500, 500), new Crab(500, 500),
             };
 
+            AccessPlayer.myTexture = Game1.myPlayerTexture;
             myGameObjects.Add(new FireRate(3));
         }
 
