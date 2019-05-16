@@ -12,7 +12,7 @@ namespace ShootEmUp
 {
     class Customization : State
     {
-        List<Texture2D> mySkins;
+        public static List<Texture2D> mySkins;
 
         Texture2D 
             myLeftArrowKey, 
@@ -26,7 +26,7 @@ namespace ShootEmUp
             myRight = Keys.Right,
             myConfirm = Keys.Enter;
 
-        public static int index;
+        public static int myIndex;
 
         public Customization(KeyboardState aKeyboardState)
         {
@@ -47,13 +47,21 @@ namespace ShootEmUp
                 Game1.myShipThicc,
             };
 
+            if (Game1.myPreOrder)
+            {
+                mySkins.Add(Game1.myShipFire1);
+                mySkins.Add(Game1.myShipWater1);
+            }
+
             if (File.Exists(Game1.GetFullDirectory))
             {
-                index = int.Parse(File.ReadAllText(Game1.GetFullDirectory));
+                myIndex = int.Parse(File.ReadAllText(Game1.GetFullDirectory));
+
+                CheckSkinIndex();
             }
             else
             {
-                index = 0;
+                myIndex = 0;
             }
 
             myLeftArrowKey = Game1.myLeft;
@@ -75,7 +83,8 @@ namespace ShootEmUp
             }
             else if (tempKeyboard.IsKeyDown(myConfirm) && myPreviousKeyboard.IsKeyUp(myConfirm))
             {
-                Game1.myPlayerTexture = mySkins[index];
+                CheckSkinIndex();
+                Game1.myPlayerTexture = mySkins[myIndex];
                 Game1.Save();
                 Game1.AccessStateStack.Pop();
             }
@@ -88,31 +97,56 @@ namespace ShootEmUp
             aSpriteBatch.Draw(myLeftArrowKey, new Vector2(100, 150), null, Color.White, 0, myLeftArrowKey.Bounds.Size.ToVector2() * 0.5f, 2, SpriteEffects.None, 0);
             aSpriteBatch.Draw(myLeftArrowKey, new Vector2(400, 150), null, Color.White, 0, myLeftArrowKey.Bounds.Size.ToVector2() * 0.5f, 2, SpriteEffects.FlipHorizontally, 0);
             aSpriteBatch.Draw(myConfirmKey, new Vector2(160, 375), null, Color.White, 0, myConfirmKey.Bounds.Size.ToVector2() * 0.5f, 1.5f, SpriteEffects.None, 0);
-            aSpriteBatch.Draw(mySkins[index], new Vector2(250, 150), null, Color.White, 0, mySkins[index].Bounds.Size.ToVector2() * 0.5f, 7, SpriteEffects.None, 0);
+            aSpriteBatch.Draw(mySkins[myIndex], new Vector2(250, 150), null, Color.White, 0, mySkins[myIndex].Bounds.Size.ToVector2() * 0.5f, 7, SpriteEffects.None, 0);
             aSpriteBatch.DrawString(Game1.mySpriteFont, "Confirm", new Vector2(250, 340), Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
+        }
+
+        public static Texture2D GetSelectedTexture()
+        {
+            if (File.Exists(Game1.GetFullDirectory))
+            {
+                myIndex = int.Parse(File.ReadAllText(Game1.GetFullDirectory));
+
+                CheckSkinIndex();
+            }
+            else
+            {
+                myIndex = 0;
+            }
+
+            Game1.myPlayerTexture = mySkins[myIndex];
+            return mySkins[myIndex];
+        }
+
+        static void CheckSkinIndex()
+        {
+            if (myIndex >= mySkins.Count)
+            {
+                myIndex = 0;
+            }
         }
 
         void Next()
         {
-            if (index == mySkins.Count - 1)
+            if (myIndex == mySkins.Count - 1)
             {
-                index = 0;
+                myIndex = 0;
             }
             else
             {
-                index++;
+                myIndex++;
             }
         }
 
         void Previous()
         {
-            if (index == 0)
+            if (myIndex == 0)
             {
-                index = mySkins.Count - 1;
+                myIndex = mySkins.Count - 1;
             }
             else
             {
-                index--;
+                myIndex--;
             }
         }
     }

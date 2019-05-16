@@ -11,7 +11,7 @@ namespace ShootEmUp
 {
     abstract class GameObject
     {
-        public Vector2 GetOrigin => new Vector2(myTexture.Bounds.Width * 0.5f, myTexture.Bounds.Height * 0.5f); 
+        public Vector2 GetOrigin => new Vector2(myTexture.Bounds.Width * 0.5f, myTexture.Bounds.Height * 0.5f);
 
         SpriteEffects mySpriteEffects = SpriteEffects.None;
 
@@ -46,9 +46,6 @@ namespace ShootEmUp
         public void Draw(SpriteBatch aSpriteBatch)
         {
             aSpriteBatch.Draw(myTexture, myPosition, null, myColor, myRotation, GetOrigin, myScale, mySpriteEffects, myLayer);
-
-            //Rectangle temp = new Rectangle(myPosition.ToPoint(), myTexture.Bounds.Size);
-            //aSpriteBatch.Draw(Game1.hej, temp, Color.White);
         }
 
         protected void Move(GameTime someDeltaTime)

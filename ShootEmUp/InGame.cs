@@ -44,6 +44,23 @@ namespace ShootEmUp
         {
             myScore = 0;
 
+            Customization.mySkins = new List<Texture2D>()
+            {
+                Game1.myShip,
+                Game1.myShipPurple,
+                Game1.myShipBee,
+                Game1.myShipRed,
+                Game1.myShipColor,
+                Game1.myShipTriple,
+                Game1.myShipSteam,
+                Game1.myShipThicc,
+            };
+
+            if (Game1.myPreOrder)
+            {
+                Customization.mySkins.Add(Game1.myShipFire1);
+            }
+
             myLevels = new List<Level>
             {   
                 //new Level(0, 10, 1, 3, 1, 2, 2, 5, 0, 1.2f, 1, false),

@@ -28,7 +28,8 @@ namespace ShootEmUp
 
         double myTriAngle = Math.PI * 0.1f;
 
-        int 
+        int
+            myAnimationIndex,
             myBulletDamage = 1,
             myBulletSpeed = 200;
 
@@ -36,26 +37,88 @@ namespace ShootEmUp
             myOriginalAttackCooldown = 0.5f,
             myAttackCooldown,
             myAttackTimer,
+            myAnimationCooldown = 0.3f,
+            myAnimationTimer,
             myRotationSpeed = 1.5f;
 
-        public bool myTriShooting;
+        public bool 
+            myIsFire,
+            myIsPreOrderSkin,
+            myTriShooting;
 
         public Player()
         {
             myPosition = myStartPos;
-            myTexture = Game1.myPlayerTexture;
+            myAnimationTimer = myAnimationCooldown;
+            myTexture = Customization.GetSelectedTexture();
             myRectangle = CreateRectangle();
+            myRectangle.Size = new Point((int)(Game1.myShip.Bounds.Size.X * myScale), (int)(Game1.myShip.Bounds.Size.Y * myScale));
             myAttackCooldown = myOriginalAttackCooldown;
             myLayer = 0.8f;
             myHealth = 100;
             mySpeed = 120;
+
+            if ((Game1.myPlayerTexture == Game1.myShipFire1 || Game1.myPlayerTexture == Game1.myShipWater1) && Game1.myPreOrder)
+            {
+                myIsPreOrderSkin = true;
+            }
         }
 
         public override void Update(GameTime someDeltaTime)
         {
-            myTexture = Game1.myPlayerTexture;
+            if (Game1.myPreOrder)
+            {
+                if (Game1.myPlayerTexture == Game1.myShipFire1)
+                {
+                    myIsFire = true;
+                    myIsPreOrderSkin = true;
+                }
+                else if (Game1.myPlayerTexture == Game1.myShipWater1)
+                {
+                    myIsFire = false;
+                    myIsPreOrderSkin = true;
+                }
+                else
+                {
+                    myIsPreOrderSkin = false;
+                }
+            }
+            else
+            {
+                myIsPreOrderSkin = false;
+            }
 
             float tempDelta = (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
+
+            if (myIsPreOrderSkin)
+            {
+                if (myAnimationCooldown <= 0)
+                {
+                    myAnimationIndex++;
+
+                    if (myAnimationIndex == 4)
+                    {
+                        myAnimationIndex = 0;
+                    }
+
+                    if (myIsFire)
+                    {
+                        myTexture = Game1.myPreOrderSkinsFire[myAnimationIndex];
+                    }
+                    else
+                    {
+                        myTexture = Game1.myPreOrderSkinsWater[myAnimationIndex];
+                    }
+
+                    myAnimationCooldown = myAnimationTimer;
+                }
+
+                myAnimationCooldown -= tempDelta;
+            }
+            else
+            {
+                myTexture = Game1.myPlayerTexture;
+            }
 
             CheckPlayerDeath();
 

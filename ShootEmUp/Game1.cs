@@ -14,6 +14,8 @@ namespace ShootEmUp
     /// </summary>
     public class Game1 : Game
     {
+        public static readonly bool myPreOrder = true;
+
         public static Stack<State> AccessStateStack { get; set; }
         public static State GetCurrentState => AccessStateStack.Peek();
         public static Point AccessWindowSize { get; private set; }
@@ -43,8 +45,19 @@ namespace ShootEmUp
 
         public static Texture2D myPlayerTexture;
 
+        public static Texture2D[] myPreOrderSkinsFire;
+        public static Texture2D[] myPreOrderSkinsWater;
+
         public static Texture2D
             myShip,
+            myShipFire1,
+            myShipFire2,
+            myShipFire3,
+            myShipFire4,
+            myShipWater1,
+            myShipWater2,
+            myShipWater3,
+            myShipWater4,
             myShipPurple,
             myShipBee,
             myShipRed,
@@ -158,6 +171,14 @@ namespace ShootEmUp
             mySpriteFont = Content.Load<SpriteFont>("Standard");
 
             myShip = GetContent("ship");
+            myShipFire1 = GetContent("ShipFire");
+            myShipFire2 = GetContent("ShipFire2");
+            myShipFire3 = GetContent("ShipFire3");
+            myShipFire4 = GetContent("ShipFire4");
+            myShipWater1 = GetContent("shipWater");
+            myShipWater2 = GetContent("shipWater2");
+            myShipWater3 = GetContent("shipWater3");
+            myShipWater4 = GetContent("shipWater4");
             myShipPurple = GetContent("shipPurple");
             myShipBee = GetContent("shipBee");
             myShipRed = GetContent("shipRed");
@@ -202,6 +223,16 @@ namespace ShootEmUp
             myClamOpening = GetContent("clamopening");
             myClamOpen = GetContent("clamopen");
             myPearl = GetContent("pearl");
+
+            myPreOrderSkinsFire = new Texture2D[4]
+            {
+                myShipFire1, myShipFire2, myShipFire3, myShipFire4,
+            };
+
+            myPreOrderSkinsWater = new Texture2D[4]
+            {
+                myShipWater1, myShipWater2, myShipWater3, myShipWater4,
+            };
 
             myPlayerTexture = myShip;
         }
@@ -307,15 +338,12 @@ namespace ShootEmUp
 
         public static void Save()
         {
-            if (Directory.Exists(GetDirectory))
-            {
-                File.WriteAllText(GetFullDirectory, Customization.index.ToString());
-            }
-            else
+            if (!Directory.Exists(GetDirectory))
             {
                 Directory.CreateDirectory(GetDirectory);
-                File.WriteAllText(GetFullDirectory, Customization.index.ToString());
             }
+
+            File.WriteAllText(GetFullDirectory, Customization.myIndex.ToString());
         }
     }
 }
