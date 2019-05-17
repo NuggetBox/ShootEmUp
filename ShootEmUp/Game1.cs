@@ -67,6 +67,7 @@ namespace ShootEmUp
             myShipThicc;
 
         public static Texture2D
+            myBackground,
             myEnter,
             myEsc,
             myRight,
@@ -207,6 +208,7 @@ namespace ShootEmUp
             myUp = GetContent("up");
             myDown = GetContent("down");
             myEsc = GetContent("esc");
+            myBackground = GetContent("background");
 
             myBarrel = GetContent("barrel");
             myPlayerBullet = GetContent("ball");

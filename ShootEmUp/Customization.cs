@@ -120,30 +120,31 @@ namespace ShootEmUp
         {
             if (mySkins[myIndex] == Game1.myShipFire1 || mySkins[myIndex] == Game1.myShipWater1)
             {
-                aSpriteBatch.DrawString(Game1.mySpriteFont, "Pre-Order Exclusive!", new Vector2(850, 150), Color.Yellow, 0, Game1.mySpriteFont.MeasureString("Pre-Order Exclusive!") * 0.5f, myPreOrderScale, SpriteEffects.None, 0);
+                aSpriteBatch.DrawString(Game1.mySpriteFont, "Pre-Order Exclusive!", new Vector2(850, 150), Color.Yellow, 0, Game1.mySpriteFont.MeasureString("Pre-Order Exclusive!") * 0.5f, myPreOrderScale, SpriteEffects.None, 0.6f);
             }
 
             if (!Game1.myPreOrder)
             {
                 if (mySkins[myIndex] == Game1.myShipFire1 || mySkins[myIndex] == Game1.myShipWater1)
                 {
-                    aSpriteBatch.Draw(mySkins[myIndex], new Vector2(250, 150), null, Color.DarkGray, 0, mySkins[myIndex].Bounds.Size.ToVector2() * 0.5f, 7, SpriteEffects.None, 0);
+                    aSpriteBatch.Draw(mySkins[myIndex], new Vector2(250, 150), null, Color.DarkGray, 0, mySkins[myIndex].Bounds.Size.ToVector2() * 0.5f, 7, SpriteEffects.None, 0.4f);
                     aSpriteBatch.Draw(Game1.myLock, new Vector2(250, 150), null, Color.White, -0.35f, Game1.myLock.Bounds.Size.ToVector2() * 0.5f, 10, SpriteEffects.None, 0.5f);
                 }
                 else
                 {
-                    aSpriteBatch.Draw(mySkins[myIndex], new Vector2(250, 150), null, Color.White, 0, mySkins[myIndex].Bounds.Size.ToVector2() * 0.5f, 7, SpriteEffects.None, 0);
+                    aSpriteBatch.Draw(mySkins[myIndex], new Vector2(250, 150), null, Color.White, 0, mySkins[myIndex].Bounds.Size.ToVector2() * 0.5f, 7, SpriteEffects.None, 0.4f);
                 }
             }
             else
             {
-                aSpriteBatch.Draw(mySkins[myIndex], new Vector2(250, 150), null, Color.White, 0, mySkins[myIndex].Bounds.Size.ToVector2() * 0.5f, 7, SpriteEffects.None, 0);
+                aSpriteBatch.Draw(mySkins[myIndex], new Vector2(250, 150), null, Color.White, 0, mySkins[myIndex].Bounds.Size.ToVector2() * 0.5f, 7, SpriteEffects.None, 0.5f);
             }
 
-            aSpriteBatch.Draw(myLeftArrowKey, new Vector2(100, 150), null, Color.White, 0, myLeftArrowKey.Bounds.Size.ToVector2() * 0.5f, 2, SpriteEffects.None, 0);
-            aSpriteBatch.Draw(myLeftArrowKey, new Vector2(400, 150), null, Color.White, 0, myLeftArrowKey.Bounds.Size.ToVector2() * 0.5f, 2, SpriteEffects.FlipHorizontally, 0);
-            aSpriteBatch.Draw(myConfirmKey, new Vector2(160, 375), null, Color.White, 0, myConfirmKey.Bounds.Size.ToVector2() * 0.5f, 1.5f, SpriteEffects.None, 0);
-            aSpriteBatch.DrawString(Game1.mySpriteFont, "Confirm", new Vector2(250, 340), Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0);
+            aSpriteBatch.Draw(myLeftArrowKey, new Vector2(100, 150), null, Color.White, 0, myLeftArrowKey.Bounds.Size.ToVector2() * 0.5f, 2, SpriteEffects.None, 0.5f);
+            aSpriteBatch.Draw(myLeftArrowKey, new Vector2(400, 150), null, Color.White, 0, myLeftArrowKey.Bounds.Size.ToVector2() * 0.5f, 2, SpriteEffects.FlipHorizontally, 0.5f);
+            aSpriteBatch.Draw(myConfirmKey, new Vector2(160, 375), null, Color.White, 0, myConfirmKey.Bounds.Size.ToVector2() * 0.5f, 1.5f, SpriteEffects.None, 0.5f);
+            aSpriteBatch.DrawString(Game1.mySpriteFont, "Confirm", new Vector2(250, 340), Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0.5f);
+            aSpriteBatch.Draw(Game1.myBackground, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 5, SpriteEffects.None, 0);
         }
 
         public static Texture2D GetSelectedTexture()

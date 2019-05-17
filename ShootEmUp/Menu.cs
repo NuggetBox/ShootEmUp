@@ -79,13 +79,15 @@ namespace ShootEmUp
             for (int i = 0; i < tempSize; ++i)
             {
                 Button tempButton = myButtons[i];
-                aSpriteBatch.DrawString(Game1.mySpriteFont, tempButton.myLabel, tempButton.myPosition, tempButton.myColor, 0, Vector2.Zero, myButtonScale, SpriteEffects.None, 0);
+                aSpriteBatch.DrawString(Game1.mySpriteFont, tempButton.myLabel, tempButton.myPosition, tempButton.myColor, 0, Vector2.Zero, myButtonScale, SpriteEffects.None, 0.5f);
             }
 
             if (Game1.myFinalScore != null)
             {
-                aSpriteBatch.DrawString(Game1.mySpriteFont, "Final score: " + Game1.myFinalScore, new Vector2(75, 13), Color.IndianRed, 0, Vector2.Zero, 0.4f, SpriteEffects.None, 0);
+                aSpriteBatch.DrawString(Game1.mySpriteFont, "Final score: " + Game1.myFinalScore, new Vector2(75, 13), Color.IndianRed, 0, Vector2.Zero, 0.4f, SpriteEffects.None, 0.5f);
             }
+
+            aSpriteBatch.Draw(Game1.myBackground, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 5, SpriteEffects.None, 0);
         }
 
         public static void Start()
