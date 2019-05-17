@@ -25,7 +25,7 @@ namespace ShootEmUp
 
         static string myFileName = "data.bog";
 
-        public static int myFinalScore = -1;
+        public static int? myFinalScore = null;
 
         GraphicsDeviceManager myGraphics;
         SpriteBatch mySpriteBatch;
@@ -73,6 +73,7 @@ namespace ShootEmUp
             myLeft,
             myUp,
             myDown,
+            myLock,
             myW,
             myA,
             myS,
@@ -199,6 +200,7 @@ namespace ShootEmUp
             myI = GetContent("i");
             myL = GetContent("l");
             myM = GetContent("m");
+            myLock = GetContent("lock");
             myEnter = GetContent("enter");
             myRight = GetContent("right");
             myLeft = GetContent("left");
