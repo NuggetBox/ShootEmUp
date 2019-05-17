@@ -25,7 +25,7 @@ namespace ShootEmUp
 
         KeyboardState myPreviousKeyboard;
 
-        Keys
+        readonly Keys
             myLeft = Keys.Left,
             myRight = Keys.Right,
             myConfirm = Keys.Enter;

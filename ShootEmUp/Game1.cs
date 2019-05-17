@@ -36,7 +36,7 @@ namespace ShootEmUp
 
         public static SoundEffectInstance mySong;
 
-        Keys
+        readonly Keys
             myPitchUp = Keys.E,
             myPitchDown = Keys.Q,
             myPitchReset = Keys.R,
