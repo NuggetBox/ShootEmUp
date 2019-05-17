@@ -14,7 +14,7 @@ namespace ShootEmUp
     /// </summary>
     public class Game1 : Game
     {
-        public static readonly bool myPreOrder = true;
+        public static readonly bool myPreOrder = false;
 
         public static Stack<State> AccessStateStack { get; set; }
         public static State GetCurrentState => AccessStateStack.Peek();

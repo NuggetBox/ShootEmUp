@@ -95,8 +95,6 @@ namespace ShootEmUp
                     break;
             }
 
-            
-
             if (tempKeyboard.IsKeyDown(myLeft) && myPreviousKeyboard.IsKeyUp(myLeft))
             {
                 Previous();
@@ -107,9 +105,12 @@ namespace ShootEmUp
             }
             else if (tempKeyboard.IsKeyDown(myConfirm) && myPreviousKeyboard.IsKeyUp(myConfirm))
             {
-                Game1.myPlayerTexture = mySkins[myIndex];
-                Game1.Save();
-                Game1.AccessStateStack.Pop();
+                if (Game1.myPreOrder || (!Game1.myPreOrder && (mySkins[myIndex] != Game1.myShipFire1 && mySkins[myIndex] != Game1.myShipWater1)))
+                {
+                    Game1.myPlayerTexture = mySkins[myIndex];
+                    Game1.Save();
+                    Game1.AccessStateStack.Pop();
+                }
             }
 
             myPreviousKeyboard = tempKeyboard;
