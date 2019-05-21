@@ -50,7 +50,7 @@ namespace ShootEmUp
         {
             myPosition = myStartPos;
             myAnimationTimer = myAnimationCooldown;
-            myTexture = Customization.GetSelectedTexture();
+            //myTexture = Customization.GetSelectedTexture();
             myRectangle = CreateRectangle();
             myRectangle.Size = new Point((int)(Game1.myShip.Bounds.Size.X * myScale), (int)(Game1.myShip.Bounds.Size.Y * myScale));
             myAttackCooldown = myOriginalAttackCooldown;
