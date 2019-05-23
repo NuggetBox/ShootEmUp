@@ -21,10 +21,13 @@ namespace ShootEmUp
 
         public override void Update(GameTime someDeltaTime)
         {
-            if (myPosition.Y >= Game1.AccessWindowSize.Y * 1.5f)
+            if (Game1.GetCurrentState is InGame)
             {
-                InGame.myGameObjects.Add(new Water(Game1.AccessWindowSize.X * 0.5f, -Game1.AccessWindowSize.Y * 0.5f));
-                myRemoved = true;
+                if (myPosition.Y >= Game1.AccessWindowSize.Y * 1.5f)
+                {
+                    InGame.myGameObjects.Add(new Water(Game1.AccessWindowSize.X * 0.5f, -Game1.AccessWindowSize.Y * 0.5f));
+                    myRemoved = true;
+                }
             }
 
             Move(someDeltaTime);

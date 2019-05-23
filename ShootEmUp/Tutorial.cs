@@ -34,11 +34,11 @@ namespace ShootEmUp
                 new Key(Game1.myF, new Vector2(100, 594)),
                 new Key(Game1.myM, new Vector2(100, 654)),
 
-                new Key(Game1.myUp, new Vector2(650, 71)),
-                new Key(Game1.myLeft, new Vector2(596, 125)),
-                new Key(Game1.myDown, new Vector2(650, 125)),
-                new Key(Game1.myRight, new Vector2(704, 125)),
-                new Key(Game1.myEnter, new Vector2(630, 195)),
+                new Key(Game1.myW, new Vector2(650, 71)),
+                new Key(Game1.myA, new Vector2(596, 125)),
+                new Key(Game1.myS, new Vector2(650, 125)),
+                new Key(Game1.myD, new Vector2(704, 125)),
+                new Key(Game1.myEnter, new Vector2(630, 200)),
 
                 //new Key(Game1.myEsc, new Vector2(50, 0)),
 

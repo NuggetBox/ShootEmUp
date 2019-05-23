@@ -45,32 +45,47 @@ namespace ShootEmUp
 
         void CheckCollision()
         {
-            for (int i = 0; i < InGame.myGameObjects.Count; ++i)
+            if (Game1.AccessStateStack.Peek() is InGame)
             {
-                if (myRectangle.Intersects(InGame.myGameObjects[i].myRectangle) && !(InGame.myGameObjects[i] is Bullet) && !myRemoved)
+                for (int i = 0; i < InGame.myGameObjects.Count; ++i)
                 {
-                    if (InGame.myGameObjects[i] is Player)
+                    if (myRectangle.Intersects(InGame.myGameObjects[i].myRectangle) && !(InGame.myGameObjects[i] is Bullet) && !myRemoved)
                     {
-                        if (!GetIsPlayerBullet)
+                        if (InGame.myGameObjects[i] is Player)
+                        {
+                            if (!GetIsPlayerBullet)
+                            {
+                                InGame.myGameObjects[i].myHealth -= myDamage;
+
+                                // TODO: IF PLAYER DIE
+                                CheckPlayerDeath();
+
+                                myRemoved = true;
+                                return;
+                            }
+                        }
+                        else if (InGame.myGameObjects[i] is Enemy && GetIsPlayerBullet)
                         {
                             InGame.myGameObjects[i].myHealth -= myDamage;
 
-                            // TODO: IF PLAYER DIE
-                            CheckPlayerDeath();
+                            // TODO: IF ENEMY DIE
+                            if (InGame.myGameObjects[i].myHealth <= 0)
+                            {
+                                InGame.myGameObjects[i].myRemoved = true;
+                            }
 
                             myRemoved = true;
-                            return;
                         }
                     }
-                    else if (InGame.myGameObjects[i] is Enemy && GetIsPlayerBullet)
+                }
+            }
+            else if (Game1.AccessStateStack.Peek() is Battle)
+            {
+                for (int i = 0; i < Battle.myPlayers.Length; i++)
+                {
+                    if (myRectangle.Intersects(Battle.myPlayers[i].myRectangle) && !myRemoved && (myOwner as Player).myPlayerOne != Battle.myPlayers[i].myPlayerOne)
                     {
-                        InGame.myGameObjects[i].myHealth -= myDamage;
-
-                        // TODO: IF ENEMY DIE
-                        if (InGame.myGameObjects[i].myHealth <= 0)
-                        {
-                            InGame.myGameObjects[i].myRemoved = true;
-                        }
+                        Battle.myPlayers[i].myHealth -= myDamage;
 
                         myRemoved = true;
                     }

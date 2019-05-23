@@ -87,24 +87,59 @@ namespace ShootEmUp
 
         protected Rectangle CreateRectangle()
         {
-            return new Rectangle((int)(myPosition.X - GetOrigin.X * myScale), (int)(myPosition.Y - GetOrigin.Y * myScale), (int)(myTexture.Width * myScale),(int)(myTexture.Height * myScale));
+            return new Rectangle((int)(myPosition.X - GetOrigin.X * myScale), (int)(myPosition.Y - GetOrigin.Y * myScale), (int)(myTexture.Width * myScale), (int)(myTexture.Height * myScale));
         }
 
         protected void CheckPlayerDeath()
         {
-            if (InGame.AccessPlayer.myHealth <= 0)
+            if (Game1.GetCurrentState is InGame)
             {
-                Game1.myFinalScore = InGame.myScore;
-                InGame.myScore = 0;
-
-                List<Button> tempButtons = new List<Button>()
+                if (InGame.AccessPlayer.myHealth <= 0)
                 {
-                    new Button("Restart", Menu.Start),
-                    new Button("Main Menu", Menu.ExitToMain),
-                    new Button("Quit", Menu.Quit),
-                };
+                    Game1.myFinalScore = InGame.myScore;
+                    InGame.myScore = 0;
 
-                Game1.AccessStateStack.Push(new Menu(tempButtons));
+                    List<Button> tempButtons = new List<Button>()
+                    {
+                        new Button("Restart", Menu.Start),
+                        new Button("Main Menu", Menu.ExitToMain),
+                        new Button("Quit", Menu.Quit),
+                    };
+
+                    Game1.AccessStateStack.Push(new Menu(tempButtons));
+                }
+            }
+            else if (Game1.GetCurrentState is Battle)
+            {
+                if (this is Player)
+                {
+                    if (myHealth <= 0)
+                    {
+                        List<Button> tempButtons = new List<Button>()
+                        {
+                            new Button("Restart", Menu.Restart),
+                            new Button("Main Menu", Menu.ExitToMain),
+                            new Button("Quit Game", Menu.Quit)
+                        };
+
+                        Texture2D tempDisplay;
+                        string tempWinText;
+
+                        if ((this as Player).myPlayerOne)
+                        {
+                            tempDisplay = Battle.myPlayers[1].myTexture;
+                            tempWinText = "Player 2 wins!";
+                        }
+                        else
+                        {
+                            tempDisplay = Battle.myPlayers[0].myTexture;
+                            tempWinText = "Player 1 wins!";
+                        }
+
+                        Game1.AccessStateStack.Push(new Menu(tempButtons) { myDisplayTexture = tempDisplay, myWinText = tempWinText } );
+                        Game1.GetCurrentState.Initialize();
+                    }
+                }
             }
         }
     }

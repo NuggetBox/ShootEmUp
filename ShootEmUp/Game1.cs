@@ -14,7 +14,7 @@ namespace ShootEmUp
     /// </summary>
     public class Game1 : Game
     {
-        public static readonly bool myPreOrder = false;
+        public static readonly bool myPreOrder = true;
 
         public static Stack<State> AccessStateStack { get; set; }
         public static State GetCurrentState => AccessStateStack.Peek();
@@ -96,6 +96,7 @@ namespace ShootEmUp
             myOctopus,
             myOctopusSlither,
             myInk,
+            myBattleBeach,
             myBeach,
             myWater,
             myClamClosed,
@@ -137,7 +138,8 @@ namespace ShootEmUp
 
             List<Button> tempButtons = new List<Button>
             {
-                new Button("Start", Menu.Start),
+                new Button("Start Solo", Menu.Start),
+                new Button("Start Battle", Menu.Battle),
                 new Button("Skins", Menu.SkinCustomization),
                 new Button("Tutorial", Menu.Tutorial),
                 new Button("Quit", Menu.Quit),
@@ -145,9 +147,34 @@ namespace ShootEmUp
 
             Menu menu = new Menu(tempButtons);
 
-            AccessStateStack.Push(menu); 
+            AccessStateStack.Push(menu);
 
             base.Initialize();
+
+            Customization.mySkins = new List<Texture2D>()
+            {
+                myShip,
+                myShipPurple,
+                myShipBee,
+                myShipRed,
+                myShipColor,
+                myShipTriple,
+                myShipSteam,
+                myShipThicc,
+                myShipFire1,
+                myShipWater1,
+            };
+
+            if (File.Exists(GetFullDirectory))
+            {
+                Customization.myIndex = int.Parse(File.ReadAllText(GetFullDirectory));
+            }
+            else
+            {
+                Customization.myIndex = 0;
+            }
+
+            //AccessStateStack.Push(new Menu(tempButtons) { myDisplayTexture = myPlayerTexture });
 
             if (!File.Exists(GetFullDirectory))
             {
@@ -221,6 +248,7 @@ namespace ShootEmUp
             myInk = GetContent("ink");
 
             myBeach = GetContent("beach");
+            myBattleBeach = GetContent("battlebeach");
             myWater = GetContent("water");
 
             myClamClosed = GetContent("clamclosed");

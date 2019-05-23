@@ -44,30 +44,31 @@ namespace ShootEmUp
         {
             myScore = 0;
 
-            Customization.mySkins = new List<Texture2D>()
-            {
-                Game1.myShip,
-                Game1.myShipPurple,
-                Game1.myShipBee,
-                Game1.myShipRed,
-                Game1.myShipColor,
-                Game1.myShipTriple,
-                Game1.myShipSteam,
-                Game1.myShipThicc,
-            };
+            //Customization.mySkins = new List<Texture2D>()
+            //{
+            //    Game1.myShip,
+            //    Game1.myShipPurple,
+            //    Game1.myShipBee,
+            //    Game1.myShipRed,
+            //    Game1.myShipColor,
+            //    Game1.myShipTriple,
+            //    Game1.myShipSteam,
+            //    Game1.myShipThicc,
+            //};
 
-            if (Game1.myPreOrder)
-            {
-                Customization.mySkins.Add(Game1.myShipFire1);
-            }
+            //if (Game1.myPreOrder)
+            //{
+            //    Customization.mySkins.Add(Game1.myShipFire1);
+            //}
 
             myLevels = new List<Level>
-            {   
-                //new Level(0, 10, 1, 3, 1, 2, 2, 5, 0, 1.2f, 1, false),
-                //new Level(0, 2, 3, 1, 0, 0, 1, 0, 3, 1.5f, 1, false),
-                //new Level(0, 2, 3, 0, 1, 0, 1, 0, 3, 1.5f, 1, false),
+            {
+                new Level(1, 1, 1, 20, 5, 3, 0.96f, 0.75f, 2, 0.2f), // Default
 
-                new Level(1, 1, 1, 20, 5, 3, 0.97f, 0.8f, 2, 0.2f),
+                //new Level(1, 0, 0, 5, 0, 1, 1000, 0, 0, 0), //Crab art
+                //new Level(0, 0, 1, 5, 0, 1, 1000, 0, 0, 0), //Clam art
+                //new Level(0, 1, 0, 5, 0, 1, 1000, 0, 0, 0), //Octopus art
+                //new Level(0, 0, 0, 5, 0, 1000, 1, 0, 0, 0), //Barrel art
             };
 
             myPowerUpTimer = AccessLevel.myPowerUpDelay;
@@ -77,7 +78,7 @@ namespace ShootEmUp
 
             myGameObjects = new List<GameObject>()
             {
-                new Player(),
+                new Player(true),
 
                 new Water(Game1.AccessWindowSize.X * 0.5f, Game1.AccessWindowSize.Y * 0.5f),
                 new Water(Game1.AccessWindowSize.X * 0.5f, - Game1.AccessWindowSize.Y * 0.5f),

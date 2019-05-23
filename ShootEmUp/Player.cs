@@ -13,25 +13,26 @@ namespace ShootEmUp
     {
         public static Random myRandom = new Random();
 
-        readonly Keys
-            myUp = Keys.W,
-            myDown = Keys.S,
-            myRight = Keys.D,
-            myLeft = Keys.A,
-            myClockwiseRotation = Keys.L,
-            myCounterClockwiseRotation = Keys.J,
-            myShoot = Keys.I;
+        public Keys
+            myUp,
+            myDown,
+            myRight,
+            myLeft,
+            myClockwiseRotation,
+            myCounterClockwiseRotation,
+            myShoot;
 
         public List<PowerUp> myPowerUps = new List<PowerUp>();
 
-        Vector2 myStartPos = new Vector2(640, 370);
+        public Vector2 myStartPos = new Vector2(640, 360);
 
         double myTriAngle = Math.PI * 0.1f;
 
         int
             myAnimationIndex,
-            myBulletDamage = 1,
-            myBulletSpeed = 200;
+            myBulletDamage = 1;
+
+        public int myBulletSpeed = 300;
 
         public float
             myOriginalAttackCooldown = 0.5f,
@@ -41,22 +42,41 @@ namespace ShootEmUp
             myAnimationTimer,
             myRotationSpeed = 1.5f;
 
-        public bool 
+        public bool
+            myPlayerOne,
             myIsFire,
             myIsPreOrderSkin,
             myTriShooting;
 
-        public Player()
+        public Player(bool aIsPlayerOneBool)
         {
+            myPlayerOne = aIsPlayerOneBool;
             myPosition = myStartPos;
             myAnimationTimer = myAnimationCooldown;
-            myTexture = Customization.GetSelectedTexture();
+
+            if (Game1.GetCurrentState is InGame)
+            {
+                myTexture = Customization.GetSelectedTexture();
+            }
+            else if (Game1.GetCurrentState is Battle)
+            {
+                myTexture = Customization.mySkins[myPlayerOne ? BattleCustomization.myPlayerOneIndex : BattleCustomization.myPlayerTwoIndex];
+            }
+
             myRectangle = CreateRectangle();
             myRectangle.Size = new Point((int)(Game1.myShip.Bounds.Size.X * myScale), (int)(Game1.myShip.Bounds.Size.Y * myScale));
             myAttackCooldown = myOriginalAttackCooldown;
             myLayer = 0.8f;
             myHealth = 100;
             mySpeed = 120;
+
+            myUp = Keys.W;
+            myDown = Keys.S;
+            myRight = Keys.D;
+            myLeft = Keys.A;
+            myClockwiseRotation = Keys.L;
+            myCounterClockwiseRotation = Keys.J;
+            myShoot = Keys.I;
 
             if ((Game1.myPlayerTexture == Game1.myShipFire1 || Game1.myPlayerTexture == Game1.myShipWater1) && Game1.myPreOrder)
             {
@@ -115,10 +135,6 @@ namespace ShootEmUp
 
                 myAnimationCooldown -= tempDelta;
             }
-            else
-            {
-                myTexture = Game1.myPlayerTexture;
-            }
 
             CheckPlayerDeath();
 
@@ -157,9 +173,35 @@ namespace ShootEmUp
                 myRotation -= tempDelta * myRotationSpeed;
             }
 
-            if (myPosition.X + myDirection.X * mySpeed * tempDelta > Game1.myLeftBeach && myPosition.X + myDirection.X * mySpeed * tempDelta < Game1.myRightBeach)
+            if (myDirection != Vector2.Zero)
+            {
+                myDirection.Normalize();
+            }
+
+            Vector2 tempSuggestedPosition = new Vector2(myPosition.X + myDirection.X * mySpeed * tempDelta, myPosition.Y + myDirection.Y * mySpeed * tempDelta);
+
+            if (Game1.GetCurrentState is InGame && tempSuggestedPosition.X > Game1.myLeftBeach && tempSuggestedPosition.X < Game1.myRightBeach && tempSuggestedPosition.Y > 0 && tempSuggestedPosition.Y < Game1.AccessWindowSize.Y)
             {
                 Move(someDeltaTime);
+            }
+            else if (Game1.GetCurrentState is Battle)
+            {
+                int tempLeft1 = 100, tempRight1 = 540, tempLeft2 = 740, tempRight2 = 1180; 
+
+                if (myPlayerOne)
+                {
+                    if (tempSuggestedPosition.X < tempRight1 && tempSuggestedPosition.X > tempLeft1 && tempSuggestedPosition.Y >= 0 && tempSuggestedPosition.Y <= Game1.AccessWindowSize.Y)
+                    {
+                        Move(someDeltaTime);
+                    }
+                }
+                else
+                {
+                    if (tempSuggestedPosition.X < tempRight2 && tempSuggestedPosition.X > tempLeft2 && tempSuggestedPosition.Y >= 0 && tempSuggestedPosition.Y <= Game1.AccessWindowSize.Y)
+                    {
+                        Move(someDeltaTime);
+                    }
+                }
             }
 
             for (int i = 0; i < myPowerUps.Count; ++i)
@@ -186,8 +228,16 @@ namespace ShootEmUp
                 Vector2 tempRight = new Vector2((float)Math.Cos(myRotation), (float)Math.Sin(myRotation));
                 Vector2 tempLeft = new Vector2((float)Math.Cos(myRotation + Math.PI), (float)Math.Sin(myRotation + Math.PI));
 
-                InGame.myGameObjects.Add(new Bullet(this, tempRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
-                InGame.myGameObjects.Add(new Bullet(this, tempLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                if (Game1.GetCurrentState is InGame)
+                {
+                    InGame.myGameObjects.Add(new Bullet(this, tempRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                    InGame.myGameObjects.Add(new Bullet(this, tempLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                }
+                else if (Game1.GetCurrentState is Battle)
+                {
+                    Battle.myBullets.Add(new Bullet(this, tempRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                    Battle.myBullets.Add(new Bullet(this, tempLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                }
             }
         }
 
@@ -201,12 +251,24 @@ namespace ShootEmUp
             Vector2 tempTopLeft = new Vector2((float)Math.Cos(myRotation + Math.PI + myTriAngle), (float)Math.Sin(myRotation + Math.PI + myTriAngle));
             Vector2 tempBottomLeft = new Vector2((float)Math.Cos(myRotation + Math.PI - myTriAngle), (float)Math.Sin(myRotation + Math.PI - myTriAngle));
 
-            InGame.myGameObjects.Add(new Bullet(this, tempRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
-            InGame.myGameObjects.Add(new Bullet(this, tempTopRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
-            InGame.myGameObjects.Add(new Bullet(this, tempBottomRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
-            InGame.myGameObjects.Add(new Bullet(this, tempLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
-            InGame.myGameObjects.Add(new Bullet(this, tempTopLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
-            InGame.myGameObjects.Add(new Bullet(this, tempBottomLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+            if (Game1.GetCurrentState is InGame)
+            {
+                InGame.myGameObjects.Add(new Bullet(this, tempRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                InGame.myGameObjects.Add(new Bullet(this, tempTopRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                InGame.myGameObjects.Add(new Bullet(this, tempBottomRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                InGame.myGameObjects.Add(new Bullet(this, tempLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                InGame.myGameObjects.Add(new Bullet(this, tempTopLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                InGame.myGameObjects.Add(new Bullet(this, tempBottomLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+            }
+            else if (Game1.GetCurrentState is Battle)
+            {
+                Battle.myBullets.Add(new Bullet(this, tempRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                Battle.myBullets.Add(new Bullet(this, tempTopRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                Battle.myBullets.Add(new Bullet(this, tempBottomRight, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                Battle.myBullets.Add(new Bullet(this, tempLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                Battle.myBullets.Add(new Bullet(this, tempTopLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+                Battle.myBullets.Add(new Bullet(this, tempBottomLeft, myPosition, myBulletSpeed, myBulletDamage, Game1.myPlayerBullet));
+            }
         }
 
         public void ResetAttackCooldown()
