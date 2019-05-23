@@ -147,7 +147,7 @@ namespace ShootEmUp
 
             Menu menu = new Menu(tempButtons);
 
-            AccessStateStack.Push(menu); 
+            AccessStateStack.Push(menu);
 
             base.Initialize();
 

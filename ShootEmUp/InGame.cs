@@ -78,7 +78,7 @@ namespace ShootEmUp
 
             myGameObjects = new List<GameObject>()
             {
-                new Player(),
+                new Player(true),
 
                 new Water(Game1.AccessWindowSize.X * 0.5f, Game1.AccessWindowSize.Y * 0.5f),
                 new Water(Game1.AccessWindowSize.X * 0.5f, - Game1.AccessWindowSize.Y * 0.5f),

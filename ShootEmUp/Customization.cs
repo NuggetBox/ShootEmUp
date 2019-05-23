@@ -19,15 +19,15 @@ namespace ShootEmUp
         public static List<Texture2D> mySkins;
 
         Texture2D 
-            myLeftArrowKey, 
-            myRightArrowKey,
+            myLeftKey, 
+            myRightKey,
             myConfirmKey;
 
         KeyboardState myPreviousKeyboard;
 
         readonly Keys
-            myLeft = Keys.Left,
-            myRight = Keys.Right,
+            myLeft = Keys.A,
+            myRight = Keys.D,
             myConfirm = Keys.Enter;
 
         public static int myIndex;
@@ -41,8 +41,8 @@ namespace ShootEmUp
 
         public override void Initialize()
         {
-            myLeftArrowKey = Game1.myLeft;
-            myRightArrowKey = Game1.myRight;
+            myLeftKey = Game1.myA;
+            myRightKey = Game1.myD;
             myConfirmKey = Game1.myEnter;
         }
 
@@ -117,8 +117,8 @@ namespace ShootEmUp
                 aSpriteBatch.Draw(mySkins[myIndex], new Vector2(250, 150), null, Color.White, 0, mySkins[myIndex].Bounds.Size.ToVector2() * 0.5f, 7, SpriteEffects.None, 0.5f);
             }
 
-            aSpriteBatch.Draw(myLeftArrowKey, new Vector2(100, 150), null, Color.White, 0, myLeftArrowKey.Bounds.Size.ToVector2() * 0.5f, 2, SpriteEffects.None, 0.5f);
-            aSpriteBatch.Draw(myLeftArrowKey, new Vector2(400, 150), null, Color.White, 0, myLeftArrowKey.Bounds.Size.ToVector2() * 0.5f, 2, SpriteEffects.FlipHorizontally, 0.5f);
+            aSpriteBatch.Draw(myLeftKey, new Vector2(100, 150), null, Color.White, 0, myLeftKey.Bounds.Size.ToVector2() * 0.5f, 2, SpriteEffects.None, 0.5f);
+            aSpriteBatch.Draw(myRightKey, new Vector2(400, 150), null, Color.White, 0, myLeftKey.Bounds.Size.ToVector2() * 0.5f, 2, SpriteEffects.None, 0.5f);
             aSpriteBatch.Draw(myConfirmKey, new Vector2(160, 375), null, Color.White, 0, myConfirmKey.Bounds.Size.ToVector2() * 0.5f, 1.5f, SpriteEffects.None, 0.5f);
             aSpriteBatch.DrawString(Game1.mySpriteFont, "Confirm", new Vector2(250, 340), Color.White, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0.5f);
             aSpriteBatch.Draw(Game1.myBackground, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 5, SpriteEffects.None, 0);

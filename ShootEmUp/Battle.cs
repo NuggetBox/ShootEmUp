@@ -23,11 +23,11 @@ namespace ShootEmUp
         {
             myPlayers = new Player[]
             {
-                new Player() { myPlayerOne = true, myStartPos = new Vector2(320, 360), mySpeed = 360, myRotationSpeed = 3.5f, myOriginalAttackCooldown = 0.15f, myHealth = 25, myBulletSpeed = 450 },
+                new Player(true) { myStartPos = new Vector2(320, 360), mySpeed = 360, myRotationSpeed = 3.5f, myOriginalAttackCooldown = 0.15f, myHealth = 25, myBulletSpeed = 450 },
 
-                new Player() { myUp = Keys.Up, myDown = Keys.Down, myRight = Keys.Right, myLeft = Keys.Left,
+                new Player(false) { myUp = Keys.Up, myDown = Keys.Down, myRight = Keys.Right, myLeft = Keys.Left,
                     myClockwiseRotation = Keys.NumPad6, myCounterClockwiseRotation = Keys.NumPad4, myShoot = Keys.NumPad8,
-                    myStartPos = new Vector2(960, 360), myPlayerOne = false, mySpeed = 360, myRotationSpeed = 3.5f, myOriginalAttackCooldown = 0.15f, myHealth = 25, myBulletSpeed = 450 }
+                    myStartPos = new Vector2(960, 360), mySpeed = 360, myRotationSpeed = 3.5f, myOriginalAttackCooldown = 0.15f, myHealth = 25, myBulletSpeed = 450 }
             };
 
             myPlayers[0].myPosition = myPlayers[0].myStartPos;

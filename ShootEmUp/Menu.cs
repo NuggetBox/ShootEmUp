@@ -61,7 +61,7 @@ namespace ShootEmUp
             }
             else
             {
-                if (myKeyboardState.IsKeyDown(Keys.Up) && myPreviousKeyboardState.IsKeyUp(Keys.Up))
+                if (myKeyboardState.IsKeyDown(Keys.W) && myPreviousKeyboardState.IsKeyUp(Keys.W))
                 {
                     if (mySelectedIndex != 0)
                     {
@@ -69,7 +69,7 @@ namespace ShootEmUp
                     }
                     //Console.Beep();
                 }
-                else if (myKeyboardState.IsKeyDown(Keys.Down) && myPreviousKeyboardState.IsKeyUp(Keys.Down))
+                else if (myKeyboardState.IsKeyDown(Keys.S) && myPreviousKeyboardState.IsKeyUp(Keys.S))
                 {
                     if (mySelectedIndex != myButtons.Count - 1)
                     {
@@ -165,7 +165,7 @@ namespace ShootEmUp
 
         public static void Battle()
         {
-            Game1.AccessStateStack.Push(new Battle());
+            Game1.AccessStateStack.Push(new BattleCustomization(myKeyboardState));
             Game1.GetCurrentState.Initialize();
         }
 

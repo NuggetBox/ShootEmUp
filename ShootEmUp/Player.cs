@@ -48,11 +48,21 @@ namespace ShootEmUp
             myIsPreOrderSkin,
             myTriShooting;
 
-        public Player()
+        public Player(bool aIsPlayerOneBool)
         {
+            myPlayerOne = aIsPlayerOneBool;
             myPosition = myStartPos;
             myAnimationTimer = myAnimationCooldown;
-            myTexture = Customization.GetSelectedTexture();
+
+            if (Game1.GetCurrentState is InGame)
+            {
+                myTexture = Customization.GetSelectedTexture();
+            }
+            else if (Game1.GetCurrentState is Battle)
+            {
+                myTexture = Customization.mySkins[myPlayerOne ? BattleCustomization.myPlayerOneIndex : BattleCustomization.myPlayerTwoIndex];
+            }
+
             myRectangle = CreateRectangle();
             myRectangle.Size = new Point((int)(Game1.myShip.Bounds.Size.X * myScale), (int)(Game1.myShip.Bounds.Size.Y * myScale));
             myAttackCooldown = myOriginalAttackCooldown;
@@ -124,10 +134,6 @@ namespace ShootEmUp
                 }
 
                 myAnimationCooldown -= tempDelta;
-            }
-            else
-            {
-                myTexture = Game1.myPlayerTexture;
             }
 
             CheckPlayerDeath();
