@@ -12,7 +12,7 @@ namespace ShootEmUp
 {
     class Customization : State
     {
-        enum TextScaling { Shrinking, Growing };
+        public enum TextScaling { Shrinking, Growing };
 
         TextScaling myTextScaling = TextScaling.Growing;
 
@@ -41,29 +41,6 @@ namespace ShootEmUp
 
         public override void Initialize()
         {
-            mySkins = new List<Texture2D>()
-            {
-                Game1.myShip,
-                Game1.myShipPurple,
-                Game1.myShipBee,
-                Game1.myShipRed,
-                Game1.myShipColor,
-                Game1.myShipTriple,
-                Game1.myShipSteam,
-                Game1.myShipThicc,
-                Game1.myShipFire1,
-                Game1.myShipWater1,
-            };
-
-            if (File.Exists(Game1.GetFullDirectory))
-            {
-                myIndex = int.Parse(File.ReadAllText(Game1.GetFullDirectory));
-            }
-            else
-            {
-                myIndex = 0;
-            }
-
             myLeftArrowKey = Game1.myLeft;
             myRightArrowKey = Game1.myRight;
             myConfirmKey = Game1.myEnter;
