@@ -120,7 +120,8 @@ namespace ShootEmUp
             for (int i = 0; i < myPlayers.Length; ++i)
             {
                 myPlayers[i].Draw(aSpriteBatch);
-                aSpriteBatch.DrawString(Game1.mySpriteFont, myPlayers[i].myHealth.ToString(), new Vector2(1000 * i, 0), Color.White);
+                aSpriteBatch.Draw(Game1.myRedBar, new Vector2(myPlayers[i].myPosition.X, myPlayers[i].myPosition.Y - 75), null, Color.White, 0, Game1.myRedBar.Bounds.Center.ToVector2(), new Vector2(12.5f, 1), SpriteEffects.None, 0.9f);
+                aSpriteBatch.Draw(Game1.myGreenBar, new Vector2(myPlayers[i].myPosition.X, myPlayers[i].myPosition.Y - 75), null, Color.White, 0, Game1.myRedBar.Bounds.Center.ToVector2(), new Vector2(myPlayers[i].myHealth * 0.5f, 1), SpriteEffects.None, 1f);
             }
 
             for (int i = 0; i < myBullets.Count; ++i)

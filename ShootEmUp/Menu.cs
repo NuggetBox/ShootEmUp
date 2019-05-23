@@ -57,7 +57,6 @@ namespace ShootEmUp
             if (myKeyboardState.IsKeyDown(Keys.Enter) && myPreviousKeyboardState.IsKeyUp(Keys.Enter))
             {
                 myButtons[mySelectedIndex].Press();
-                //Console.Beep();
             }
             else
             {
@@ -67,7 +66,6 @@ namespace ShootEmUp
                     {
                         --mySelectedIndex;
                     }
-                    //Console.Beep();
                 }
                 else if (myKeyboardState.IsKeyDown(Keys.S) && myPreviousKeyboardState.IsKeyUp(Keys.S))
                 {
@@ -75,7 +73,6 @@ namespace ShootEmUp
                     {
                         ++mySelectedIndex;
                     }
-                    //Console.Beep();
                 }
             }
 

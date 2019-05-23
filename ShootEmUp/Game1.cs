@@ -90,6 +90,8 @@ namespace ShootEmUp
 
         public static Texture2D
             myPlayerBullet,
+            myRedBar,
+            myGreenBar,
             myBarrel,
             myCrab,
             myCrabPinch,
@@ -229,6 +231,8 @@ namespace ShootEmUp
             myL = GetContent("l");
             myM = GetContent("m");
             myLock = GetContent("lock");
+            myRedBar = GetContent("red");
+            myGreenBar = GetContent("green");
             myEnter = GetContent("enter");
             myRight = GetContent("right");
             myLeft = GetContent("left");
