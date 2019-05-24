@@ -75,6 +75,9 @@ namespace ShootEmUp
             myUp,
             myDown,
             myLock,
+            myNum4,
+            myNum6,
+            myNum8,
             myW,
             myA,
             myS,
@@ -143,7 +146,7 @@ namespace ShootEmUp
                 new Button("Start Solo", Menu.Start),
                 new Button("Start Battle", Menu.Battle),
                 new Button("Skins", Menu.SkinCustomization),
-                new Button("Tutorial", Menu.Tutorial),
+                new Button("Controls", Menu.Tutorial),
                 new Button("Quit", Menu.Quit),
             };
 
@@ -175,8 +178,6 @@ namespace ShootEmUp
             {
                 Customization.myIndex = 0;
             }
-
-            //AccessStateStack.Push(new Menu(tempButtons) { myDisplayTexture = myPlayerTexture });
 
             if (!File.Exists(GetFullDirectory))
             {
@@ -218,6 +219,9 @@ namespace ShootEmUp
             myShipSteam = GetContent("shipSteam");
             myShipThicc = GetContent("shipThicc");
 
+            myNum4 = GetContent("num4");
+            myNum6 = GetContent("num6");
+            myNum8 = GetContent("num8");
             myW = GetContent("w");
             myA = GetContent("a");
             myS = GetContent("s");
@@ -332,7 +336,6 @@ namespace ShootEmUp
                 mySong.Volume = mySong.Volume == 1 ? 0 : 1;
             }
 
-            // TODO: Add your update logic here
             if (myQuit)
                 QuitGame();
 
@@ -351,7 +354,6 @@ namespace ShootEmUp
         {
             GraphicsDevice.Clear(Color.DodgerBlue);
 
-            // TODO: Add your drawing code here
             mySpriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, null, null, null, null);
 
             base.Draw(gameTime);

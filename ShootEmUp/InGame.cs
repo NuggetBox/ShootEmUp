@@ -44,23 +44,6 @@ namespace ShootEmUp
         {
             myScore = 0;
 
-            //Customization.mySkins = new List<Texture2D>()
-            //{
-            //    Game1.myShip,
-            //    Game1.myShipPurple,
-            //    Game1.myShipBee,
-            //    Game1.myShipRed,
-            //    Game1.myShipColor,
-            //    Game1.myShipTriple,
-            //    Game1.myShipSteam,
-            //    Game1.myShipThicc,
-            //};
-
-            //if (Game1.myPreOrder)
-            //{
-            //    Customization.mySkins.Add(Game1.myShipFire1);
-            //}
-
             myLevels = new List<Level>
             {
                 new Level(1, 1, 1, 20, 5, 3, 0.96f, 0.75f, 2, 0.2f), // Default
@@ -82,23 +65,6 @@ namespace ShootEmUp
 
                 new Water(Game1.AccessWindowSize.X * 0.5f, Game1.AccessWindowSize.Y * 0.5f),
                 new Water(Game1.AccessWindowSize.X * 0.5f, - Game1.AccessWindowSize.Y * 0.5f),
-
-                //new FireRate(0.5f),
-
-                //new Pirate(20, 510),
-
-                //new Octopus(500, 50), 
-
-                //new Clam(250, 250),
-
-                //new Crab(20, 20),
-
-                //new Crab(0, 0), new Crab(100, 50), new Crab(200, 0), new Crab(300, 0), new Crab(400, 0), new Crab(500, 0), new Crab(600, 0), new Crab(600, 0),
-                //new Crab(25, 25), new Crab(100, 150), new Crab(200, 100), new Crab(300, 100), new Crab(400, 100), new Crab(500, 100), new Crab(500, 100), new Crab(500, 100),
-                //new Crab(50, 50), new Crab(100, 250), new Crab(200, 200), new Crab(300, 200), new Crab(400, 200), new Crab(500, 200), new Crab(500, 200), new Crab(500, 200),
-                //new Crab(75, 75), new Crab(100, 350), new Crab(200, 300), new Crab(300, 300), new Crab(400, 300), new Crab(500, 300), new Crab(500, 300), new Crab(500, 300),
-                //new Crab(100, 600), new Crab(100, 450), new Crab(200, 400), new Crab(300, 400), new Crab(400, 400), new Crab(500, 400), new Crab(500, 400), new Crab(500, 400),
-                //new Crab(100, 100), new Crab(100, 550), new Crab(200, 500), new Crab(300, 500), new Crab(400, 500), new Crab(500, 500), new Crab(500, 500), new Crab(500, 500),
             };
 
             AccessPlayer.myTexture = Game1.myPlayerTexture;

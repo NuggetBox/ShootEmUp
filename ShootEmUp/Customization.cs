@@ -85,6 +85,12 @@ namespace ShootEmUp
                 if (Game1.myPreOrder || (!Game1.myPreOrder && (mySkins[myIndex] != Game1.myShipFire1 && mySkins[myIndex] != Game1.myShipWater1)))
                 {
                     Game1.myPlayerTexture = mySkins[myIndex];
+
+                    if (InGame.myGameObjects != null)
+                    {
+                        InGame.AccessPlayer.myTexture = Game1.myPlayerTexture;
+                    }
+
                     Game1.Save();
                     Game1.AccessStateStack.Pop();
                 }

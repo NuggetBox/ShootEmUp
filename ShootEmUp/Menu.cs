@@ -151,6 +151,7 @@ namespace ShootEmUp
 
         public static void Start()
         {
+            Game1.myFinalScore = null;
             Game1.AccessStateStack.Push(new InGame());
             Game1.GetCurrentState.Initialize();
         }
@@ -174,6 +175,7 @@ namespace ShootEmUp
 
         public static void Restart()
         {
+            Game1.myFinalScore = null;
             Game1.AccessStateStack.Push(new Battle());
             Game1.GetCurrentState.Initialize();
         }
