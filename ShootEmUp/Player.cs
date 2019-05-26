@@ -110,7 +110,7 @@ namespace ShootEmUp
 
             float tempDelta = (float)someDeltaTime.ElapsedGameTime.TotalSeconds;
 
-            if (myIsPreOrderSkin)
+            if (myIsPreOrderSkin && Game1.GetCurrentState is InGame)
             {
                 if (myAnimationCooldown <= 0)
                 {
