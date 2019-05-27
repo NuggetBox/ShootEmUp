@@ -97,6 +97,7 @@ namespace ShootEmUp
                 if (InGame.AccessPlayer.myHealth <= 0)
                 {
                     Game1.myFinalScore = InGame.myScore;
+                    Highscore.AddScore(InGame.myScore);
                     InGame.myScore = 0;
 
                     List<Button> tempButtons = new List<Button>()

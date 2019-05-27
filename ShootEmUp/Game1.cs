@@ -14,7 +14,7 @@ namespace ShootEmUp
     /// </summary>
     public class Game1 : Game
     {
-        public static readonly bool myPreOrder = false;
+        public static readonly bool myPreOrder = true;
 
         public static Stack<State> AccessStateStack { get; set; }
         public static State GetCurrentState => AccessStateStack.Peek();
@@ -138,6 +138,8 @@ namespace ShootEmUp
         /// </summary>
         protected override void Initialize()
         {
+            Highscore.Load();
+
             // TODO: Add your initialization logic here
             AccessStateStack = new Stack<State>();
 
@@ -146,6 +148,7 @@ namespace ShootEmUp
                 new Button("Start Solo", Menu.Start),
                 new Button("Start Battle", Menu.Battle),
                 new Button("Skins", Menu.SkinCustomization),
+                new Button("Highscores", Menu.Highscore),
                 new Button("Controls", Menu.Tutorial),
                 new Button("Quit", Menu.Quit),
             };
@@ -365,6 +368,7 @@ namespace ShootEmUp
 
         void QuitGame()
         {
+            Highscore.Save();
             Save();
             Exit();
         }

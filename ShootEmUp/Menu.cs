@@ -180,6 +180,11 @@ namespace ShootEmUp
             Game1.GetCurrentState.Initialize();
         }
 
+        public static void Highscore()
+        {
+            Game1.AccessStateStack.Push(new Highscore(myKeyboardState));
+        }
+
         public static void Tutorial()
         {
             Game1.AccessStateStack.Push(new Tutorial());

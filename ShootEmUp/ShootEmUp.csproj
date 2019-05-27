@@ -50,6 +50,7 @@
     <Compile Include="Crab.cs" />
     <Compile Include="Customization.cs" />
     <Compile Include="FireRate.cs" />
+    <Compile Include="Highscore.cs" />
     <Compile Include="Ink.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Octopus.cs" />
